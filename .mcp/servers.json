@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "websearch": {
+      "type": "http",
+      "url": "https://search.parallel.ai/mcp",
+      "description": "Web search and page fetch: web_search takes an objective plus queries and returns citation-backed excerpts; web_fetch pulls a URL's content",
+      "timeout": 120
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--headless",
+        "--isolated"
+      ],
+      "description": "Browser automation: navigate pages, click, fill forms, take screenshots, read accessibility snapshots via Playwright",
+      "timeout": 120
+    }
+  }
+}

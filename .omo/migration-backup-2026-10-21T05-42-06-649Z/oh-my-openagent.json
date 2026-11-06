@@ -1,0 +1,114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "default_model": "opencode-go/muse-spark-1.3-contributor",
+  "agents": {
+    "sisyphus": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.25,
+      "max_tokens": 8192,
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"],
+      "variant": "default"
+    },
+    "hephaestus": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.3,
+      "max_tokens": 8192,
+      "variant": "default",
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"]
+    },
+    "oracle": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.2,
+      "variant": "default",
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"]
+    },
+    "prometheus": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.25,
+      "max_tokens": 8192,
+      "variant": "default",
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"]
+    },
+    "metis": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.3,
+      "variant": "default"
+    },
+    "momus": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.4,
+      "variant": "default"
+    },
+    "atlas": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.3,
+      "variant": "default"
+    },
+    "librarian": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.4,
+      "variant": "default",
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"]
+    },
+    "explore": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.5,
+      "variant": "default",
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"]
+    },
+    "multimodal-looker": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.4,
+      "variant": "default"
+    },
+    "sisyphus-junior": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.35,
+      "variant": "default",
+      "fallback_models": ["opencode-go/muse-spark-1.3-contributor"]
+    }
+  },
+  "categories": {
+    "deep": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.3,
+      "max_tokens": 8192,
+      "variant": "default"
+    },
+    "ultrabrain": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.25,
+      "variant": "default"
+    },
+    "quick": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.5,
+      "variant": "default"
+    },
+    "visual-engineering": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.4,
+      "variant": "default"
+    },
+    "artistry": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.45,
+      "variant": "default"
+    },
+    "writing": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.4,
+      "variant": "default"
+    },
+    "unspecified-low": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.5,
+      "variant": "default"
+    },
+    "unspecified-high": {
+      "model": "opencode-go/muse-spark-1.3-contributor",
+      "temperature": 0.3,
+      "variant": "default"
+    }
+  }
+}

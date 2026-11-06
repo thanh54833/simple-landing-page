@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "pack": "agentic-os",
+  "skills": {
+    "doc-coauthoring": {
+      "source": "anthropics/skills (manual copy)",
+      "sourceType": "local",
+      "version": "local-2026-10-08",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring/SKILL.md"
+    },
+    "writing-intent": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-10-09",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
+    "writing-adr": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-10-14",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
+    "tasks-creator": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-10-12",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
+    "init-deep": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-10-12",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
+    "update-spec": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-10-26",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
+    "writing-for-agents": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "version": "v1.3.1",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-for-agents"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "version": "4.5.2",
+      "skillPath": "impeccable/SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/pbakaus/impeccable/tree/main/.agents/skills/impeccable"
+    },
+    "hallmark": {
+      "source": "Nutlope/hallmark",
+      "sourceType": "github",
+      "version": "2.0.0",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/Nutlope/hallmark/tree/main/skills/hallmark"
+    }
+  },
+  "retired": []
+}

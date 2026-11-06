@@ -1,0 +1,19 @@
+---
+description: Verify an implemented branch with evidence and code review before shipping, via Superpowers
+argument-hint: "[plan path]"
+---
+
+## User Input
+
+```text
+$ARGUMENTS
+```
+
+1. Resolve the plan, first match wins:
+   - the User Input path;
+   - the plan this session implemented, else reviewed, created, or revised, else the user named as the subject of work (latest wins) — use it without asking, and state its path in one line so the user can correct it;
+   - otherwise list `docs/superpowers/plans/*.md` and ask.
+2. ADR check: open the plan's spec, read `## Decisions`. Any linked ADR whose `Status` is not `accepted` → STOP with `NOT READY` and the ADR path as reason.
+3. Invoke the Superpowers `verification-before-completion` skill (Claude Code: `superpowers:verification-before-completion`). Run every test/verify command in the plan plus the project's test suite; report real output. Failure → STOP with `NOT READY`, suggest fixing via `systematic-debugging`.
+4. Invoke the Superpowers `requesting-code-review` skill (Claude Code: `superpowers:requesting-code-review`) on the branch diff vs base. Fix Critical/Important findings, then re-run step 3.
+5. STOP with a verdict: `READY TO SHIP` or `NOT READY` + reasons. Do not merge or push. On `READY TO SHIP`, suggest `/ship`.

@@ -1,0 +1,18 @@
+---
+description: Back-sync an approved design spec with shipped code drift
+argument-hint: <path to approved spec>
+---
+
+## User Input
+
+```text
+$ARGUMENTS
+```
+
+1. Resolve the spec, first match wins:
+   - the User Input path;
+   - the spec this session approved, else created or revised, else the user named as the subject of work (latest wins) — use it without asking, and state its path in one line so the user can correct it;
+   - otherwise list `docs/superpowers/specs/` and ask which one.
+   No spec → STOP, suggest `/spec`. Confirm the spec is approved: ask once "Has this spec been reviewed and approved?" unless the user already approved it in this session or said so. Not approved → STOP, fix it in `/spec` instead.
+2. Invoke the `update-spec` skill. If the runtime cannot find it, read `.agents/skills/agentic-os/update-spec/SKILL.md` and follow it exactly.
+3. STOP after the skill reports. Do not edit code — back-sync is a separate gate.

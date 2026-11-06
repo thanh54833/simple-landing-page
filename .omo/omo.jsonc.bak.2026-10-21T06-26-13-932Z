@@ -1,0 +1,35 @@
+// OMO configuration
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json",
+  "_migrations": [
+    "2026-07-opencode-config-unification",
+    "2026-08-reasoning-unification"
+  ],
+  "models": {
+    "muse-spark": { "model": "opencode-go/muse-spark-1.3-contributor" }
+  },
+  "model_profile": "opencode-go/muse-spark-1.3-contributor",
+  "agents": {
+    "sisyphus": { "model": "muse-spark", "temperature": 0.25, "variant": "default" },
+    "hephaestus": { "model": "muse-spark", "temperature": 0.3, "variant": "default" },
+    "oracle": { "model": "muse-spark", "temperature": 0.2, "variant": "default" },
+    "prometheus": { "model": "muse-spark", "temperature": 0.25, "variant": "default" },
+    "metis": { "model": "muse-spark", "temperature": 0.3, "variant": "default" },
+    "momus": { "model": "muse-spark", "temperature": 0.4, "variant": "default" },
+    "atlas": { "model": "muse-spark", "temperature": 0.3, "variant": "default" },
+    "librarian": { "model": "muse-spark", "temperature": 0.4, "variant": "default" },
+    "explore": { "model": "muse-spark", "temperature": 0.5, "variant": "default" },
+    "multimodal-looker": { "model": "muse-spark", "temperature": 0.4, "variant": "default" },
+    "sisyphus-junior": { "model": "muse-spark", "temperature": 0.35, "variant": "default" }
+  },
+  "categories": {
+    "deep": { "model": "muse-spark", "temperature": 0.3, "max_tokens": 8192, "variant": "default" },
+    "ultrabrain": { "model": "muse-spark", "temperature": 0.25, "variant": "default" },
+    "quick": { "model": "muse-spark", "temperature": 0.5, "variant": "default" },
+    "visual-engineering": { "model": "muse-spark", "temperature": 0.4, "variant": "default" },
+    "artistry": { "model": "muse-spark", "temperature": 0.45, "variant": "default" },
+    "writing": { "model": "muse-spark", "temperature": 0.4, "variant": "default" },
+    "unspecified-low": { "model": "muse-spark", "temperature": 0.5, "variant": "default" },
+    "unspecified-high": { "model": "muse-spark", "temperature": 0.3, "variant": "default" }
+  }
+}
