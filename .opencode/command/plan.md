@@ -1,0 +1,22 @@
+---
+description: Turn an approved design spec into an implementation plan ready to execute, via Superpowers writing-plans
+argument-hint: <path to approved spec | accepted T3 intent>
+---
+
+## User Input
+
+```text
+$ARGUMENTS
+```
+
+1. Resolve the spec, first match wins:
+   - the User Input path;
+   - the spec this session approved, else created or revised, else the user named as the subject of work (latest wins) — use it without asking, and state its path in one line so the user can correct it;
+   - otherwise list `docs/superpowers/specs/*-design.md` and ask which one.
+   No spec → STOP, suggest `/spec`. Exception: an intent path with `Status: accepted` and `Class: T3` (hotfix lane has no spec) is valid input; use it in place of the spec below, and if the fix needs a schema, auth, or contract change → STOP, reclassify T4, suggest `/spec`.
+2. Confirm the spec is approved: ask once "Has this spec been reviewed and approved?" unless the user already approved it in this session or said so. Not approved → STOP. (T3 intent: it must be `accepted`.)
+3. ADR gate (skip for a T3 intent — it has no `## Decisions`; the reclassify check in step 1 replaces it): read the spec's `## Decisions` section. Any linked ADR whose `Status` is not `accepted` → STOP, suggest `/adr <spec path>`. No `## Decisions` section and the spec records an architecture change (new subsystem, schema, auth, contract) → STOP, suggest `/adr`. Otherwise continue.
+4. Invoke the Superpowers `writing-plans` skill (Claude Code: `superpowers:writing-plans`) with the spec (T3: the accepted intent) as input.
+5. Save to `docs/superpowers/plans/YYYY-MM-DD-<topic>.md`, reusing the spec's (T3: the intent's) date+topic stem.
+6. Run the skill's Execution Handoff: ask the user to review the plan and choose an execution method (subagent-driven or inline).
+7. STOP once the plan is reviewed and the method is chosen. Report the plan path and chosen method, suggest `/implement <plan path> <method>`. Do not invoke `subagent-driven-development` or `executing-plans` — implementation is a separate gate.

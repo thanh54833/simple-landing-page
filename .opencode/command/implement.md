@@ -1,0 +1,22 @@
+---
+description: Execute an approved implementation plan task-by-task via Superpowers, stopping before branch finishing
+argument-hint: <plan path> [subagent-driven | inline]
+---
+
+## User Input
+
+```text
+$ARGUMENTS
+```
+
+1. Resolve the plan, first match wins:
+   - the User Input path;
+   - the plan this session reviewed, else created or revised, else the user named as the subject of work (latest wins) — use it without asking, and state its path in one line so the user can correct it;
+   - otherwise list `docs/superpowers/plans/*.md` and ask which one.
+   No plan → STOP, suggest `/plan`.
+2. Resolve the execution method: from the User Input, else the method chosen at `/plan` in this session, else ask once — `subagent-driven` (recommended) or `inline`.
+3. Invoke the matching Superpowers skill with the plan:
+   - `subagent-driven` → `subagent-driven-development` (Claude Code: `superpowers:subagent-driven-development`)
+   - `inline` → `executing-plans` (Claude Code: `superpowers:executing-plans`)
+   The skill owns worktree setup, TDD, and per-task review — follow it as written.
+4. STOP at the point where the skill would invoke `finishing-a-development-branch`. Do not merge, push, open a PR, or discard. Report: branch/worktree, tasks completed, anything left open. Suggest `/verify <plan path>`.
