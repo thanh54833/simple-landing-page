@@ -18,5 +18,6 @@
     ".agents/skills/agentic-os/doc-coauthoring/**",
     ".agents/skills/agentic-os/writing-for-agents/**",
     ".agents/skills/agentic-os/hallmark/**"
-  ]
+  ],
+  "version":"2026-10-26"
 }

@@ -4,7 +4,7 @@
 Canonical slash-command routers: each names one skill plus its gate, never the procedure.
 
 ## STRUCTURE
-Gate chain, in order: `intent` → `spec` → `adr` → `plan` → `implement` → `verify` → `ship`. Standalone (outside the chain): `debug`, `impeccable`, `retro`, `update-spec` (back-sync gate for drifted specs). Shared `CHANGELOG.md` (newest-first per date).
+Gate chain, in order: `intent` → `spec` → `adr` → `plan` → `implement` → `verify` → `ship`. Standalone (outside the chain): `debug`, `impeccable`, `redesign`, `retro`, `update-spec` (back-sync gate for drifted specs). Shared `CHANGELOG.md` (newest-first per date).
 
 ## WHERE TO LOOK
 | Router | Backing skill | Notes |
@@ -18,6 +18,7 @@ Gate chain, in order: `intent` → `spec` → `adr` → `plan` → `implement` �
 | `ship.md` | `finishing-a-development-branch` | needs `/verify` verdict first |
 | `debug.md` | Superpowers `systematic-debugging` | no fixes before Phase 1; includes the vite → `:8000` layer check |
 | `impeccable.md` | `impeccable` | frontend-only; routes sub-commands in `reference/` |
+| `redesign.md` | `impeccable` | frontend-only; resolves a component/page/sheet target to files, refines inside DESIGN.md (no new tokens), keeps behavior + tests |
 | `retro.md` | `writing-for-agents` | needs session id/log; categories: nav, checks, standards, global, tools |
 | `update-spec.md` | `update-spec` | back-sync drifted spec; STOP, suggest `/adr` (new number), `/verify`, or `/intent` |
 

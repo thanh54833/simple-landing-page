@@ -1,0 +1,22 @@
+---
+description: Redesign a named component, page, or sheet inside the existing design system via the impeccable skill
+argument-hint: <target and optional direction, e.g. "sync-panel" | "repo-head quieter" | "/repository/1 header">
+---
+
+## User Input
+
+```text
+$ARGUMENTS
+```
+
+1. Treat the User Input as `<target> [direction]`. Empty → ask which component, page, or sheet, and what feels wrong about it.
+2. Resolve the target to source files, first match wins, and state the files in one line so the user can correct them:
+   - a file path;
+   - a CSS selector or class (`aside.sync-panel`, `.repo-head`) → grep `apps/web/src` for the class, take the component that renders it plus its rules in `index.css`;
+   - a route (`/repository/1`) → the page component that route renders; then the single element the user named, not the whole page;
+   - a component or sheet name → its file in `apps/web/src`.
+   Nothing resolves → list the nearest candidates and ask.
+3. Read `.agents/skills/agentic-os/impeccable/SKILL.md` in full and follow its `Local Overrides`. Treat this as a refinement inside the committed world: `PRODUCT.md` Brand Commitments and `DESIGN.md` are binding, so reuse existing tokens and component grammar; add no hue, token, or second decorative system. A redesign keeps behavior, copy, accessible names, and the tests that pin them; it replaces layout, hierarchy, and treatment. Route a leftover direction word (`quieter`, `bolder`, `polish`, `layout`, `typeset`…) to its `reference/<name>.md`; otherwise load `reference/layout.md` and `reference/polish.md`.
+4. Build in one pass, then run `cd apps/web && npm run build` and the target's vitest file (Node 22 if the default Node fails on `undici`). Report failures as they are; a failure that also occurs without your diff is pre-existing, say so.
+5. Not for backend-only or non-UI tasks — say so and STOP.
+6. STOP with a short report: what changed, files touched, build/test result, and what was not visually checked. A new reusable pattern → suggest `/impeccable document`.
