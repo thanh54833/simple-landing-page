@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/apmantza/pi-lens/master/docs/schema/pi-lens-config-v1.json",
+  "ignore": [
+    "node_modules/**",
+    "apps/web/dist/**",
+    ".playwright-mcp/**",
+    ".pi/npm/**",
+    ".pi/git/**",
+    ".superpowers/**",
+    ".omo/**",
+    ".impeccable/**",
+    ".claude/commands/**",
+    ".claude/skills/**",
+    ".opencode/command/**",
+    ".pi/prompts/**",
+    ".agents/skills/react-best-practices/**",
+    ".agents/skills/agentic-os/impeccable/**",
+    ".agents/skills/agentic-os/doc-coauthoring/**",
+    ".agents/skills/agentic-os/writing-for-agents/**",
+    ".agents/skills/agentic-os/hallmark/**"
+  ]
+}
