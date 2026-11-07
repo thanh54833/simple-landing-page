@@ -1,7 +1,6 @@
 # Changelog — .agents
 
-File tổng cho toàn bộ `.agents/` (routers + skills + settings), newest first.
-Heading theo ngày (`## YYYY-MM-DD`) vì root không pin version trong lock như skill.
+Một file duy nhất cho toàn bộ `.agents/` (routers + skills + settings), newest first. Heading theo ngày (`## YYYY-MM-DD`). Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 Chi tiết gate → xem `.commands/CHANGELOG.md`; chi tiết từng skill self-built → xem `skills/agentic-os/<skill>/CHANGELOG.md`. File này chỉ ghi thay đổi cấu trúc/sync/settings ảnh hưởng toàn cây.
 
 ## 2026-10-26

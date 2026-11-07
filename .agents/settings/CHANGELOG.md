@@ -1,7 +1,6 @@
 # Changelog — settings
 
-Một file duy nhất cho toàn bộ `settings/`, newest first.
-Heading theo ngày (`## YYYY-MM-DD`) vì settings không pin version trong lock như skill.
+Một file duy nhất cho toàn bộ `settings/`, newest first. Heading theo ngày (`## YYYY-MM-DD`). Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 
 ## 2026-10-26
 

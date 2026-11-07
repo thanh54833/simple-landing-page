@@ -1,8 +1,6 @@
 # Changelog — commands
 
-Một file duy nhất cho toàn bộ `.agents/commands/`, newest first.
-Heading theo ngày (`## YYYY-MM-DD`) vì command không pin version trong lock như skill.
-Mẫu: `blader/humanizer` `CHANGELOG.md`.
+Một file duy nhất cho toàn bộ `.agents/.commands/`, newest first. Heading theo ngày (`## YYYY-MM-DD`). Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 
 ## 2026-11-07
 

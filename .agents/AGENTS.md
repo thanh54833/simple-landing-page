@@ -43,6 +43,7 @@ Fan-out written by `scripts/sync-agents.mjs` (`make agents_sync`, short `make as
 | Release/CI/RE work | `skills/rea/AGENTS.md` | REA paths resolve against the target repo |
 | Frontend design | `skills/agentic-os/impeccable/SKILL.md` | vendored; follow its `Local Overrides` |
 | Write skills/AGENTS.md | `skills/agentic-os/writing-for-agents/SKILL.md` | vendored reference: pointers, hierarchy, pruning |
+| Maintenance chores on `.agents/` | `playbooks/AGENTS.md` | numbered folders, not mirrored; `001_changelog/` for CHANGELOG.md |
 
 ## CONVENTIONS
 - Edit only here. `.claude/commands/`, `.claude/skills/`, `.opencode/command/`, `.pi/prompts/` are generated mirrors — `make agents_sync` writes them, `make agents_sync-check` fails when they drift.

@@ -1,6 +1,6 @@
 # Changelog — tasks-creator
 
-Newest first. Heading đầu giữ cùng version với `../agentic-os-lock.json`.
+Một file duy nhất cho `skills/agentic-os/tasks-creator/`, newest first. Heading đầu giữ cùng version với `../agentic-os-lock.json`. Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 
 ## local-2026-10-12
 
