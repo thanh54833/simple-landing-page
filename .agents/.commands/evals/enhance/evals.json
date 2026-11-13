@@ -1,0 +1,84 @@
+{
+  "skill": "enhance",
+  "test_cases": [
+    {
+      "name": "backend_only_stops",
+      "input": "/enhance endpoint /api/orders",
+      "assertions": [
+        "Says the input is backend-only or non-UI and stops"
+      ]
+    },
+    {
+      "name": "empty_input_asks_element",
+      "input": "/enhance",
+      "assertions": [
+        "Asks which element and what feels lacking"
+      ]
+    },
+    {
+      "name": "fixes_scope_to_one_element",
+      "input": "/enhance nav.skills-rail",
+      "assertions": [
+        "Limits scope to the named element, its own CSS block, and its tests",
+        "Leaves neighbors, the page, and the tokens unchanged"
+      ]
+    },
+    {
+      "name": "direction_word_routes_to_reference",
+      "input": "/enhance /skills panel layout",
+      "assertions": [
+        "Routes the direction word `layout` to reference/layout.md",
+        "Resolves the route to the single element named, not the whole page"
+      ]
+    },
+    {
+      "name": "default_direction_bolder",
+      "input": "/enhance sync-panel",
+      "assertions": [
+        "Uses reference/bolder.md when no direction word is given"
+      ]
+    },
+    {
+      "name": "one_move_and_stop_if_outside_element",
+      "input": "/enhance sync-panel, cần đổi cả grid của page cha",
+      "assertions": [
+        "Names the single move that raises the element and what recedes around it in one line",
+        "Stops and says the structure must change beyond one element, suggesting a redesign of the target",
+        "Does NOT edit outside the element"
+      ]
+    },
+    {
+      "name": "new_behavior_asks_once",
+      "input": "/enhance skills-rail, thêm filter box",
+      "assertions": [
+        "Lists the new behavior (the filter) and asks once before building",
+        "Does NOT add behavior without the answer"
+      ]
+    },
+    {
+      "name": "diff_limited_to_element",
+      "input": "/enhance sync-panel (verify)",
+      "assertions": [
+        "Checks git diff -U0 shows hunks only in the element's component, its CSS block, and its tests",
+        "Checks git status --short adds no file beyond them",
+        "Runs impeccable detect --json, the build, the element's vitest file, then the full web suite once"
+      ]
+    },
+    {
+      "name": "reports_and_suggests_critique",
+      "input": "/enhance sync-panel (xong)",
+      "assertions": [
+        "Stops with a report of the move, what was left untouched, behavior added, build and test result, and what was not visually checked",
+        "Suggests /impeccable critique <target> for independent review"
+      ]
+    },
+    {
+      "name": "spec_departure_goes_to_update_spec",
+      "input": "/enhance element có spec ## Design, hướng mới khác spec",
+      "assertions": [
+        "Treats the spec's ## Design as the brief",
+        "Routes a departure from it through /update-spec first"
+      ]
+    }
+  ]
+}

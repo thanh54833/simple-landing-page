@@ -1,0 +1,65 @@
+{
+  "prompt_type": "product",
+  "meta": {
+    "quality_tier": "masterpiece",
+    "aspect_ratio": "16:9",
+    "style": "vector",
+    "target_model": "gpt-image-2.5",
+    "resolution": "1536x864"
+  },
+  "subject": {
+    "description": "single Physarum slime mould as a flat gold filament lattice, dense and muscular, pushing thick tapering veins outward to absorb small square icon tiles",
+    "physical_details": {
+      "materials": ["flat gold fill #e7b949", "highlight veins #f5cd65", "thin areas #cd9816"],
+      "micro_detail_requirements": [
+        "varied rounded holes of unequal size",
+        "a few tiny dot nuclei",
+        "veins taper to fine tips"
+      ],
+      "finish": "flat vector fills, no gradients on the background, no cast shadows"
+    }
+  },
+  "environment": {
+    "location": "flat bead-black canvas #080c0c with faint hairline grid seams #293232",
+    "background": [
+      "three labeled tile groups around the organism: sdlc (left, 3 tiles), design (right-top, 2 tiles), cli (right-bottom, 4 tiles)",
+      "aqua #8ce6dc bracket and tiny lowercase mono label above each group",
+      "thin aqua divider between the design group and the cli group"
+    ],
+    "atmosphere": "quiet technical instrument datasheet, precise and editorial"
+  },
+  "lighting": {
+    "type": "soft",
+    "quality": "flat, even",
+    "effects": ["no glow", "no halo", "no drop shadows"]
+  },
+  "camera_technical": {
+    "framing": "straight-on orthographic, organism centered at about 45 percent of frame height",
+    "composition": "left column of 3 tiles, right side split into a top row of 2 and a bottom row of 4, balanced margins",
+    "resolution": "1536x864"
+  },
+  "realism_anchors": [
+    "tiles nearest the organism are half engulfed by gold lattice and tinted gold",
+    "middle tiles are touched by a single vein",
+    "outermost tiles stay dark and untouched",
+    "tiles are #192121 with 1px #5b6665 border and 6px radius",
+    "tile labels are small monospace uppercase in cream #f6f3eb"
+  ],
+  "negative_prompt": [
+    "colors outside gold, aqua, cream and bead-black",
+    "glow or halo around the organism",
+    "drop shadows",
+    "photorealistic fungus texture",
+    "misspelled tile labels",
+    "extra tiles beyond 3, 2 and 4",
+    "watermark"
+  ],
+  "layout_overlays": {
+    "bottom_left_caption": {
+      "content_template": "PHYSARUM AGENT",
+      "font_style": "monospace uppercase",
+      "color": "cream #f6f3eb",
+      "placement": "bottom-left corner"
+    }
+  }
+}

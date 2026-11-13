@@ -1,0 +1,15 @@
+{
+  "skill": "doc-coauthoring",
+  "test_cases": [
+    {"input": "giúp tôi viết PRD cho tính năng mới", "should_trigger": true},
+    {"input": "draft a decision doc for choosing a message broker", "should_trigger": true},
+    {"input": "viết RFC cho thay đổi kiến trúc", "should_trigger": true},
+    {"input": "write up a design doc with me step by step", "should_trigger": true},
+    {"input": "tôi cần soạn một proposal gửi sếp", "should_trigger": true},
+    {"input": "fix the failing unit test", "should_trigger": false},
+    {"input": "viết intent.md cho ý tưởng này", "should_trigger": false},
+    {"input": "refactor hàm này cho gọn", "should_trigger": false},
+    {"input": "rewrite this paragraph to sound less like AI", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

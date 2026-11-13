@@ -1,0 +1,14 @@
+{
+  "skill": "adr",
+  "test_cases": [
+    {"input": "ghi ADR cho quyết định kiến trúc trong spec", "should_trigger": true},
+    {"input": "record the architecture decisions from the approved spec", "should_trigger": true},
+    {"input": "spec này có cần ADR không?", "should_trigger": true},
+    {"input": "run the G2+ gate", "should_trigger": true},
+    {"input": "viết spec cho tính năng mới", "should_trigger": false},
+    {"input": "lập plan triển khai", "should_trigger": false},
+    {"input": "fix the failing login test", "should_trigger": false},
+    {"input": "save a business rule to memory", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

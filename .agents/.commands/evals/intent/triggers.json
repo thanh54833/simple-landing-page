@@ -1,0 +1,15 @@
+{
+  "skill": "intent",
+  "test_cases": [
+    {"input": "ghi lại ý tưởng này thành intent trước khi thiết kế", "should_trigger": true},
+    {"input": "turn this ticket into an intent proto-spec", "should_trigger": true},
+    {"input": "biến alert incident này thành intent mới", "should_trigger": true},
+    {"input": "capture this idea as intent.md, don't design yet", "should_trigger": true},
+    {"input": "viết intent.md cho yêu cầu của khách", "should_trigger": true},
+    {"input": "viết spec cho intent đã accept", "should_trigger": false},
+    {"input": "lập plan triển khai cho spec đã duyệt", "should_trigger": false},
+    {"input": "debug why checkout returns 500", "should_trigger": false},
+    {"input": "record an architecture decision for Postgres", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

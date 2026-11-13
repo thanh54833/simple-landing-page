@@ -1,0 +1,77 @@
+{
+  "skill": "update-spec",
+  "test_cases": [
+    {
+      "name": "stops_when_spec_not_approved",
+      "input": "Cập nhật spec docs/physarum/specs/2026-11-01-auth-design.md, code lệch rồi (spec chưa approve)",
+      "assertions": [
+        "Checks the spec's approval before any patch",
+        "Stops and points to /spec when the spec is not approved",
+        "Does NOT edit the spec file"
+      ]
+    },
+    {
+      "name": "confirm_before_write",
+      "input": "Spec ghi callback lỗi trả 401, code đang trả 302 /?auth=<reason>. Ghi vào spec.",
+      "assertions": [
+        "Announces `Using spec: <path>`",
+        "Gets the base commit from git log -- <spec-path> and runs git diff <base>..HEAD -- apps/",
+        "Drafts labeled hunks (MODIFIED/ADDED/REMOVED) in conversation and shows each hunk with why",
+        "Does NOT call Edit or Write on the spec before the user confirms the hunks",
+        "Writes only the hunk, NOT a rewrite of the whole file"
+      ]
+    },
+    {
+      "name": "modified_keeps_old_scenario",
+      "input": "Patch §3 của spec: callback lỗi giờ redirect",
+      "assertions": [
+        "MODIFIED hunk keeps the old scenario",
+        "Reads related intent, plan and ADR and checks both directions for contradiction",
+        "Rereads the spec after writing and scans new notes against old text"
+      ]
+    },
+    {
+      "name": "ui_only_drift_not_patched",
+      "input": "Code đổi trigger 32px thay vì 24px và đổi copy nút. Cập nhật spec.",
+      "assertions": [
+        "Lists the sizing and copy changes as `UI-only (không patch)` with a reason",
+        "Does NOT add them to the spec body"
+      ]
+    },
+    {
+      "name": "undecided_behavior_stops_with_options",
+      "input": "Spec có endpoint /export nhưng code không có. Spec gợi ý xóa, cứ xóa luôn.",
+      "assertions": [
+        "Stops and presents options: delete vs implement vs defer",
+        "Does NOT record the deletion until the user picks",
+        "Does NOT silently decide a load-bearing call"
+      ]
+    },
+    {
+      "name": "never_touches_code_or_tests",
+      "input": "Test pin đang sai so với hành vi mới, sửa test cho khớp luôn nhé",
+      "assertions": [
+        "Does NOT edit apps/, *.test.*, DESIGN.md, PRODUCT.md, or config",
+        "Says test changes go through test gates"
+      ]
+    },
+    {
+      "name": "design_drift_from_implement",
+      "input": "/implement chặn vì slot header trong ## Design không khớp, patch spec",
+      "assertions": [
+        "Treats ## Design as spec content, not UI-only drift",
+        "Takes the drift from the user's description since there is no apps/ diff",
+        "Patches ## Design as a MODIFIED hunk only after user confirm",
+        "Points back to /implement, NOT /verify"
+      ]
+    },
+    {
+      "name": "stops_after_accept_with_pointer",
+      "input": "User đã accept patch của spec. Tiếp theo?",
+      "assertions": [
+        "Points the next step as guidance only (architecture → /adr new number, otherwise /verify)",
+        "Does NOT run the next gate itself"
+      ]
+    }
+  ]
+}

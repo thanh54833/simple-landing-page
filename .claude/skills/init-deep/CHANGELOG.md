@@ -1,0 +1,12 @@
+# Changelog — init-deep
+
+Một file duy nhất cho `skills/agentic-os/init-deep/`, newest first. Heading đầu giữ cùng version với `../agentic-os-lock.json`. Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
+
+## local-2026-10-12
+
+- Thêm `evals/evals.json` (8 test case) và `evals/triggers.json` (9 trigger, 5 negative).
+- Initial self-built release: sinh hierarchy `AGENTS.md` (Root 50-150 dòng + subdirs 30-80 dòng theo complexity score), ngoài chuỗi gate SDLC.
+- Discovery concurrent: explore background (dynamic spawning theo scale) + bash structure + LSP/codegraph code map + đọc `AGENTS.md` sẵn có; modes `--create-new` / `--max-depth`.
+- Scoring matrix 8 factors + Decision Rules (Root ALWAYS, `>15` create, `8-15` distinct domain, `<8` skip); File Writing Rule Edit-vs-Write; Review dedup + Final Report.
+- DỪNG ở Final Report (files, dirs analyzed, hierarchy); không design/implement tiếp.
+- Thêm `AGENTS.md` rule guide + `CHANGELOG.md` theo mẫu `blader/humanizer`.

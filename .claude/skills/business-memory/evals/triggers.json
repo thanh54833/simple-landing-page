@@ -1,0 +1,15 @@
+{
+  "skill": "business-memory",
+  "test_cases": [
+    {"input": "init business memory cho project này", "should_trigger": true},
+    {"input": "ghi lại quyết định vừa chốt vào memory", "should_trigger": true},
+    {"input": "remember this business rule for later decisions", "should_trigger": true},
+    {"input": "save an operational insight from this incident", "should_trigger": true},
+    {"input": "capture domain rules for decision support", "should_trigger": true},
+    {"input": "viết spec cho tính năng mới", "should_trigger": false},
+    {"input": "fix the CI lint error", "should_trigger": false},
+    {"input": "lưu preference theme máy local của tôi", "should_trigger": false},
+    {"input": "recall what we decided last week", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

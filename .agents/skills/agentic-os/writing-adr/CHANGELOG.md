@@ -2,9 +2,14 @@
 
 Một file duy nhất cho `skills/agentic-os/writing-adr/`, newest first. Heading đầu giữ cùng version với `../agentic-os-lock.json`. Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 
+## local-2026-11-10
+
+- Thêm `evals/evals.json` (8 test case) và `evals/triggers.json` (11 trigger, 6 negative).
+- Đổi mã lane trong skill cho khớp bảng mới: Architecture là T3 (trước là T4).
+
 ## local-2026-10-14
 
-- ADR dir chuyển từ `docs/adr/` sang `docs/superpowers/adr/` theo owner override (gom vào gate working area); command `/adr` và spec `## Decisions` đồng bộ theo.
+- ADR dir chuyển từ `docs/adr/` sang `docs/physarum/adr/` theo owner override (gom vào gate working area); command `/adr` và spec `## Decisions` đồng bộ theo.
 
 ## local-2026-10-09
 

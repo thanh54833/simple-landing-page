@@ -1,0 +1,9 @@
+{
+  "skill": "ten-skill",
+  "test_cases": [
+    {"input": "câu positive 1", "should_trigger": true},
+    {"input": "câu positive 2", "should_trigger": true},
+    {"input": "câu gần nghĩa nhưng thuộc skill/gate khác", "should_trigger": false},
+    {"input": "câu hoàn toàn không liên quan", "should_trigger": false}
+  ]
+}

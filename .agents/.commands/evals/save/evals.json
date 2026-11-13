@@ -1,0 +1,62 @@
+{
+  "skill": "save",
+  "test_cases": [
+    {
+      "name": "resolves_input_and_states_it",
+      "input": "/save chốt dùng Stripe cho thanh toán, loại PayPal vì phí cao",
+      "assertions": [
+        "Takes the User Input text as what to save and states it in one line",
+        "Combines the input line and the diff confirmation into one stop"
+      ]
+    },
+    {
+      "name": "empty_input_saves_settled_session_items",
+      "input": "/save (session đã chốt 2 quyết định chưa lưu)",
+      "assertions": [
+        "Lists every settled-but-unsaved decision, rule, or lesson from this session in one line",
+        "Saves them as one package"
+      ]
+    },
+    {
+      "name": "nothing_to_save_asks",
+      "input": "/save (không có gì chốt trong session)",
+      "assertions": [
+        "Asks what to save",
+        "Does NOT invent items to save"
+      ]
+    },
+    {
+      "name": "memory_not_initialised_stops",
+      "input": "/save quyết định X (docs/physarum/business-memory/index.json không tồn tại)",
+      "assertions": [
+        "Stops and says the memory is not initialised",
+        "Offers to run the business-memory skill's reference/init.md first",
+        "Does NOT create the memory from this command"
+      ]
+    },
+    {
+      "name": "follows_save_reference",
+      "input": "/save quyết định Y (memory đã init)",
+      "assertions": [
+        "Invokes business-memory and follows its reference/save.md",
+        "Asks once with the diff before writing"
+      ]
+    },
+    {
+      "name": "unsettled_input_is_proposed",
+      "input": "/save có thể mình sẽ dùng Redis cho cache",
+      "assertions": [
+        "Writes status proposed, NOT accepted",
+        "Does NOT mark accepted without the owner's explicit choice"
+      ]
+    },
+    {
+      "name": "stops_after_report",
+      "input": "/save (đã ghi xong)",
+      "assertions": [
+        "Stops after reporting the files written and the updated index.json",
+        "Does NOT edit code or invoke another gate's skill"
+      ]
+    }
+  ]
+}

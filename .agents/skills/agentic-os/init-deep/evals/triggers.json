@@ -1,0 +1,14 @@
+{
+  "skill": "init-deep",
+  "test_cases": [
+    {"input": "init-deep cho repo này", "should_trigger": true},
+    {"input": "tạo AGENTS.md phân cấp cho các thư mục", "should_trigger": true},
+    {"input": "initialize hierarchical AGENTS.md knowledge base", "should_trigger": true},
+    {"input": "regenerate all AGENTS.md from scratch", "should_trigger": true},
+    {"input": "viết CHANGELOG cho skill", "should_trigger": false},
+    {"input": "debug why the build fails", "should_trigger": false},
+    {"input": "viết intent.md cho ý tưởng này", "should_trigger": false},
+    {"input": "review the code diff", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

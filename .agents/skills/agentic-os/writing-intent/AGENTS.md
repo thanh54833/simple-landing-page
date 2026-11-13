@@ -12,19 +12,19 @@ Viết xong thì DỪNG — không gọi `brainstorming`/`writing-plans`, không
 
 ## Key files
 
-- `SKILL.md` — source of truth duy nhất: classify source, analyst questions, template, bảng Classification T2/T3/T4. Mọi sửa behavior bắt đầu ở đây.
+- `SKILL.md` — source of truth duy nhất: classify source, analyst questions, template, bảng Classification T0–T3. Mọi sửa behavior bắt đầu ở đây.
 - `AGENTS.md` (file này) — rule guide cho agent sửa skill; không chứa procedure chạy gate.
 - `CHANGELOG.md` — release notes, newest first. Behavior change hoặc non-obvious fix phải có 1 note.
 - `../agentic-os-lock.json` — pin `writing-intent` (`sourceType: local`, `version: local-YYYY-MM-DD`).
-- `.opencode/command/intent.md` — router `$ARGUMENTS` (idea/ticket/alert) vào skill; giữ in sync, không chép procedure.
-- Target runtime: `docs/superpowers/intents/YYYY-MM-DD-<slug>-intent.md` (cùng stem date+topic với spec/plan sau này).
+- `.agents/.commands/intent.md` — router `$ARGUMENTS` (idea/ticket/alert) vào skill; giữ in sync, không chép procedure.
+- Target runtime: `docs/physarum/intents/YYYY-MM-DD-<slug>-intent.md` (cùng stem date+topic với spec/plan sau này).
 
 ## Rules for changes
 
-- Giữ `SKILL.md` và `.opencode/command/intent.md` in sync. Command chỉ resolve input + classify + khai báo điểm DỪNG.
+- Giữ `SKILL.md` và `.agents/.commands/intent.md` in sync. Command chỉ resolve input + classify + khai báo điểm DỪNG.
 - **Hard gate:** không design/implement trước khi `intent.md` accepted (kể cả khi user đòi spec cùng turn — viết intent trước, design là gate riêng).
 - **Template:** field nào viết/không viết theo bảng Field (Problem = pain hiện tại, không phải fix; Outcome = user thấy gì, không phải build sao). Intent > 1 trang là đang thành PRD — cắt. Đổi template → cập nhật bảng Field + `Common Mistakes`.
-- **Classification:** evaluate top-down, row đầu match thắng (T4 Architecture → T3 Hotfix → T2 Feature → T0/T1 Bounded). Đổi predicate/Lane → cập nhật bảng + Handoff (`/spec`/`/plan` path, T3 không spec, T0/T1 khỏi intent). Scope phình sau accept → reclassify upward, không skip gate.
+- **Classification:** mã tăng theo rủi ro (T0 thấp nhất, T3 cao nhất); đánh giá từ mã cao xuống thấp, row đầu match thắng (T3 Architecture → T2 Hotfix/Debug → T1 Feature → T0 Tiny/Quick). Đổi predicate/Lane → cập nhật bảng + Handoff (`/spec`/`/plan` path; T2 khỏi intent và đi `/debug` → `/verify` → `/ship`; T0 Tiny/Quick intent tuỳ chọn rồi `/implement` → `/verify` → `/ship`). Scope phình sau accept → reclassify upward, không skip gate.
 - **Bounded:** flag/endpoint nhỏ/one-file fix trên flow có sẵn thì khỏi `intent.md` — design trong chat là đủ.
 - **Version:** giữ cùng version ở `../agentic-os-lock.json` và heading đầu `CHANGELOG.md`. Đổi skill → bump lock cùng commit.
 - **Compatibility:** instructions trung lập runtime (Claude Code, OpenCode, Orca là ví dụ).

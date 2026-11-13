@@ -1,0 +1,14 @@
+{
+  "skill": "retro",
+  "test_cases": [
+    {"input": "retro phiên làm việc này", "should_trigger": true},
+    {"input": "what could improve the agent's environment after this session", "should_trigger": true},
+    {"input": "/retro session-id", "should_trigger": true},
+    {"input": "rà lại session để cải thiện AGENTS.md", "should_trigger": true},
+    {"input": "debug the failing test", "should_trigger": false},
+    {"input": "viết spec", "should_trigger": false},
+    {"input": "save a decision to memory", "should_trigger": false},
+    {"input": "build a landing page", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "skill": "update-spec",
+  "test_cases": [
+    {"input": "code đã lệch spec, back-sync giúp tôi", "should_trigger": true},
+    {"input": "sync the approved spec with the shipped drift", "should_trigger": true},
+    {"input": "/update-spec docs/physarum/specs/x-design.md", "should_trigger": true},
+    {"input": "ghi hotfix đã merge vào spec", "should_trigger": true},
+    {"input": "viết spec mới", "should_trigger": false},
+    {"input": "fix the bug in code", "should_trigger": false},
+    {"input": "ghi ADR", "should_trigger": false},
+    {"input": "save a business rule", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

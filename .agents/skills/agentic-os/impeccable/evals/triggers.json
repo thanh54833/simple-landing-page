@@ -1,0 +1,15 @@
+{
+  "skill": "impeccable",
+  "test_cases": [
+    {"input": "redesign the landing page to look bolder", "should_trigger": true},
+    {"input": "audit the accessibility of this dashboard", "should_trigger": true},
+    {"input": "polish the UI before we ship", "should_trigger": true},
+    {"input": "cải thiện typography và spacing cho form này", "should_trigger": true},
+    {"input": "critique this component's visual hierarchy", "should_trigger": true},
+    {"input": "fix the SQL query performance", "should_trigger": false},
+    {"input": "viết ADR cho quyết định chọn database", "should_trigger": false},
+    {"input": "refactor the backend service", "should_trigger": false},
+    {"input": "rewrite this blog post to sound human", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "skill": "ship",
+  "test_cases": [
+    {"input": "ship nhánh này", "should_trigger": true},
+    {"input": "finish the branch: merge or open a PR", "should_trigger": true},
+    {"input": "/ship", "should_trigger": true},
+    {"input": "hoàn tất branch đã verify", "should_trigger": true},
+    {"input": "viết plan", "should_trigger": false},
+    {"input": "debug the failure", "should_trigger": false},
+    {"input": "verify evidence for the plan", "should_trigger": false},
+    {"input": "ghi ADR", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

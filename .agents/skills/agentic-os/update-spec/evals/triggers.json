@@ -1,0 +1,15 @@
+{
+  "skill": "update-spec",
+  "test_cases": [
+    {"input": "code đã ship lệch spec, back-sync giúp tôi", "should_trigger": true},
+    {"input": "hotfix đã merge, ghi vào spec", "should_trigger": true},
+    {"input": "spec drift: spec ghi X mà code làm Y", "should_trigger": true},
+    {"input": "record a small decided behavior change in the spec", "should_trigger": true},
+    {"input": "cập nhật spec theo thay đổi validation đã merge", "should_trigger": true},
+    {"input": "viết spec mới cho tính năng thanh toán", "should_trigger": false},
+    {"input": "write a new intent for the idea", "should_trigger": false},
+    {"input": "fix the bug in the checkout code", "should_trigger": false},
+    {"input": "viết ADR cho quyết định này", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

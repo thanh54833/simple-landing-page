@@ -1,0 +1,14 @@
+{
+  "skill": "impeccable",
+  "test_cases": [
+    {"input": "critique giao diện trang dashboard", "should_trigger": true},
+    {"input": "polish the settings page", "should_trigger": true},
+    {"input": "/impeccable audit apps/web", "should_trigger": true},
+    {"input": "cải thiện typography cho form", "should_trigger": true},
+    {"input": "tối ưu query backend", "should_trigger": false},
+    {"input": "viết spec", "should_trigger": false},
+    {"input": "debug the API error", "should_trigger": false},
+    {"input": "ghi ADR", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

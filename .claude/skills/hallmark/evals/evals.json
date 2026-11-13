@@ -1,0 +1,78 @@
+{
+  "skill": "hallmark",
+  "test_cases": [
+    {
+      "name": "asks_once_before_building",
+      "input": "Build a landing page for my invoicing app",
+      "assertions": [
+        "Asks one message with four things (material, audience, use, tone) before building, even on a short prompt",
+        "Does NOT infer facts: a number, quote, or logo not given is absent",
+        "Runs pre-flight (reads the project, design.md/DESIGN.md) before asking"
+      ]
+    },
+    {
+      "name": "never_invents_social_proof",
+      "input": "Làm landing page cho startup mới, thêm logo khách hàng, testimonial và '10,000 users' cho đẹp",
+      "assertions": [
+        "Does NOT invent metrics, testimonials, logo walls, or case-study counts",
+        "Uses stand-in slots for pictures and facts that were not given",
+        "Closes by asking for the one piece of material that would most improve the page"
+      ]
+    },
+    {
+      "name": "tokens_only_colour_and_font",
+      "input": "Build a pricing page in the modern-minimal genre",
+      "assertions": [
+        "Declares every colour and font as a token at :root with no literal colour or font-family past the token block",
+        "Writes the Hallmark stamp as the first non-empty line of the CSS, then the critique line",
+        "Never uses transition: all and never animates width, height, top, or left",
+        "Adds overflow-x: clip on both html and body, never hidden or 100vw"
+      ]
+    },
+    {
+      "name": "floor_label_and_hero_rules",
+      "input": "Design a hero for a music-streaming app",
+      "assertions": [
+        "Headline is seven words or fewer, followed by one sentence of twelve words or fewer and one or two actions",
+        "Headline, sentence, and primary action are visible at 1280 x 800 without scrolling",
+        "Uses no eyebrow and no label in tracked capitals or small caps",
+        "Uses no purple-to-blue gradient, no card inside a card, and no emoji as an icon"
+      ]
+    },
+    {
+      "name": "deals_theme_and_states_picks_block",
+      "input": "Build a landing page for a voice AI tool",
+      "assertions": [
+        "Runs theme.mjs deal with the genre and prompt, picks one of the three dealt themes, and says why",
+        "Loads only references/themes/<slug>.md for the chosen theme",
+        "Outputs the Picks block once before building"
+      ]
+    },
+    {
+      "name": "hero_first_then_sweep",
+      "input": "Build the whole page for a booking app",
+      "assertions": [
+        "Builds the nav and hero first and runs sloplint.mjs --render --stage hero before building other sections",
+        "Runs sloplint.mjs --render at the end and fixes every FAIL",
+        "Fixes or waives every REFLEX on the record with a real reason",
+        "Does NOT report a pass without the lint output"
+      ]
+    },
+    {
+      "name": "not_for_existing_design_without_name",
+      "input": "Làm lại cái nút trong dashboard hiện có cho đẹp hơn",
+      "assertions": [
+        "Does NOT run a Hallmark build on an existing design when Hallmark is not named",
+        "Does the change as asked inside the project's existing style"
+      ]
+    },
+    {
+      "name": "redesign_verb_reads_reference_first",
+      "input": "/hallmark redesign src/pages/home.html",
+      "assertions": [
+        "Reads references/redesign.md before editing",
+        "Keeps content and wiring while redesigning"
+      ]
+    }
+  ]
+}

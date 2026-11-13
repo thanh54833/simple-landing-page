@@ -1,0 +1,14 @@
+{
+  "skill": "save",
+  "test_cases": [
+    {"input": "lưu quyết định vừa chốt vào business memory", "should_trigger": true},
+    {"input": "save this business rule to memory", "should_trigger": true},
+    {"input": "/save chốt dùng Stripe", "should_trigger": true},
+    {"input": "ghi lại bài học vận hành này", "should_trigger": true},
+    {"input": "viết spec", "should_trigger": false},
+    {"input": "debug the failing test", "should_trigger": false},
+    {"input": "recall what we decided last week", "should_trigger": false},
+    {"input": "ship the branch", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

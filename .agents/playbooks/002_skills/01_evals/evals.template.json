@@ -1,0 +1,14 @@
+{
+  "skill": "ten-skill",
+  "test_cases": [
+    {
+      "name": "ten_test_ro_rang",
+      "input": "đúng câu user sẽ nói",
+      "assertions": [
+        "Agent PHẢI làm việc X",
+        "Agent KHÔNG ĐƯỢC làm việc Y",
+        "Agent gọi tool/script/file cụ thể Z"
+      ]
+    }
+  ]
+}

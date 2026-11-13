@@ -5,7 +5,7 @@ Mẫu theo `blader/humanizer` `AGENTS.md`.
 
 ## What this skill contains
 
-Skill single `SKILL.md`, không build step. Chạy sau implement khi code drift khỏi spec đã approve (hotfix đổi logic, fix bug đổi behavior), hoặc khi change nhỏ đã chốt cần ghi vào spec. Patch spec tại chỗ trong `docs/superpowers/specs/`, hunk dán nhãn, confirm-then-write. Viết xong thì DỪNG — không gọi `writing-plans`, không sửa code.
+Skill single `SKILL.md`, không build step. Chạy sau implement khi code drift khỏi spec đã approve (hotfix đổi logic, fix bug đổi behavior), hoặc khi change nhỏ đã chốt cần ghi vào spec. Patch spec tại chỗ trong `docs/physarum/specs/`, hunk dán nhãn, confirm-then-write. Viết xong thì DỪNG — không gọi `writing-plans`, không sửa code.
 
 ## Key files
 
@@ -14,7 +14,7 @@ Skill single `SKILL.md`, không build step. Chạy sau implement khi code drift 
 - `CHANGELOG.md` — release notes, newest first. Behavior change hoặc non-obvious fix phải có 1 note.
 - `../agentic-os-lock.json` — pin `update-spec` (`sourceType: local`, `version: local-YYYY-MM-DD`).
 - `.agents/.commands/update-spec.md` — router `$ARGUMENTS` (spec path) vào skill; giữ in sync, không chép procedure.
-- Target runtime: mọi file trong `docs/superpowers/specs/` (patch tại chỗ) + ghi chú artifact liên quan khi cần.
+- Target runtime: mọi file trong `docs/physarum/specs/` (patch tại chỗ) + ghi chú artifact liên quan khi cần.
 
 ## Rules for changes
 

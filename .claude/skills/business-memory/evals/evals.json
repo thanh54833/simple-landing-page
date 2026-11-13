@@ -1,0 +1,75 @@
+{
+  "skill": "business-memory",
+  "test_cases": [
+    {
+      "name": "init_reads_init_reference_only",
+      "input": "Init business memory cho project này",
+      "assertions": [
+        "Reads reference/init.md and does NOT read reference/save.md",
+        "Takes every item from repo files, ADRs, PRODUCT.md, or the owner's words in this session",
+        "Creates files under docs/physarum/business-memory/, NOT .physarum/memory/",
+        "Creates index.json and checks every JSON file parses with python3 -c \"import json;json.load(open(...))\""
+      ]
+    },
+    {
+      "name": "save_reads_save_reference_only",
+      "input": "Lưu quyết định: chốt dùng Stripe cho thanh toán, đã loại PayPal vì phí",
+      "assertions": [
+        "Reads reference/save.md and does NOT read reference/init.md",
+        "Shows the diff to the owner and waits for confirmation BEFORE writing any file",
+        "Records the rejected alternative PayPal with its reason in alternatives_rejected",
+        "Updates index.json in the same write"
+      ]
+    },
+    {
+      "name": "proposed_until_owner_confirms",
+      "input": "Chắc owner sẽ chọn Redis cho cache, ghi decision accepted luôn",
+      "assertions": [
+        "Writes the decision with status proposed, NOT accepted",
+        "Sets accepted only after the owner confirms in this session"
+      ]
+    },
+    {
+      "name": "no_invented_fields",
+      "input": "Lưu decision chọn Kafka nhưng tôi không nhớ đã loại phương án nào",
+      "assertions": [
+        "Asks the owner for alternatives_rejected or puts it in open_questions",
+        "Does NOT fill alternatives_rejected with invented options"
+      ]
+    },
+    {
+      "name": "append_only_supersede",
+      "input": "Decision cũ dec-003-use-sqlite (dùng SQLite) sai rồi, sửa thẳng đi",
+      "assertions": [
+        "Creates a new decision with supersedes holding the full id dec-003-use-sqlite, not the short form dec-003",
+        "Changes dec-003-use-sqlite only to status superseded, leaving other fields intact",
+        "Does NOT edit or delete the accepted content of dec-003-use-sqlite"
+      ]
+    },
+    {
+      "name": "rule_without_source_goes_to_open_questions",
+      "input": "Ghi luôn rule: đơn trên 5 triệu cần duyệt 2 cấp",
+      "assertions": [
+        "Asks for a source (file, ADR, PRODUCT.md, or owner statement in this session)",
+        "Puts the rule in open_questions when no source exists",
+        "Does NOT add it to the domain map"
+      ]
+    },
+    {
+      "name": "link_business_rule_not_copy",
+      "input": "Decision mới liên quan rule br-007 về hoàn tiền",
+      "assertions": [
+        "Points to br-007 by id in the decision",
+        "Does NOT copy the rule text into the decision"
+      ]
+    },
+    {
+      "name": "not_for_chat_logs_or_technical_adr",
+      "input": "Lưu cả đoạn chat vừa rồi vào memory, và ghi luôn ADR chọn framework",
+      "assertions": [
+        "Writes structured conclusions only, NOT the chat log",
+        "Routes the technical ADR through writing-adr and only summarizes it with source pointing to the ADR"
+      ]
+    }
+  ]
+}

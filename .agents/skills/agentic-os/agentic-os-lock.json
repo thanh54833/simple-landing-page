@@ -13,7 +13,7 @@
     "writing-intent": {
       "source": "local",
       "sourceType": "local",
-      "version": "local-2026-10-09",
+      "version": "local-2026-11-10",
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": ""
@@ -21,7 +21,7 @@
     "writing-adr": {
       "source": "local",
       "sourceType": "local",
-      "version": "local-2026-10-14",
+      "version": "local-2026-11-10",
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": ""
@@ -42,10 +42,18 @@
       "computedHash": "",
       "repository": ""
     },
+    "writing-command": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-11-10",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
     "update-spec": {
       "source": "local",
       "sourceType": "local",
-      "version": "local-2026-10-26",
+      "version": "local-2026-11-10",
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": ""
@@ -73,6 +81,22 @@
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": "https://github.com/Nutlope/hallmark/tree/main/skills/hallmark"
+    },
+    "business-memory": {
+      "source": "local",
+      "sourceType": "local",
+      "version": "local-2026-11-12",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": ""
+    },
+    "ai-image-generation": {
+      "source": "inference-sh/skills",
+      "sourceType": "github",
+      "version": "main@0cbf91c",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/inference-sh/skills/tree/main/tools/image/ai-image-generation"
     }
   },
   "retired": []

@@ -1,0 +1,74 @@
+{
+  "skill": "writing-command",
+  "test_cases": [
+    {
+      "name": "stops_when_no_backing_skill",
+      "input": "Thêm command /audit nhưng chưa có skill nào cho nó",
+      "assertions": [
+        "Stops and says the skill must be created first",
+        "Does NOT create .agents/.commands/audit.md"
+      ]
+    },
+    {
+      "name": "router_has_four_things_only",
+      "input": "Thêm command /review-docs gọi skill writing-for-agents",
+      "assertions": [
+        "Creates .agents/.commands/review-docs.md with frontmatter containing only description and argument-hint",
+        "Router body contains resolve input, check gate, invoke skill, and a final STOP naming the next command",
+        "Does NOT put how-to procedure into the router",
+        "Ends the router with STOP and does NOT invoke the next gate's skill"
+      ]
+    },
+    {
+      "name": "never_edit_mirrors",
+      "input": "Sửa nhanh .claude/commands/spec.md để thêm một bước",
+      "assertions": [
+        "Edits only .agents/.commands/spec.md, NOT .claude/commands/, .opencode/command/, or .pi/prompts/",
+        "Runs make agents_sync, then make agents_sync-check"
+      ]
+    },
+    {
+      "name": "grep_step_references_before_renumber",
+      "input": "Chèn thêm một bước vào giữa router plan.md",
+      "assertions": [
+        "Runs grep -rn \"step [0-9]\\|steps [0-9]\" .agents/ before editing",
+        "Fixes every reference that points at a renumbered step",
+        "Leaves unchanged steps verbatim"
+      ]
+    },
+    {
+      "name": "reuse_existing_resolve_ladder",
+      "input": "Thêm gate router mới giữa verify và ship cần resolve spec path",
+      "assertions": [
+        "Greps .agents/.commands/ for an existing router with the same step",
+        "Uses the neighbor router's session-default ladder verbatim",
+        "Does NOT invent a new wording for the ladder"
+      ]
+    },
+    {
+      "name": "register_and_changelog",
+      "input": "Thêm command /audit-evals, skill đã có",
+      "assertions": [
+        "Adds a row to WHERE TO LOOK in .agents/.commands/AGENTS.md",
+        "Adds one Vietnamese bullet to .agents/.commands/CHANGELOG.md under today's heading",
+        "Runs diff .agents/.commands/<name>.md .claude/commands/<name>.md after sync"
+      ]
+    },
+    {
+      "name": "quote_argument_hint_bracket",
+      "input": "Command mới có argument-hint là [path]",
+      "assertions": [
+        "Quotes the argument-hint value because it starts with `[`",
+        "Frontmatter has no third field"
+      ]
+    },
+    {
+      "name": "dry_run_every_branch",
+      "input": "Hoàn tất command mới /audit-evals",
+      "assertions": [
+        "Dry-runs the router with empty input, a path input, and an out-of-scope input",
+        "Reports the result of each branch, each ending in an action or STOP"
+      ]
+    }
+  ]
+}

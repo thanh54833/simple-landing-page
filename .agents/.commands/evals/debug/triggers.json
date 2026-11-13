@@ -1,0 +1,14 @@
+{
+  "skill": "debug",
+  "test_cases": [
+    {"input": "debug lỗi này giúp tôi", "should_trigger": true},
+    {"input": "investigate why this test fails", "should_trigger": true},
+    {"input": "/debug TypeError in login handler", "should_trigger": true},
+    {"input": "tìm root cause của lỗi 500", "should_trigger": true},
+    {"input": "viết spec", "should_trigger": false},
+    {"input": "ship the branch", "should_trigger": false},
+    {"input": "build a landing page", "should_trigger": false},
+    {"input": "ghi intent", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

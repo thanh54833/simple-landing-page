@@ -12,10 +12,16 @@ $ARGUMENTS
 1. Resolve the intent file, first match wins:
    - the User Input path;
    - the intent this session accepted, else created or revised, else the user named as the subject of work (latest wins) — use it without asking, and state its path in one line so the user can correct it;
-   - otherwise list `docs/superpowers/intents/*-intent.md` and ask which one.
+   - otherwise list `docs/physarum/intents/*-intent.md` and ask which one.
 2. Read it from disk (an accept in this session edits the file; never rely on memory of its `Status`). If `Status` is not `accepted` → STOP: say the PO must accept it first (run `/intent` to revise a draft). No intent file → STOP, suggest `/intent`.
 3. Invoke the Superpowers `brainstorming` skill (Claude Code: `superpowers:brainstorming`) with the intent as the brief:
    - Take the architectural path; do not reclassify to bounded or spike.
    - Problem, Proposed outcome, Constraints, Out of scope come from the intent — do not re-ask them; only ask what is still in Open questions or needed for design.
-4. Save the spec to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`, reusing the intent's date+topic stem.
-5. STOP after the user approves the written spec. Suggest `/adr <spec path>` (G2+; may conclude "No ADR needed"), then `/plan`. Do not invoke `writing-plans` — planning is a separate gate.
+   - Write the spec to `docs/physarum/specs/YYYY-MM-DD-<topic>-design.md`, reusing the intent's date+topic stem, and hold the skill's review and hand-over-for-approval steps until step 4 is done.
+4. UI check. When the intent's Proposed outcome or Affected users and systems names something a person sees or operates in the web app (page, route, component, sheet, nav item), the spec is a UI spec: read `.agents/.commands/impeccable.md` and follow its Design contract and Spec stage on the saved spec file, so `## Design` is in it before the user is asked to review. Ask only what `## Design` still needs; do not re-ask intent items. No UI named → skip this step. Then let the held review step run.
+5. STOP after the user approves the written spec; for a UI spec the approval covers `## Design`. Then ask once which command runs next, never picking silently. Offer exactly two options, `/adr <spec path>` (G2+; may conclude "No ADR needed") and `/plan <spec path>`, the recommended one first and labeled `(Recommended)`, with a one-line reason citing what the user decided. Pick the recommended one by the first rule that matches:
+   1. The user said in this session to skip the ADR → `/plan`.
+   2. The spec's `## Decisions` already holds an outcome that lets `/plan` continue (an accepted ADR, "No ADR needed", "Deferred", or an `ADR skipped by user` line) and no linked ADR is still not accepted → `/plan`.
+   3. The intent's `Class` is T3, or the spec records an architecture change (new subsystem, schema, auth, contract), or a linked ADR is not yet accepted → `/adr`.
+   4. Otherwise → `/plan`.
+   Whenever the user picks `/plan` while the intent's `Class` is T3 or the spec records an architecture change, and `## Decisions` has no outcome line yet, add the line `ADR skipped by user` to the spec's `## Decisions` (a waiver by the user, not an ADR outcome); `/plan` accepts exactly that line at its ADR gate. Then STOP and name the chosen command. Do not invoke the chosen skill, and do not invoke `writing-plans` — planning is a separate gate.

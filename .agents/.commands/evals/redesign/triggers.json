@@ -1,0 +1,14 @@
+{
+  "skill": "redesign",
+  "test_cases": [
+    {"input": "redesign component sync-panel", "should_trigger": true},
+    {"input": "làm lại giao diện header của trang repository", "should_trigger": true},
+    {"input": "/redesign /repository/1 header layout", "should_trigger": true},
+    {"input": "redesign this sheet inside the design system", "should_trigger": true},
+    {"input": "redesign toàn bộ backend", "should_trigger": false},
+    {"input": "viết spec", "should_trigger": false},
+    {"input": "debug the failing test", "should_trigger": false},
+    {"input": "enhance one button only", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

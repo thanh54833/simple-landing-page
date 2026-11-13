@@ -1,0 +1,15 @@
+{
+  "skill": "writing-command",
+  "test_cases": [
+    {"input": "thêm slash command mới vào .agents/.commands", "should_trigger": true},
+    {"input": "rename the /verify command and fix its router", "should_trigger": true},
+    {"input": "thêm một bước vào router /plan", "should_trigger": true},
+    {"input": "sync a command across runtimes", "should_trigger": true},
+    {"input": "sửa drift của command giữa claude và opencode", "should_trigger": true},
+    {"input": "viết SKILL.md cho skill mới", "should_trigger": false},
+    {"input": "write the design spec", "should_trigger": false},
+    {"input": "debug the failing API test", "should_trigger": false},
+    {"input": "tạo evals cho skill writing-adr", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

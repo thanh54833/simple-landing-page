@@ -36,14 +36,14 @@ Fan-out written by `scripts/sync-agents.mjs` (`make agents_sync`, short `make as
 | Sync the runtime copies | `scripts/sync-agents.mjs` | `--check` writes nothing, exits 1 on drift |
 | Pack rules | `skills/AGENTS.md` | start here, then the pack's own `AGENTS.md` |
 | Write/revise an intent | `skills/agentic-os/writing-intent/SKILL.md` | source of truth for `/intent` |
-| Record an ADR | `skills/agentic-os/writing-adr/SKILL.md` | gate G2+; writes `docs/superpowers/adr/` |
+| Record an ADR | `skills/agentic-os/writing-adr/SKILL.md` | gate G2+; writes `docs/physarum/adr/` |
 | Back-sync a drifted spec | `skills/agentic-os/update-spec/SKILL.md` | hunk-labeled patch, confirm-then-write |
 | Gate task sets | `skills/agentic-os/tasks-creator/` | outside the gate chain, no command |
 | Hierarchy `AGENTS.md` | `skills/agentic-os/init-deep/SKILL.md` | generator for this file |
 | Release/CI/RE work | `skills/rea/AGENTS.md` | REA paths resolve against the target repo |
 | Frontend design | `skills/agentic-os/impeccable/SKILL.md` | vendored; follow its `Local Overrides` |
 | Write skills/AGENTS.md | `skills/agentic-os/writing-for-agents/SKILL.md` | vendored reference: pointers, hierarchy, pruning |
-| Maintenance chores on `.agents/` | `playbooks/AGENTS.md` | numbered folders, not mirrored; `001_changelog/` for CHANGELOG.md |
+| Maintenance chores on `.agents/` | `playbooks/AGENTS.md` | numbered folders, not mirrored; `001_changelog/` for CHANGELOG.md; `002_skills/` for skill evals |
 
 ## CONVENTIONS
 - Edit only here. `.claude/commands/`, `.claude/skills/`, `.opencode/command/`, `.pi/prompts/` are generated mirrors — `make agents_sync` writes them, `make agents_sync-check` fails when they drift.

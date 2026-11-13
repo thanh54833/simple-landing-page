@@ -1,0 +1,15 @@
+{
+  "skill": "humanizer",
+  "test_cases": [
+    {"input": "humanize this text, it sounds like ChatGPT", "should_trigger": true},
+    {"input": "bỏ giọng AI khỏi đoạn văn này", "should_trigger": true},
+    {"input": "remove the AI tells from this blog post", "should_trigger": true},
+    {"input": "rewrite this so it reads like me, not a chatbot", "should_trigger": true},
+    {"input": "review this prose for staged openers and forced triads", "should_trigger": true},
+    {"input": "write a spec for the export feature", "should_trigger": false},
+    {"input": "debug the failing test", "should_trigger": false},
+    {"input": "translate this text to Vietnamese", "should_trigger": false},
+    {"input": "build a landing page", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

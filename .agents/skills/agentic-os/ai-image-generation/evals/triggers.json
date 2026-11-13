@@ -1,0 +1,61 @@
+{
+  "skill": "ai-image-generation",
+  "test_cases": [
+    {
+      "input": "tạo ảnh banner cho README của repo, theo design system",
+      "should_trigger": true
+    },
+    {
+      "input": "generate an image of a cat astronaut",
+      "should_trigger": true
+    },
+    {
+      "input": "tạo ảnh bằng AI cho poster sự kiện",
+      "should_trigger": true
+    },
+    {
+      "input": "text to image with FLUX",
+      "should_trigger": true
+    },
+    {
+      "input": "edit this photo: replace the background",
+      "should_trigger": true
+    },
+    {
+      "input": "upscale and create an illustration with gpt image",
+      "should_trigger": true
+    },
+    {
+      "input": "tạo superprompt JSON cho ảnh cover repo",
+      "should_trigger": true
+    },
+    {
+      "input": "generate an image that keeps my logo, using it as a reference image",
+      "should_trigger": true
+    },
+    {
+      "input": "design a JSON schema for the upload API response",
+      "should_trigger": false
+    },
+    {
+      "input": "generate a video from this image",
+      "should_trigger": false
+    },
+    {
+      "input": "viết spec cho tính năng upload ảnh",
+      "should_trigger": false
+    },
+    {
+      "input": "optimize the image loading in the web app",
+      "should_trigger": false
+    },
+    {
+      "input": "debug why the upload endpoint returns 500",
+      "should_trigger": false
+    },
+    {
+      "input": "commit these code changes",
+      "should_trigger": false
+    }
+  ]
+}

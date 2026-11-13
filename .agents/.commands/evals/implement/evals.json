@@ -1,0 +1,89 @@
+{
+  "skill": "implement",
+  "test_cases": [
+    {
+      "name": "no_plan_suggests_plan",
+      "input": "/implement (không có plan, thay đổi lớn: thêm module thanh toán)",
+      "assertions": [
+        "Stops and suggests /plan, or /intent for a larger change with no plan",
+        "Does NOT start coding"
+      ]
+    },
+    {
+      "name": "tiny_request_runs_directly",
+      "input": "/implement đổi tên biến userCnt thành userCount trong một file",
+      "assertions": [
+        "Treats the chat message as the single task with no plan",
+        "Implements directly in this session with no subagents",
+        "Uses superpowers:test-driven-development when a test applies"
+      ]
+    },
+    {
+      "name": "accepted_t0_intent_valid_input",
+      "input": "/implement docs/physarum/intents/2026-11-12-rename-intent.md (accepted, Class: T0)",
+      "assertions": [
+        "Accepts the T0 intent as input in place of a plan",
+        "Implements it as a single task"
+      ]
+    },
+    {
+      "name": "reclassify_when_tiny_grows",
+      "input": "/implement (đang làm Tiny/Quick, phát hiện cần thêm acceptance criteria và đụng 5 file)",
+      "assertions": [
+        "Stops and reclassifies to T1",
+        "Writes an intent if none is accepted, then runs /spec",
+        "Does NOT continue implementing"
+      ]
+    },
+    {
+      "name": "asks_method_and_workspace_with_recommended_first",
+      "input": "/implement docs/physarum/plans/2026-11-12-billing.md (chưa chọn method, workspace)",
+      "assertions": [
+        "Asks method and workspace in one question round",
+        "Lists `subagent-driven (Recommended)` before `inline`, and `current branch (Recommended)` before `new worktree`",
+        "Does NOT pick silently"
+      ]
+    },
+    {
+      "name": "main_branch_warning",
+      "input": "/implement plan khi branch hiện tại là main",
+      "assertions": [
+        "States in the `current branch` option that it commits to the default branch"
+      ]
+    },
+    {
+      "name": "reuses_method_from_plan_session",
+      "input": "/implement (session vừa chọn inline ở /plan, user nói làm trên current branch)",
+      "assertions": [
+        "Uses the method chosen at /plan and the stated workspace without asking again"
+      ]
+    },
+    {
+      "name": "routes_to_matching_superpowers_skill",
+      "input": "/implement plan.md subagent-driven",
+      "assertions": [
+        "Invokes superpowers:subagent-driven-development for subagent-driven",
+        "Invokes superpowers:executing-plans for inline",
+        "Passes the workspace choice so the skill does not ask again"
+      ]
+    },
+    {
+      "name": "ui_task_follows_build_stage",
+      "input": "/implement plan có task UI và spec có ## Design",
+      "assertions": [
+        "Follows the Build stage of .agents/.commands/impeccable.md for every UI task before its task review",
+        "Records the Evidence: list under the task in the plan file",
+        "Stops a deviation from ## Design and routes it through /update-spec instead of changing code silently"
+      ]
+    },
+    {
+      "name": "stops_before_finishing_branch",
+      "input": "/implement (mọi task xong)",
+      "assertions": [
+        "Stops where the skill would invoke finishing-a-development-branch",
+        "Does NOT merge, push, open a PR, or discard",
+        "Reports branch/worktree, tasks completed, and anything left open, and suggests /verify <plan path>"
+      ]
+    }
+  ]
+}

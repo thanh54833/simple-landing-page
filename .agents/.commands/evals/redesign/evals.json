@@ -1,0 +1,90 @@
+{
+  "skill": "redesign",
+  "test_cases": [
+    {
+      "name": "backend_only_stops",
+      "input": "/redesign service orders API",
+      "assertions": [
+        "Says the input is backend-only or non-UI and stops"
+      ]
+    },
+    {
+      "name": "empty_input_asks_target_and_pain",
+      "input": "/redesign",
+      "assertions": [
+        "Asks which component, page, or sheet, and what feels wrong about it",
+        "Does NOT pick a target"
+      ]
+    },
+    {
+      "name": "resolves_selector_to_files",
+      "input": "/redesign aside.sync-panel",
+      "assertions": [
+        "Greps apps/web/src for the class and takes the component that renders it plus its rules in index.css",
+        "States the resolved files in one line so the user can correct them"
+      ]
+    },
+    {
+      "name": "route_resolves_single_element",
+      "input": "/redesign /repository/1 header",
+      "assertions": [
+        "Resolves the route to the page component that renders it",
+        "Narrows to the single element the user named, NOT the whole page"
+      ]
+    },
+    {
+      "name": "unresolved_lists_candidates",
+      "input": "/redesign foo-widget (không tồn tại)",
+      "assertions": [
+        "Lists the nearest candidates and asks",
+        "Does NOT edit any file"
+      ]
+    },
+    {
+      "name": "stays_inside_design_system",
+      "input": "/redesign repo-head layout",
+      "assertions": [
+        "Treats PRODUCT.md Brand Commitments and DESIGN.md as binding",
+        "Adds no hue, token, shadow, or second decorative system",
+        "Keeps behavior, copy, accessible names, and the tests that pin them"
+      ]
+    },
+    {
+      "name": "looks_before_editing",
+      "input": "/redesign sync-panel",
+      "assertions": [
+        "Confirms the app answers on http://localhost:3000, starting make dev when it does not",
+        "Screenshots the target at 1440px and 390px in every reachable state before editing",
+        "Records git rev-parse HEAD and git status --short before editing",
+        "Names the shipped pattern in DESIGN.md or index.css that the result will mirror"
+      ]
+    },
+    {
+      "name": "pins_behavior_from_tests",
+      "input": "/redesign sync-panel (bước build)",
+      "assertions": [
+        "Greps apps/web/tests for the target's names and lists the roles, accessible names, and text the tests assert",
+        "Leaves those assertions intact"
+      ]
+    },
+    {
+      "name": "verify_once_batched",
+      "input": "/redesign sync-panel (đã build xong)",
+      "assertions": [
+        "Runs impeccable detect --json on changed files with no findings",
+        "Runs npm run build, the target's vitest file, then the full web suite once",
+        "Does at most one confirming visual round",
+        "Runs a failing test at the base commit before calling it pre-existing"
+      ]
+    },
+    {
+      "name": "keeps_tree_clean_and_reports",
+      "input": "/redesign sync-panel (cuối)",
+      "assertions": [
+        "Deletes only screenshot files it created under .playwright-mcp/, never the folder",
+        "Reverts apps/web/tsconfig.tsbuildinfo when the build dirtied it",
+        "Stops with a report of what changed, files touched, build/test result, and what was not visually checked"
+      ]
+    }
+  ]
+}

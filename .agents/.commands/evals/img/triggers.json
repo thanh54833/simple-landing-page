@@ -1,0 +1,37 @@
+{
+  "skill": "img",
+  "test_cases": [
+    {
+      "input": "/img tạo cover hero 16:9",
+      "should_trigger": true
+    },
+    {
+      "input": "tạo ảnh banner cho README theo design system của repo",
+      "should_trigger": true
+    },
+    {
+      "input": "generate an image with the Cobra agent",
+      "should_trigger": true
+    },
+    {
+      "input": "duyệt ảnh gen-004 và đưa vào final",
+      "should_trigger": true
+    },
+    {
+      "input": "redesign the skills panel",
+      "should_trigger": false
+    },
+    {
+      "input": "polish the sidebar nav, bolder",
+      "should_trigger": false
+    },
+    {
+      "input": "optimize image loading in the web app",
+      "should_trigger": false
+    },
+    {
+      "input": "viết spec cho tính năng upload ảnh",
+      "should_trigger": false
+    }
+  ]
+}

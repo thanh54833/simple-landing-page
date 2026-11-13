@@ -1,0 +1,105 @@
+{
+  "skill": "intent",
+  "test_cases": [
+    {
+      "name": "empty_input_asks_for_source",
+      "input": "/intent",
+      "assertions": [
+        "Asks the user for the idea, ticket, or alert because the User Input is empty",
+        "Does NOT create any file under docs/physarum/intents/",
+        "Does NOT invent an idea to write about"
+      ]
+    },
+    {
+      "name": "invokes_writing_intent_skill",
+      "input": "/intent khách hàng muốn xem lịch sử đơn hàng theo tháng",
+      "assertions": [
+        "Invokes the writing-intent skill, or reads .agents/skills/agentic-os/writing-intent/SKILL.md when the runtime cannot find it",
+        "Treats the User Input as source material for the intent",
+        "Does NOT put the procedure of writing an intent into its own steps"
+      ]
+    },
+    {
+      "name": "classifies_source_asks_once_if_unclear",
+      "input": "/intent giảm thời gian load báo cáo",
+      "assertions": [
+        "Classifies the source as idea, ticket, or alert",
+        "Asks once about the source type when it is unclear",
+        "Does NOT ask the source question more than once"
+      ]
+    },
+    {
+      "name": "ticket_keeps_id_in_source_ref",
+      "input": "/intent CC-1234 Báo cáo doanh thu tải chậm hơn 10 giây",
+      "assertions": [
+        "Sets Source: ticket",
+        "Writes CC-1234 into Source ref of the intent file"
+      ]
+    },
+    {
+      "name": "tiny_change_says_not_needed_and_stops",
+      "input": "/intent đổi tên biến userCnt thành userCount trong một file",
+      "assertions": [
+        "Says an intent is not needed for a Tiny/Quick change unless the user wants it recorded",
+        "Names the lane [/intent →] /implement → /verify → /ship",
+        "Does NOT write an intent file when the user did not ask to record it",
+        "Stops after naming the lane"
+      ]
+    },
+    {
+      "name": "tiny_change_user_wants_record",
+      "input": "/intent đổi tên biến userCnt thành userCount trong một file, tôi muốn ghi lại intent",
+      "assertions": [
+        "Writes a short intent with one line per section",
+        "Names /implement as the next command",
+        "Does NOT route the change through /spec or /plan"
+      ]
+    },
+    {
+      "name": "hotfix_says_no_intent_and_stops",
+      "input": "/intent alert: production checkout trả 500 từ 10 phút trước, cần khôi phục như cũ",
+      "assertions": [
+        "Says intent.md is not needed for a hotfix",
+        "Names /debug → /verify → /ship",
+        "Does NOT create an intent file",
+        "Ends the turn after naming the hotfix lane, with no analyst questions asked"
+      ]
+    },
+    {
+      "name": "alert_needing_new_behavior_writes_intent",
+      "input": "/intent alert: nhiều user bị lock tài khoản, cần thêm cơ chế unlock qua email và đổi auth flow",
+      "assertions": [
+        "Does NOT treat the alert as a hotfix because new behavior and an auth change are required",
+        "Writes a new intent file instead of stopping at the hotfix lane"
+      ]
+    },
+    {
+      "name": "asks_questions_one_at_a_time",
+      "input": "/intent cho phép khách tự đổi địa chỉ giao hàng",
+      "assertions": [
+        "Asks analyst questions one at a time, never as a batch list",
+        "Continues until every Classification predicate is answered or parked in Open questions"
+      ]
+    },
+    {
+      "name": "writes_file_with_template_and_draft_status",
+      "input": "/intent cho phép khách tự đổi địa chỉ giao hàng (đã trả lời đủ câu hỏi)",
+      "assertions": [
+        "Writes docs/physarum/intents/YYYY-MM-DD-<outcome-slug>-intent.md",
+        "File contains ## Classification and Status: draft",
+        "Slug comes from the outcome, NOT from the task name"
+      ]
+    },
+    {
+      "name": "stops_with_class_lane_next_command",
+      "input": "/intent cho phép khách tự đổi địa chỉ giao hàng (file đã ghi xong)",
+      "assertions": [
+        "Hands the file path to the originator for correction",
+        "States the proposed Class, the Lane, and the next command (first step of the Lane) in one line",
+        "Does NOT commit",
+        "Does NOT invoke brainstorming or writing-plans",
+        "Does NOT design"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "skill": "img",
+  "test_cases": [
+    {
+      "name": "verb_first_word_is_resolved_and_stated",
+      "input": "/img approve gen-004-physarum-cover-hero-16x9",
+      "assertions": [
+        "Treats approve as the Cobra verb and gen-004-physarum-cover-hero-16x9 as its argument, and states that in one line",
+        "Does NOT treat the whole text as a brief for a new image"
+      ]
+    },
+    {
+      "name": "brief_maps_to_generate_for_fitting_slot",
+      "input": "/img banner 16:9 Physarum hấp thụ skill cho README",
+      "assertions": [
+        "Reads .physarum/ai-image-generate/cobra-agent/index.json and maps the brief to the physarum-cover series and its hero-16x9 slot",
+        "States the resolved series and slot in one line before invoking the skill"
+      ]
+    },
+    {
+      "name": "brief_without_series_starts_new_series",
+      "input": "/img ảnh minh họa luồng deploy lên staging (index.json không có series nào khớp)",
+      "assertions": [
+        "Resolves to new-series because no existing series fits",
+        "Waits for the owner to settle the series id and content before any belt app run"
+      ]
+    },
+    {
+      "name": "brief_fits_several_slots_asks_which",
+      "input": "/img cover cho dự án (series physarum-cover có hero-16x9 và square-1x1, cả hai đều khớp)",
+      "assertions": [
+        "Names both hero-16x9 and square-1x1 in the one-line resolution and asks which slot to make",
+        "Does NOT pick a slot on its own and does NOT run belt app run"
+      ]
+    },
+    {
+      "name": "empty_input_lists_series_and_asks",
+      "input": "/img",
+      "assertions": [
+        "Lists the series and slots found in index.json",
+        "Asks what to make and does NOT pick a slot on its own"
+      ]
+    },
+    {
+      "name": "cobra_missing_stops",
+      "input": "/img tạo cover hero 16:9 (không có .physarum/ai-image-generate/cobra-agent/AGENTS.md)",
+      "assertions": [
+        "Stops and says Cobra is not set up in this repo",
+        "Points to the ai-image-generation skill for a one-off image outside Cobra",
+        "Does NOT create the cobra-agent folder and does NOT run belt app run"
+      ]
+    },
+    {
+      "name": "delegates_to_skill_and_cobra",
+      "input": "/img tạo cover hero 16:9 theo design system",
+      "assertions": [
+        "Invokes the ai-image-generation skill and lets Cobra's AGENTS.md drive the steps",
+        "Presents the model, the belt app estimate and the flattened prompt, then waits for the owner to agree before belt app run",
+        "Does NOT restate Cobra's procedure inside the router output"
+      ]
+    },
+    {
+      "name": "stops_after_report_and_names_next_command",
+      "input": "/img generate physarum-cover hero-16x9 (Cobra vừa lưu gen-005 vào drafts)",
+      "assertions": [
+        "Stops after reporting the draft path and its ledger entry",
+        "Suggests /img approve gen-005-physarum-cover-hero-16x9 or /img improve as the next command",
+        "Does NOT approve the image, and does NOT copy it outside .physarum/ai-image-generate/"
+      ]
+    },
+    {
+      "name": "improve_follows_skill_document_reference",
+      "input": "/img improve (owner vừa nhận xét bracket lệch ở gen-004)",
+      "assertions": [
+        "Follows the Improve section of the skill's references/document.md",
+        "Shows the proposed diff of the Known failures row and waits for the owner before editing any file"
+      ]
+    },
+    {
+      "name": "approve_stops_at_final_path_with_ledger_entry",
+      "input": "/img approve gen-004-physarum-cover-hero-16x9 (owner đã duyệt, final/physarum-cover/ còn trống)",
+      "assertions": [
+        "Reports the final/physarum-cover/hero-16x9.png path together with the new approved ledger entry and then stops",
+        "Suggests no follow-up command and does NOT start another generation"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "skill": "debug",
+  "test_cases": [
+    {
+      "name": "empty_input_asks_symptom_and_repro",
+      "input": "/debug",
+      "assertions": [
+        "Asks what is broken: error message, failing test, or unexpected behavior, plus exact repro steps",
+        "Does NOT start investigating without a symptom"
+      ]
+    },
+    {
+      "name": "invokes_systematic_debugging_no_fix_first",
+      "input": "/debug test_login fail với AssertionError: 401 != 200",
+      "assertions": [
+        "Invokes superpowers:systematic-debugging with the symptom as input",
+        "Completes Phase 1 root cause investigation before proposing any fix",
+        "Does NOT edit code before Phase 1 completes"
+      ]
+    },
+    {
+      "name": "checks_api_layer_first",
+      "input": "/debug web app báo Network Error khi gọi /api/skills",
+      "assertions": [
+        "Checks whether anything listens on :8000 before touching code",
+        "Checks whether the API answers directly, bypassing the vite proxy"
+      ]
+    },
+    {
+      "name": "hotfix_writes_record",
+      "input": "/debug production checkout 500 từ alert, đã tìm ra lỗi null",
+      "assertions": [
+        "Writes docs/physarum/hotfixes/YYYY-MM-DD-<slug>.md",
+        "Record contains Symptom, Root cause, Regression test with red then green output, Fix, and Verify",
+        "Suggests /verify <hotfix record>"
+      ]
+    },
+    {
+      "name": "contract_change_stops_to_intent",
+      "input": "/debug production lỗi, fix cần đổi auth contract",
+      "assertions": [
+        "Stops and suggests /intent for the architecture lane",
+        "Does NOT apply the auth change as a hotfix"
+      ]
+    },
+    {
+      "name": "three_failed_fixes_question_architecture",
+      "input": "/debug đã thử 3 fix đều thất bại",
+      "assertions": [
+        "Questions the architecture per the skill",
+        "Does NOT attempt fix number 4"
+      ]
+    },
+    {
+      "name": "report_and_next_command",
+      "input": "/debug (đã fix một bug thường, không phải production)",
+      "assertions": [
+        "Reports root cause, the single fix applied, and verify output",
+        "Suggests /verify for a non-hotfix",
+        "Does NOT write a hotfix record"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "skill": "writing-intent",
+  "test_cases": [
+    {"input": "viết intent.md cho ý tưởng cho phép khách tự đổi địa chỉ giao hàng", "should_trigger": true},
+    {"input": "turn this Jira ticket into an intent proto-spec", "should_trigger": true},
+    {"input": "biến alert incident này thành intent mới", "should_trigger": true},
+    {"input": "sửa bản draft intent chưa accept, thêm out of scope", "should_trigger": true},
+    {"input": "capture this idea as a proto-spec, don't design yet", "should_trigger": true},
+    {"input": "viết spec design cho tính năng đã accept intent", "should_trigger": false},
+    {"input": "write the implementation plan from plan.md", "should_trigger": false},
+    {"input": "fix the failing login test", "should_trigger": false},
+    {"input": "record an architecture decision for choosing Postgres", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

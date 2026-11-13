@@ -5,9 +5,10 @@ description: Use when shipped code no longer matches its approved spec, or a sma
 
 ## Local Overrides (hub agentic-os-core)
 
-- Root `docs/superpowers/`, spec là mọi file trong `specs/`. Patch tại chỗ, không CLI openspec, không delta/main split.
+- Root `docs/physarum/`, spec là mọi file trong `specs/`. Patch tại chỗ, không CLI openspec, không delta/main split.
 - Approved spec only: chưa approve → `/spec`; feature/kiến trúc mới → `/intent`.
 - Planning artifacts only — never code, tests, `DESIGN.md`, `PRODUCT.md`, config.
+- `## Design` của UI spec là nội dung spec, không phải UI-only drift. Lệch design do `/implement` chặn (chưa có code lệch, nên không có diff `apps/`) được patch vào `## Design` như hunk `MODIFIED` sau khi user confirm; xong → quay lại `/implement`, không `/verify`.
 - Prose tiếng Việt, terms English. SKILL.md local thắng `.templates/spec/OpenSpec/`.
 
 # Updating Specs (delta + back-sync)
@@ -22,7 +23,7 @@ Việc mới → code theo spec (gate chain); drift đã ship → spec theo code
 - Hotfix đã merge cần ghi vào spec
 - Nhánh chết vi phạm anti-goal cần ghi nhận + follow-up
 
-When NOT to use: feature/kiến trúc mới → `/intent`; spec chưa approve → `/spec`; sửa code/test/design; drift copy/layout (loại, không patch).
+When NOT to use: feature/kiến trúc mới → `/intent`; spec chưa approve → `/spec`; sửa code/test/design; drift copy/layout (loại, không patch; ngoại lệ: `## Design`, xem Local Overrides).
 
 ## Core Pattern
 
@@ -51,12 +52,12 @@ digraph update_spec {
 
 ## Workflow
 
-1. **Select spec.** Ưu tiên path user đưa; trống thì list `docs/superpowers/specs/` và hỏi. Announce `Using spec: <path>`.
-2. **Get drift.** Base = commit lúc spec approved (`git log -- <spec-path>`), rồi `git diff <base>..HEAD -- apps/`. Change user mô tả vẫn phải đối chiếu code.
+1. **Select spec.** Ưu tiên path user đưa; trống thì list `docs/physarum/specs/` và hỏi. Announce `Using spec: <path>`.
+2. **Get drift.** Base = commit lúc spec approved (`git log -- <spec-path>`), rồi `git diff <base>..HEAD -- apps/`. Change user mô tả vẫn phải đối chiếu code. Lệch `## Design` từ `/implement` thì không có diff: lấy lệch từ mô tả của user/agent và slot bị ảnh hưởng.
 3. **Classify.** Behavior vào spec; UI-only liệt kê kèm lý do, không patch.
 4. **Draft in conversation, reconcile all.** Đọc spec + intent/plan/ADR liên quan; check 2 chiều (`MODIFIED` giữ scenario cũ). Chưa ghi file.
 5. **Confirm, then write — one spec.** Show hunk + why; confirm mới ghi, reject thì bỏ. Viết xong đọc lại, quét note mới vs text cũ.
-6. **Point next (guidance only).** Architecture → `/adr` số mới; còn lại → `/verify`; feature mới → `/intent`. STOP sau khi user accept patch — không tự chạy gate tiếp theo.
+6. **Point next (guidance only).** Architecture → `/adr` số mới; delta `## Design` → quay lại `/implement`; còn lại → `/verify`; feature mới → `/intent`. STOP sau khi user accept patch — không tự chạy gate tiếp theo.
 
 ## Guardrails
 

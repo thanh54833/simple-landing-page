@@ -1,0 +1,14 @@
+{
+  "skill": "enhance",
+  "test_cases": [
+    {"input": "enhance nav.skills-rail cho nổi bật hơn", "should_trigger": true},
+    {"input": "make the sync panel bolder", "should_trigger": true},
+    {"input": "/enhance /skills panel bolder", "should_trigger": true},
+    {"input": "nâng cấp một element của UI mà không đụng xung quanh", "should_trigger": true},
+    {"input": "redesign cả trang", "should_trigger": false},
+    {"input": "viết spec", "should_trigger": false},
+    {"input": "fix the backend bug", "should_trigger": false},
+    {"input": "ghi ADR", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

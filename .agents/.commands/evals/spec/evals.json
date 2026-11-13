@@ -1,0 +1,90 @@
+{
+  "skill": "spec",
+  "test_cases": [
+    {
+      "name": "resolves_session_intent_without_asking",
+      "input": "/spec (session vừa accept docs/physarum/intents/2026-11-12-order-history-intent.md)",
+      "assertions": [
+        "Uses the intent accepted in this session without asking and states its path in one line",
+        "Does NOT list intent files when the session already produced one"
+      ]
+    },
+    {
+      "name": "lists_intents_when_nothing_resolves",
+      "input": "/spec (session mới, không có path)",
+      "assertions": [
+        "Lists docs/physarum/intents/*-intent.md and asks which one",
+        "Does NOT guess an intent"
+      ]
+    },
+    {
+      "name": "stops_when_intent_not_accepted",
+      "input": "/spec docs/physarum/intents/2026-11-12-order-history-intent.md (Status: draft)",
+      "assertions": [
+        "Reads the intent from disk instead of relying on memory of its Status",
+        "Stops and says the PO must accept it first, suggesting /intent to revise the draft",
+        "Does NOT invoke brainstorming"
+      ]
+    },
+    {
+      "name": "no_intent_file_suggests_intent",
+      "input": "/spec làm tính năng export CSV (chưa có intent nào)",
+      "assertions": [
+        "Stops and suggests /intent",
+        "Does NOT write a spec"
+      ]
+    },
+    {
+      "name": "brainstorming_architectural_path_no_reask",
+      "input": "/spec docs/physarum/intents/2026-11-12-order-history-intent.md (accepted)",
+      "assertions": [
+        "Invokes superpowers:brainstorming with the intent as the brief on the architectural path",
+        "Does NOT re-ask Problem, Proposed outcome, Constraints, or Out of scope",
+        "Writes docs/physarum/specs/YYYY-MM-DD-<topic>-design.md reusing the intent's date+topic stem",
+        "Does NOT reclassify to bounded or spike"
+      ]
+    },
+    {
+      "name": "ui_spec_gets_design_section_before_review",
+      "input": "/spec intent mô tả một trang và một sheet mới trong web app",
+      "assertions": [
+        "Treats the spec as a UI spec and reads .agents/.commands/impeccable.md",
+        "Follows its Design contract and Spec stage so ## Design is in the spec before the user is asked to review",
+        "Asks only what ## Design still needs"
+      ]
+    },
+    {
+      "name": "non_ui_spec_skips_design",
+      "input": "/spec intent chỉ đổi validation của một endpoint API",
+      "assertions": [
+        "Skips the UI check step",
+        "Does NOT add a ## Design section"
+      ]
+    },
+    {
+      "name": "offers_two_options_recommended_first",
+      "input": "/spec (spec vừa được user approve, intent Class T3 đổi schema)",
+      "assertions": [
+        "Asks once which command runs next and offers exactly /adr <spec path> and /plan <spec path>",
+        "Labels /adr as (Recommended) and lists it first with a one-line reason",
+        "Does NOT pick the next command silently"
+      ]
+    },
+    {
+      "name": "plan_recommended_when_user_skips_adr",
+      "input": "/spec (user đã nói trong session: bỏ qua ADR)",
+      "assertions": [
+        "Recommends /plan first, labeled (Recommended)",
+        "When Class is T3 and ## Decisions has no outcome, writes the line `ADR skipped by user` to ## Decisions after the user picks /plan"
+      ]
+    },
+    {
+      "name": "stops_after_approval_no_planning",
+      "input": "/spec (user approve spec xong)",
+      "assertions": [
+        "Stops after naming the chosen command",
+        "Does NOT invoke writing-plans or the chosen command's skill"
+      ]
+    }
+  ]
+}

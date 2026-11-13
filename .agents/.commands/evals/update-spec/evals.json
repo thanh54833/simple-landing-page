@@ -1,0 +1,51 @@
+{
+  "skill": "update-spec",
+  "test_cases": [
+    {
+      "name": "resolves_spec_and_states_path",
+      "input": "/update-spec (session vừa approve docs/physarum/specs/2026-11-12-auth-design.md)",
+      "assertions": [
+        "Uses the session's approved spec without asking and states its path in one line"
+      ]
+    },
+    {
+      "name": "lists_specs_when_unresolved",
+      "input": "/update-spec (không có path)",
+      "assertions": [
+        "Lists docs/physarum/specs/ and asks which one"
+      ]
+    },
+    {
+      "name": "no_spec_suggests_spec",
+      "input": "/update-spec (repo chưa có spec nào)",
+      "assertions": [
+        "Stops and suggests /spec"
+      ]
+    },
+    {
+      "name": "not_approved_fix_in_spec",
+      "input": "/update-spec docs/physarum/specs/x-design.md (chưa approve)",
+      "assertions": [
+        "Asks once whether the spec has been reviewed and approved unless already approved in this session",
+        "Stops and says to fix it in /spec when not approved",
+        "Does NOT patch the spec"
+      ]
+    },
+    {
+      "name": "invokes_update_spec_skill",
+      "input": "/update-spec docs/physarum/specs/x-design.md (approved)",
+      "assertions": [
+        "Invokes the update-spec skill, or reads .agents/skills/agentic-os/update-spec/SKILL.md when the runtime cannot find it",
+        "Follows the skill exactly"
+      ]
+    },
+    {
+      "name": "stops_and_does_not_edit_code",
+      "input": "/update-spec (skill đã báo xong)",
+      "assertions": [
+        "Stops after the skill reports",
+        "Does NOT edit code, because back-sync is a separate gate"
+      ]
+    }
+  ]
+}

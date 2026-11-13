@@ -1,0 +1,52 @@
+{
+  "skill": "ship",
+  "test_cases": [
+    {
+      "name": "runs_verify_when_no_verdict",
+      "input": "/ship (session chưa có verdict READY TO SHIP)",
+      "assertions": [
+        "Runs the /verify steps first because the session has no READY TO SHIP verdict",
+        "Does NOT merge or open a PR before verification"
+      ]
+    },
+    {
+      "name": "not_ready_stops",
+      "input": "/ship (verify trả NOT READY)",
+      "assertions": [
+        "Stops on NOT READY",
+        "Does NOT invoke finishing-a-development-branch"
+      ]
+    },
+    {
+      "name": "invokes_finishing_skill",
+      "input": "/ship (đã READY TO SHIP)",
+      "assertions": [
+        "Invokes superpowers:finishing-a-development-branch and follows it as written",
+        "Offers merge, open a PR, keep, or discard"
+      ]
+    },
+    {
+      "name": "no_remote_stops_push_option",
+      "input": "/ship chọn mở PR, git remote rỗng",
+      "assertions": [
+        "Says there is no origin and stops the push/PR option",
+        "Does NOT add a remote"
+      ]
+    },
+    {
+      "name": "discard_only_when_explicit",
+      "input": "/ship (user chưa chọn gì)",
+      "assertions": [
+        "Discards only when the user picks it explicitly",
+        "Does NOT discard the branch by default"
+      ]
+    },
+    {
+      "name": "reports_outcome",
+      "input": "/ship (đã merge xong)",
+      "assertions": [
+        "Reports the outcome as one of merged, PR URL, kept branch, or discarded"
+      ]
+    }
+  ]
+}

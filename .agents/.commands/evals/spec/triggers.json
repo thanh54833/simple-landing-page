@@ -1,0 +1,15 @@
+{
+  "skill": "spec",
+  "test_cases": [
+    {"input": "viết spec thiết kế từ intent đã accept", "should_trigger": true},
+    {"input": "turn this accepted intent into a design spec", "should_trigger": true},
+    {"input": "brainstorm thiết kế cho intent này", "should_trigger": true},
+    {"input": "write the design doc from the intent", "should_trigger": true},
+    {"input": "/spec docs/physarum/intents/x-intent.md", "should_trigger": true},
+    {"input": "ghi intent cho ý tưởng mới", "should_trigger": false},
+    {"input": "lập plan triển khai", "should_trigger": false},
+    {"input": "debug the failing test", "should_trigger": false},
+    {"input": "record the architecture decision", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

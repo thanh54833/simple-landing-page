@@ -1,0 +1,60 @@
+{
+  "skill": "retro",
+  "test_cases": [
+    {
+      "name": "loads_writing_for_agents_first",
+      "input": "/retro",
+      "assertions": [
+        "Loads .agents/skills/agentic-os/writing-for-agents/SKILL.md for the writing style guide before analysis"
+      ]
+    },
+    {
+      "name": "reads_primary_sources_not_memory",
+      "input": "/retro abc123 (session id)",
+      "assertions": [
+        "Reads the session log for the given id from disk",
+        "Does NOT rely on memory of the session"
+      ]
+    },
+    {
+      "name": "empty_input_uses_current_session_logs",
+      "input": "/retro (không có tham số)",
+      "assertions": [
+        "Reads the current session's logs on this machine",
+        "Does NOT ask for a path before trying the current session"
+      ]
+    },
+    {
+      "name": "covers_seven_categories",
+      "input": "/retro ~/logs/session.jsonl",
+      "assertions": [
+        "Looks for candidates in navigation, automated checks, coding standards, global AGENTS.md, tool economy, no-ops, and information access",
+        "Treats the absence of any lint/typecheck/test guardrail as a finding"
+      ]
+    },
+    {
+      "name": "candidates_have_evidence_change_location",
+      "input": "/retro",
+      "assertions": [
+        "Presents candidates ordered by severity",
+        "Each candidate states what happened with session evidence, the proposed change, and where it goes"
+      ]
+    },
+    {
+      "name": "mechanical_rule_goes_to_check_not_standards",
+      "input": "/retro (agent hay quên chạy lint)",
+      "assertions": [
+        "Proposes a deterministic check for a mechanical rule",
+        "Reserves CODING_STANDARDS.md for judgement calls"
+      ]
+    },
+    {
+      "name": "stops_until_user_picks",
+      "input": "/retro (đã liệt kê candidates)",
+      "assertions": [
+        "Stops after presenting the candidates",
+        "Does NOT apply any change until the user picks"
+      ]
+    }
+  ]
+}

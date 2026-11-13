@@ -1,0 +1,75 @@
+{
+  "skill": "doc-coauthoring",
+  "test_cases": [
+    {
+      "name": "offers_workflow_then_stops_at_stage1",
+      "input": "Viết giúp tôi một PRD cho tính năng đăng nhập bằng OTP",
+      "assertions": [
+        "Offers the three-stage workflow (Context Gathering, Refinement & Structure, Reader Testing) and lets the user accept or decline",
+        "After the user accepts, starts at Stage 1 Context Gathering",
+        "Does NOT draft the whole document in the same turn"
+      ]
+    },
+    {
+      "name": "user_declines_workflow_goes_freeform",
+      "input": "Không cần quy trình gì hết, viết luôn RFC này theo kiểu tự do",
+      "assertions": [
+        "Accepts the refusal and writes freeform",
+        "Does NOT push the three-stage workflow again"
+      ]
+    },
+    {
+      "name": "asks_5_to_10_numbered_questions",
+      "input": "Đây là toàn bộ context của tôi về dự án thanh toán: [dump dài]. Hết rồi.",
+      "assertions": [
+        "Asks 5-10 numbered clarifying questions based on gaps in the dump",
+        "Tells the user they can answer in shorthand such as '1: yes, 2: see #channel'",
+        "Asks whether there is more context before moving to drafting"
+      ]
+    },
+    {
+      "name": "confirms_before_searching_unknown_entities",
+      "input": "Doc này liên quan project Atlas, bạn tìm hiểu giúp",
+      "assertions": [
+        "Asks whether connected tools should be searched",
+        "Waits for the user's confirmation before searching",
+        "When no integration is available, explains the lack of access and asks the user to paste the content"
+      ]
+    },
+    {
+      "name": "section_by_section_refinement",
+      "input": "Cấu trúc ok rồi, bắt đầu viết các section",
+      "assertions": [
+        "For each section: asks clarifying questions, brainstorms options, asks the user to curate by number, then drafts",
+        "Treats freeform feedback like 'I like most of it but...' as curation and applies it",
+        "Does NOT draft all sections at once"
+      ]
+    },
+    {
+      "name": "edits_only_requested_section",
+      "input": "Sửa lại section Goals thôi, các section khác giữ nguyên",
+      "assertions": [
+        "Edits only the Goals section",
+        "Does NOT rewrite the rest of the document"
+      ]
+    },
+    {
+      "name": "reader_testing_with_fresh_subagent",
+      "input": "Tất cả section xong rồi, chuyển sang Reader Testing",
+      "assertions": [
+        "Generates realistic questions a reader would ask",
+        "Invokes a sub-agent given only the document content and one question each, with no conversation context",
+        "Summarizes what Reader Claude got right and wrong for each question",
+        "Fixes the ambiguity, false assumption, or contradiction found"
+      ]
+    },
+    {
+      "name": "not_for_code_edits",
+      "input": "Sửa bug trong file auth.py",
+      "assertions": [
+        "Does NOT start the co-authoring workflow",
+        "Treats the request as a code task"
+      ]
+    }
+  ]
+}

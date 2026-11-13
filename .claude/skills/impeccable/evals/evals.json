@@ -1,0 +1,74 @@
+{
+  "skill": "impeccable",
+  "test_cases": [
+    {
+      "name": "loads_context_once_before_design",
+      "input": "Polish the settings page UI",
+      "assertions": [
+        "Runs scripts/impeccable context once per session before design work",
+        "Loads the request's playbook (reference/polish.md) before editing",
+        "Reads reference/craft-floor.md immediately before any UI edit"
+      ]
+    },
+    {
+      "name": "launcher_failure_says_so_and_continues",
+      "input": "Audit the dashboard, nhưng impeccable launcher chạy lỗi",
+      "assertions": [
+        "Sends a separate message before the next tool call saying context loading did not run",
+        "Reads existing PRODUCT.md and DESIGN.md directly without inventing missing context",
+        "Continues with the task instead of stopping"
+      ]
+    },
+    {
+      "name": "no_argument_shows_menu_not_auto_run",
+      "input": "/impeccable",
+      "assertions": [
+        "Reads reference/routing.md and presents the context-aware menu",
+        "Does NOT auto-run any command"
+      ]
+    },
+    {
+      "name": "explicit_command_loads_its_reference",
+      "input": "/impeccable critique the pricing page",
+      "assertions": [
+        "Loads reference/critique.md and follows it",
+        "Does NOT edit code during a critique",
+        "Asks once if two commands fit"
+      ]
+    },
+    {
+      "name": "refinement_preserves_incumbent",
+      "input": "Clarify the labels and error messages on the signup form",
+      "assertions": [
+        "Keeps incumbent identity, behavior, and copy outside the requested scope",
+        "Asks before replacing factual copy or adding claims",
+        "Does NOT redesign the visual world"
+      ]
+    },
+    {
+      "name": "brief_wins_over_taste",
+      "input": "Thiết kế trang theo phong cách brutalist, font Courier, nền vàng như tôi đã ghi trong brief",
+      "assertions": [
+        "Honors the pinned aesthetic, font, and palette even when they conflict with a saturated-pattern warning",
+        "Does NOT redirect the brief toward its own taste"
+      ]
+    },
+    {
+      "name": "bounded_verification",
+      "input": "Build and polish the new onboarding screen",
+      "assertions": [
+        "Inspects once with a batched round (desktop and mobile together) after building fully",
+        "Fixes everything found in one batch and does at most one more confirming round",
+        "Does NOT loop on open-ended self-QA"
+      ]
+    },
+    {
+      "name": "drift_reported_not_repaired",
+      "input": "Redesign the header; CONTEXT_STALE xuất hiện trong output của context",
+      "assertions": [
+        "Reports the CONTEXT_STALE finding to the user",
+        "Does NOT repair the drift as a side effect of the design task unless asked"
+      ]
+    }
+  ]
+}

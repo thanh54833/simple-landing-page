@@ -1,0 +1,15 @@
+{
+  "skill": "hallmark",
+  "test_cases": [
+    {"input": "build a landing page for my SaaS", "should_trigger": true},
+    {"input": "thiết kế website mới cho quán cà phê", "should_trigger": true},
+    {"input": "/hallmark redesign src/index.html", "should_trigger": true},
+    {"input": "make a new pricing page that looks designed, not generated", "should_trigger": true},
+    {"input": "audit this page with hallmark", "should_trigger": true},
+    {"input": "fix the failing API test", "should_trigger": false},
+    {"input": "viết spec cho tính năng export", "should_trigger": false},
+    {"input": "rewrite this email to sound less like AI", "should_trigger": false},
+    {"input": "tạo evals cho skill", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "skill": "tasks-creator",
+  "test_cases": [
+    {
+      "name": "creates_new_group_from_templates",
+      "input": "Tạo .tasks/01_migration cho group billing mới có apps/billing-api và apps/billing-web",
+      "assertions": [
+        "Reads the group entry in .meta/00_projects.json and all 3 templates under 00_migration/02_template/01_tasks/ (00_tasks_api.json, 00_tasks_web.json, 00_tasks_qa.json)",
+        "Classifies apps into BE and FE and numbers the folders contiguously",
+        "Creates 01_status.json as a literal empty file, NOT '{}'",
+        "Starts every new task with \"status\": \"pending\"",
+        "Does NOT copy another group's 00_tasks.json as a starting point"
+      ]
+    },
+    {
+      "name": "add_app_to_existing_group",
+      "input": "Add a new web app to group that already has done and in_progress tasks",
+      "assertions": [
+        "Does NOT rewrite the whole 00_tasks.json",
+        "Adds only one new wave key to the web folder and one to NN_tasks_qa/00_tasks.json",
+        "Leaves every other wave untouched byte-for-byte and preserves existing task statuses",
+        "Adds the app to .meta/00_projects.json projects[]",
+        "Refreshes AGENTS.md for all folders in the group"
+      ]
+    },
+    {
+      "name": "does_not_run_generate_script_with_progress",
+      "input": "Dùng make target_generate_task --force để thêm app mới cho group đã có task done",
+      "assertions": [
+        "Refuses to run generate_task.py or make target_generate_task on a folder with real progress",
+        "Explains that --force resets every task to pending",
+        "Uses the hand Core Procedure instead"
+      ]
+    },
+    {
+      "name": "templates_are_the_wording_source",
+      "input": "Đổi prompt của task web cho mọi group từ giờ",
+      "assertions": [
+        "Edits 00_migration/02_template/01_tasks/*.json, NOT a per-group 00_tasks.json",
+        "States that a per-group edit does not propagate back"
+      ]
+    },
+    {
+      "name": "renders_placeholders_and_unknown_platform",
+      "input": "Thêm app legacy-sync có platform Unknown vào group ops",
+      "assertions": [
+        "Substitutes {app} and {group} placeholders; no raw placeholder remains in the file",
+        "Adds the Unknown-platform note on T001",
+        "Copies skills verbatim from the matching template"
+      ]
+    },
+    {
+      "name": "qa_dirs_are_group_level",
+      "input": "Tạo wave QA cho app mới trong group billing",
+      "assertions": [
+        "Sets only T001 source_dir per-app",
+        "Uses the same group-level tests/plan and tests dirs for T001 target_dir and T002 source_dir/target_dir",
+        "Does NOT create a per-app subfolder for QA target dirs"
+      ]
+    },
+    {
+      "name": "orphan_folder_not_deleted",
+      "input": "Folder 03_tasks_web trên đĩa không còn khớp .meta/00_projects.json, dọn đi",
+      "assertions": [
+        "Does NOT delete the folder",
+        "Still refreshes its AGENTS.md"
+      ]
+    },
+    {
+      "name": "out_of_scope_root_orchestration",
+      "input": "Sửa 02_target/.tasks/00_migration/04_tasks_run_group_waves",
+      "assertions": [
+        "States this folder is out of scope for tasks-creator",
+        "Does NOT apply the group generation rules to it"
+      ]
+    }
+  ]
+}

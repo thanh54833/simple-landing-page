@@ -1,0 +1,15 @@
+{
+  "skill": "tasks-creator",
+  "test_cases": [
+    {"input": "tạo tasks cho group mới có .tasks/01_migration", "should_trigger": true},
+    {"input": "add a new app to a group that already has in_progress tasks", "should_trigger": true},
+    {"input": "đổi wording prompt task dùng chung cho mọi group", "should_trigger": true},
+    {"input": "tại sao wave key này có suffix?", "should_trigger": true},
+    {"input": "hand-write 00_tasks.json and 01_status.json for a group", "should_trigger": true},
+    {"input": "viết ADR cho quyết định chọn database", "should_trigger": false},
+    {"input": "debug why the API returns 500", "should_trigger": false},
+    {"input": "tạo slash command mới", "should_trigger": false},
+    {"input": "write a CHANGELOG entry", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}

@@ -7,7 +7,7 @@ description: Use when an approved design spec may contain architecture decisions
 
 - Agent đọc skill này ở gate G2+, giữa spec đã approve và `writing-plans`. Mặc định là "không cần ADR"; chỉ viết ADR khi quyết định qua bộ lọc bên dưới.
 - Viết xong ADR thì DỪNG ở `Status: accepted` (user accept). Không gọi `writing-plans`, không sửa code.
-- ADR là record vĩnh viễn: dùng chung toàn repo ở `docs/superpowers/adr/`, không gắn thư mục theo feature. Không xóa ADR cũ; quyết định đổi thì viết ADR mới và đánh dấu supersede.
+- ADR là record vĩnh viễn: dùng chung toàn repo ở `docs/physarum/adr/`, không gắn thư mục theo feature. Không xóa ADR cũ; quyết định đổi thì viết ADR mới và đánh dấu supersede.
 - Quyết định load-bearing (paradigm, stack, ranh giới lớn) do user chọn; agent chỉ trình bày phương án và đề xuất, không tự quyết.
 - Nguồn tham chiếu: agent-skills `documentation-and-adrs`, mattpocock `domain-modeling/ADR-FORMAT.md`, BMAD `bmad-architecture` (read-only trong `00_sdlc_docs/`). SKILL.md local thắng nếu lệch.
 
@@ -21,7 +21,7 @@ An ADR records *why* a significant technical decision was made: the context, the
 
 - A spec was approved and `/adr` (G2+) is the next gate
 - User asks to record an architecture decision, or asks whether a spec needs an ADR
-- Reclassification discovered architecture-level change mid-task (T4)
+- Reclassification discovered architecture-level change mid-task (T3)
 
 When NOT to use: writing the spec itself, implementation plans, README/changelog/API docs, comments in code, throwaway prototypes.
 
@@ -38,12 +38,12 @@ An approved spec must exist. No spec, or spec not approved → STOP and point to
    3. **A real trade-off** — genuine alternatives existed and one was picked for specific reasons.
 
    Also apply the invariant test: if two units built independently could choose incompatibly here, and the call is non-obvious, it belongs in an ADR. Candidates that fail go under `Deferred` in the spec, not in an ADR.
-3. **Match convention.** Inspect `docs/superpowers/adr/` (and any `.adr-dir`, project instructions) before writing. An existing scheme wins: location, extension, numbering, filename pattern, headings. If evidence conflicts, surface the conflict to the user — never introduce a second scheme. If no `docs/superpowers/adr/` exists, create it lazily and start at `0001`. Next number = highest existing + 1.
-4. **Choose mode.** Coaching (default for T4): lay out 2–3 realistic alternatives with a recommendation and let the user choose each load-bearing call. Fast: draft the ADR with `[ASSUMPTION]` tags and let the user correct. Never silently decide a load-bearing call.
-5. **Write** each ADR to `docs/superpowers/adr/NNNN-<slug>.md` from the template below. `<slug>` is kebab-case from the decision.
+3. **Match convention.** Inspect `docs/physarum/adr/` (and any `.adr-dir`, project instructions) before writing. An existing scheme wins: location, extension, numbering, filename pattern, headings. If evidence conflicts, surface the conflict to the user — never introduce a second scheme. If no `docs/physarum/adr/` exists, create it lazily and start at `0001`. Next number = highest existing + 1.
+4. **Choose mode.** Coaching (default for T3): lay out 2–3 realistic alternatives with a recommendation and let the user choose each load-bearing call. Fast: draft the ADR with `[ASSUMPTION]` tags and let the user correct. Never silently decide a load-bearing call.
+5. **Write** each ADR to `docs/physarum/adr/NNNN-<slug>.md` from the template below. `<slug>` is kebab-case from the decision.
 6. **Self-check** before asking for accept: no placeholders or `[ASSUMPTION]` left; at least one rejected alternative with a reason; no contradiction with the spec or earlier ADRs; `Binds` and `Prevents` filled.
 7. **Record in the spec.** Append or update a `## Decisions` section in the spec, one line per outcome:
-   - `- ADR: docs/superpowers/adr/NNNN-slug.md (accepted)`
+   - `- ADR: docs/physarum/adr/NNNN-slug.md (accepted)`
    - `- Deferred: <decision> — <revisit condition>`
    - `- No ADR needed: <one-line reason>` (when nothing passed the filter)
 8. **Ask the user to accept.** On accept set `Status: accepted` in each ADR. Then STOP.

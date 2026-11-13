@@ -1,0 +1,92 @@
+{
+  "skill": "writing-intent",
+  "test_cases": [
+    {
+      "name": "writes_intent_without_design",
+      "input": "Viết intent.md cho ý tưởng: khách hàng muốn xem lịch sử đơn hàng theo tháng",
+      "assertions": [
+        "Asks analyst questions one at a time (what cannot be done today, who is affected, what better looks like, what is out of scope) before writing the file",
+        "Creates docs/physarum/intents/YYYY-MM-DD-<slug>-intent.md with Status: draft",
+        "File contains the sections Problem, Proposed outcome, Affected users and systems, Constraints, Out of scope, Open questions, Classification",
+        "Does NOT put endpoints, file paths, estimates, or implementation options in any field",
+        "Stops after writing and does NOT invoke brainstorming or writing-plans"
+      ]
+    },
+    {
+      "name": "spec_request_still_writes_intent_first",
+      "input": "Viết luôn spec cho tính năng export CSV giúp tôi, khỏi intent",
+      "assertions": [
+        "Writes intent.md first and states in one line that design/spec is a separate gate",
+        "Does NOT write spec.md in the same turn",
+        "Does NOT invoke brainstorming before the intent is accepted"
+      ]
+    },
+    {
+      "name": "unconfirmed_assumptions_go_to_open_questions",
+      "input": "Ticket: 'Báo cáo doanh thu chậm'. Có thể do query, chắc là cần cache. Ghi intent.",
+      "assertions": [
+        "Sets Source: ticket and keeps a Source ref pointing to the ticket",
+        "Puts 'needs cache' under Open questions, NOT under Constraints",
+        "Keeps the originator's words in Problem and Proposed outcome",
+        "Does NOT write 'add cache' or any approach in Proposed outcome"
+      ]
+    },
+    {
+      "name": "classifies_with_predicates_highest_first",
+      "input": "Intent: đổi schema bảng orders để tách địa chỉ giao hàng, đụng 3 module",
+      "assertions": [
+        "Fills ## Classification with Class, Lane, and Signals",
+        "Evaluates T3 before T2, T1, T0 and picks T3 (schema change spanning modules)",
+        "Lane lists /spec → /adr → /plan → /implement → /verify → /ship",
+        "Signals state impact ('touches the orders schema'), NOT approach ('add a column')",
+        "States the proposed Class and Lane in one line for the originator to confirm or change"
+      ]
+    },
+    {
+      "name": "alert_hotfix_needs_no_intent",
+      "input": "Alert: production checkout trả 500 từ 10 phút trước, khôi phục hành vi cũ",
+      "assertions": [
+        "Classifies as T2 Hotfix/Debug",
+        "Says no intent is needed and names /debug → /verify → /ship",
+        "Does NOT create an intent.md file",
+        "Stops after naming the lane"
+      ]
+    },
+    {
+      "name": "alert_needing_new_behavior_gets_new_intent",
+      "input": "Alert: nhiều user bị lock tài khoản. Cần thêm cơ chế unlock qua email, đổi auth flow.",
+      "assertions": [
+        "Does NOT classify as T2 because new behavior and an auth change are required",
+        "Writes a NEW intent file instead of editing an old spec in place",
+        "Classifies as T3 because the auth model changes"
+      ]
+    },
+    {
+      "name": "tiny_change_intent_optional",
+      "input": "Đổi tên biến userCnt thành userCount trong 1 file, có cần intent không?",
+      "assertions": [
+        "Classifies as T0 Tiny/Quick",
+        "States intent is optional and short, and does NOT force one",
+        "Names lane /implement → /verify → /ship with no spec and no plan"
+      ]
+    },
+    {
+      "name": "unknown_predicate_marks_provisional",
+      "input": "Intent: thêm trường ghi chú vào form đặt hàng. Tôi chưa biết có đụng API contract không.",
+      "assertions": [
+        "Asks the missing predicate once, one question at a time",
+        "When the answer stays unknown, lists it in Open questions",
+        "Marks Class as provisional"
+      ]
+    },
+    {
+      "name": "accept_sets_status_and_stops",
+      "input": "PO đã accept intent này, tôi là Lan, hôm nay 2026-11-13.",
+      "assertions": [
+        "Sets Status: accepted and Accepted by with name and date",
+        "Does NOT start design or invoke brainstorming",
+        "Points to the first command of the intent's Lane"
+      ]
+    }
+  ]
+}

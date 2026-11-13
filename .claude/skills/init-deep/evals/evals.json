@@ -1,0 +1,74 @@
+{
+  "skill": "init-deep",
+  "test_cases": [
+    {
+      "name": "fires_explore_agents_immediately_and_varies_count",
+      "input": "/init-deep",
+      "assertions": [
+        "Fires background explore agents in the same step before the main-session analysis, without waiting",
+        "Spawns additional explore agents based on project scale (files, lines, depth, monorepo, languages)",
+        "Does NOT use a fixed agent count",
+        "Runs bash structure analysis concurrently while agents run"
+      ]
+    },
+    {
+      "name": "reads_existing_before_create_new",
+      "input": "/init-deep --create-new",
+      "assertions": [
+        "Reads all existing AGENTS.md and CLAUDE.md files first",
+        "Deletes them only after reading",
+        "Regenerates from scratch"
+      ]
+    },
+    {
+      "name": "scores_and_skips_low_score_dirs",
+      "input": "/init-deep trên repo có thư mục utils/ 3 file nhỏ",
+      "assertions": [
+        "Scores each directory with the scoring matrix",
+        "Always creates root AGENTS.md",
+        "Creates subdirectory AGENTS.md only when score > 15, or 8-15 with a distinct domain",
+        "Skips directories scoring < 8 because the parent covers them"
+      ]
+    },
+    {
+      "name": "edit_not_write_for_existing",
+      "input": "/init-deep update mode, đã có AGENTS.md ở root và apps/api",
+      "assertions": [
+        "Uses Edit on existing AGENTS.md files, NEVER Write",
+        "Uses Write only for files that do not exist yet"
+      ]
+    },
+    {
+      "name": "code_map_from_lsp_and_codegraph",
+      "input": "/init-deep trên repo 200 file có LSP và codegraph",
+      "assertions": [
+        "Queries lsp_symbols and codegraph_* tools to build CODE MAP",
+        "Skips CODE MAP only if neither exists or the project has < 10 files"
+      ]
+    },
+    {
+      "name": "child_never_repeats_parent",
+      "input": "/init-deep sinh AGENTS.md cho apps/api",
+      "assertions": [
+        "Child file is 30-80 lines",
+        "Child does NOT repeat parent content",
+        "Child contains no generic advice that applies to all projects"
+      ]
+    },
+    {
+      "name": "respects_max_depth",
+      "input": "/init-deep --max-depth=2",
+      "assertions": [
+        "Does NOT create AGENTS.md deeper than 2 directory levels"
+      ]
+    },
+    {
+      "name": "review_and_final_report",
+      "input": "/init-deep, xong chưa?",
+      "assertions": [
+        "Runs the review phase (dedupe, trim, telegraphic style) before reporting",
+        "Final report lists each file with line count, Dirs Analyzed, created and updated counts, and the hierarchy"
+      ]
+    }
+  ]
+}

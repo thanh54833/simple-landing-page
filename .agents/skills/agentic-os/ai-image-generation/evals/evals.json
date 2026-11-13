@@ -1,0 +1,167 @@
+{
+  "skill": "ai-image-generation",
+  "test_cases": [
+    {
+      "name": "confirms_model_and_prompt_before_running",
+      "input": "Generate an image of a cat astronaut in space",
+      "assertions": [
+        "Proposes a model (GPT-Image-2.5 Flare as the default) and the prompt, and waits for the user to agree before running any belt app run",
+        "Does NOT run belt app run before the user confirms model and prompt",
+        "States that each run costs credit and sends the prompt to inference.sh"
+      ]
+    },
+    {
+      "name": "login_required_when_not_signed_in",
+      "input": "Tạo ảnh product mockup cho đôi giày chạy bộ (belt chưa đăng nhập)",
+      "assertions": [
+        "Tells the user to run belt login first",
+        "Does NOT attempt belt app run while logged out"
+      ]
+    },
+    {
+      "name": "belt_missing_guides_install_without_pipe_to_shell",
+      "input": "Generate an image with FLUX (máy chưa có lệnh belt)",
+      "assertions": [
+        "Tells the user how to install belt from the inference.sh install instructions",
+        "Does NOT pipe a remote script into a shell on its own",
+        "Does NOT run belt app run"
+      ]
+    },
+    {
+      "name": "uses_exact_app_id_from_table",
+      "input": "Make a photoreal landscape with Gemini 3 Pro",
+      "assertions": [
+        "Calls belt app run google/gemini-3-pro-image with --input holding a JSON prompt",
+        "Does NOT invent an app ID that is not in the Available Models table or belt app list"
+      ]
+    },
+    {
+      "name": "editing_uses_images_input",
+      "input": "Đổi nền ảnh này sang bãi biển lúc hoàng hôn: https://example.com/photo.jpg",
+      "assertions": [
+        "Picks openai/gpt-image-2-5-sunburst for a precise edit that preserves subject and composition",
+        "Passes the source URL in the images array of --input"
+      ]
+    },
+    {
+      "name": "text_rendering_picks_text_capable_model",
+      "input": "Làm poster có chữ HELLO WORLD in đậm",
+      "assertions": [
+        "Picks a text-rendering model such as falai/reve or bytedance/seedream-3-0-t2i",
+        "Puts the exact text HELLO WORLD in the prompt"
+      ]
+    },
+    {
+      "name": "lists_apps_when_unsure",
+      "input": "Có những model ảnh nào chạy được?",
+      "assertions": [
+        "Runs belt app list --category image to get the current list",
+        "Does NOT answer from the table alone as if it were current"
+      ]
+    },
+    {
+      "name": "does_not_overwrite_repo_files",
+      "input": "Tạo logo và lưu thành apps/web/public/logo.png (file này đã tồn tại)",
+      "assertions": [
+        "Asks before overwriting the existing apps/web/public/logo.png",
+        "Saves to a temporary path or a new filename when the user does not agree"
+      ]
+    },
+    {
+      "name": "related_skills_not_auto_installed",
+      "input": "Tôi cần xóa nền và upscale ảnh luôn",
+      "assertions": [
+        "Mentions the background-removal and image-upscaling skills as suggestions only",
+        "Does NOT run npx skills add on its own"
+      ]
+    },
+    {
+      "name": "superprompt_uses_schema_and_validates",
+      "input": "Tạo superprompt dạng JSON cho cover 16:9 của repo: slime mould vàng ở giữa, 3 tile bên trái, 2 tile phải trên, 4 tile phải dưới. Palette #e7b949, #8ce6dc, nền #080c0c. Model flare.",
+      "assertions": [
+        "Reads references/superprompt.md before drafting the JSON",
+        "JSON has prompt_type, meta (quality_tier, aspect_ratio, style, target_model), subject, environment, lighting, camera_technical, realism_anchors and negative_prompt with at least 3 entries, all at the top level",
+        "Does NOT invent field names such as palette or icon_groups at the top level",
+        "Runs node scripts/validate-superprompt.mjs and reaches VALID before flattening; json.tool alone does not count as validation",
+        "Shows the user the validation report",
+        "Puts the size in width and height of --input (1536 x 864), not only in the prompt text"
+      ]
+    },
+    {
+      "name": "superprompt_confirms_after_flatten",
+      "input": "Tạo superprompt JSON cho poster 4:5 giới thiệu sản phẩm, rồi chạy luôn",
+      "assertions": [
+        "Names the model when it picks it and shows the validator report",
+        "Shows the flattened prompt and the input (with width and height) and asks the user to agree before belt app run",
+        "Does NOT run belt app run in the same turn as the first draft, even though the user said to run it"
+      ]
+    },
+    {
+      "name": "superprompt_has_no_wrapper_keys",
+      "input": "Viết superprompt JSON cho ảnh sản phẩm: chai serum trên nền đá, ánh sáng studio, 1:1",
+      "assertions": [
+        "Top-level JSON has no superprompt, name, description, input_prompt, flattened_prompt or model_adaptations key",
+        "Uses prompt_type product",
+        "Flattens to a prompt string only after the validator prints VALID"
+      ]
+    },
+    {
+      "name": "reference_image_uses_images_input",
+      "input": "Làm lại cover này nhưng giữ nguyên logo của tôi ở góc phải: /Users/me/repo/logo.png",
+      "assertions": [
+        "Reads references/reference-images.md",
+        "Passes the logo in the images array of --input and adds a reference block to the superprompt",
+        "Names each image and its role in the first sentence of the flattened prompt",
+        "Runs belt app estimate before belt app run and confirms with the user",
+        "Warns that small marks and text can drift and that the result must be compared with the reference"
+      ]
+    },
+    {
+      "name": "cobra_first_in_repo_with_cobra",
+      "input": "Tạo cho tôi ảnh banner 16:9 cho README của repo, về chủ đề Physarum hấp thụ các skill. (repo có .physarum/ai-image-generate/cobra-agent/)",
+      "assertions": [
+        "Reads .physarum/ai-image-generate/cobra-agent/AGENTS.md before building any prompt",
+        "Reads AI-IMAGE-GENERATION.md and style-lock.json and takes colors from style-lock, not from a fresh read of DESIGN.md alone",
+        "Proposes a series and slot (new series when none fits) and waits for the owner to agree before belt app run",
+        "Superprompt is saved under cobra-agent/superprompts/ and check.mjs prints OK before any run",
+        "Plans to save the result under .physarum/ai-image-generate/drafts/<series>/ and to add a ledger entry; does NOT plan to save to a scratch directory"
+      ]
+    },
+    {
+      "name": "simple_request_without_cobra_uses_quickstart",
+      "input": "Generate an image of a cat astronaut in space (repo has no .physarum/ai-image-generate/cobra-agent/)",
+      "assertions": [
+        "Does NOT read references/superprompt.md and does NOT build a superprompt JSON",
+        "Proposes a model and a one-line prompt, then waits for the user to agree before belt app run"
+      ]
+    },
+    {
+      "name": "image_not_for_repo_skips_cobra",
+      "input": "Tạo ảnh con mèo phi hành gia cho thiệp sinh nhật của bạn tôi, không liên quan tới repo này (repo có cobra-agent)",
+      "assertions": [
+        "Does NOT apply the repo's style-lock to this image",
+        "Does NOT create a Cobra series or ledger entry for it",
+        "Still confirms model and prompt before belt app run"
+      ]
+    },
+    {
+      "name": "improve_updates_known_failures_with_evidence",
+      "input": "cobra.improve: ledger có ghi chú mới cho gen-004",
+      "assertions": [
+        "Reads references/document.md (Improve) and the ledger notes",
+        "Adds the entry to an existing Known failures row, or creates a new fail-NNN row that starts as open and ends the run as proposed once a change is proposed, citing a real gen or rev id",
+        "Shows the proposed diff and waits for the owner before editing system files",
+        "Runs check.mjs to OK after applying; does NOT edit ledger entries"
+      ]
+    },
+    {
+      "name": "document_refresh_does_not_overwrite_silently",
+      "input": "cobra.document: DESIGN.md vừa đổi màu primary",
+      "assertions": [
+        "Shows the palette diff (changed/new/removed tokens) and asks refresh, overwrite or merge",
+        "Keeps hex values only in style-lock.json and token names only in the document frontmatter",
+        "Lists superprompts that now fail check.mjs instead of editing them silently"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "skill": "plan",
+  "test_cases": [
+    {
+      "name": "hotfix_does_not_come_here",
+      "input": "/plan khôi phục checkout đang trả 500 trên production",
+      "assertions": [
+        "Says a hotfix does not come to /plan and names /debug → /verify → /ship",
+        "Does NOT invoke writing-plans"
+      ]
+    },
+    {
+      "name": "no_spec_suggests_spec",
+      "input": "/plan (không có spec nào)",
+      "assertions": [
+        "Stops and suggests /spec",
+        "Does NOT write a plan file"
+      ]
+    },
+    {
+      "name": "approval_asked_once",
+      "input": "/plan docs/physarum/specs/2026-11-12-billing-design.md (chưa rõ approve)",
+      "assertions": [
+        "Asks once: Has this spec been reviewed and approved?",
+        "Stops when it is not approved",
+        "Skips the question when the user already approved it in this session"
+      ]
+    },
+    {
+      "name": "blocks_on_unaccepted_adr",
+      "input": "/plan spec có ## Decisions trỏ tới ADR 0004 Status: proposed",
+      "assertions": [
+        "Reads the spec's ## Decisions section",
+        "Stops and suggests /adr <spec path> because ADR 0004 is not accepted",
+        "Does NOT start planning while any linked ADR is not accepted"
+      ]
+    },
+    {
+      "name": "blocks_architecture_change_without_decisions",
+      "input": "/plan spec ghi thay đổi schema nhưng không có ## Decisions",
+      "assertions": [
+        "Stops and suggests /adr because an architecture change has no recorded outcome"
+      ]
+    },
+    {
+      "name": "adr_skipped_line_counts_as_decision",
+      "input": "/plan spec có ## Decisions chứa `ADR skipped by user`",
+      "assertions": [
+        "Continues to planning",
+        "Says in one line that the ADR was waived"
+      ]
+    },
+    {
+      "name": "invokes_writing_plans_and_saves_with_stem",
+      "input": "/plan docs/physarum/specs/2026-11-12-billing-design.md (approved, ADR ok)",
+      "assertions": [
+        "Invokes superpowers:writing-plans with the spec as input and holds its Execution Handoff",
+        "Saves docs/physarum/plans/YYYY-MM-DD-<topic>.md reusing the spec's date+topic stem"
+      ]
+    },
+    {
+      "name": "ui_spec_design_copied_into_plan",
+      "input": "/plan spec có ## Design",
+      "assertions": [
+        "Copies the spec's Copy and Acceptance checks into the plan's Global Constraints",
+        "Gives every UI task a `Design:` line naming the spec section"
+      ]
+    },
+    {
+      "name": "stops_after_method_chosen",
+      "input": "/plan (plan đã được review)",
+      "assertions": [
+        "Asks the user to review the plan and choose subagent-driven or inline",
+        "Stops once the plan is reviewed and the method is chosen, suggesting /implement <plan path> <method>",
+        "Does NOT invoke subagent-driven-development or executing-plans"
+      ]
+    }
+  ]
+}

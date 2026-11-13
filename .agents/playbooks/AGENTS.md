@@ -10,12 +10,19 @@ playbooks/
 └── 001_changelog/
     ├── changelog.md           # the playbook
     └── CHANGELOG.template.md  # asset the playbook copies from
+└── 002_skills/
+    └── 01_evals/
+        ├── evals.md               # the playbook (evals/ chuẩn Grok)
+        ├── evals.template.json    # assets the playbook copies from
+        ├── triggers.template.json
+        └── check-evals.py         # checker, thay validate-skill.py của Grok
 ```
 
 ## WHERE TO LOOK
 | Task | Location | Notes |
 |------|----------|-------|
 | Create/extend a `CHANGELOG.md` | `001_changelog/changelog.md` | model playbook: copy its shape |
+| Create/audit `evals/` of a self-built skill | `002_skills/01_evals/evals.md` | model: `skills/agentic-os/writing-adr/evals/`; run `check-evals.py` |
 | Write a new playbook | "ADD A PLAYBOOK" below | start from the skeleton, not from scratch |
 | Deep method for wording and testing | `superpowers:writing-skills` | same discipline; playbooks are skills minus auto-trigger |
 

@@ -1,0 +1,80 @@
+{
+  "skill": "verify",
+  "test_cases": [
+    {
+      "name": "resolves_plan_hotfix_or_tiny",
+      "input": "/verify (session vừa implement plan docs/physarum/plans/2026-11-12-billing.md)",
+      "assertions": [
+        "Uses the plan this session implemented without asking and states its path in one line",
+        "Lists plans, hotfix records, and accepted T0 intents and asks only when nothing resolves"
+      ]
+    },
+    {
+      "name": "tiny_with_no_artifact_verifies_diff",
+      "input": "/verify (Tiny/Quick, không có artifact nào)",
+      "assertions": [
+        "Verifies the branch diff itself",
+        "Runs only the project's test suite, not plan commands",
+        "Skips the ADR check and the design evidence step"
+      ]
+    },
+    {
+      "name": "blocks_on_unaccepted_adr",
+      "input": "/verify plan có spec link tới ADR 0004 Status: proposed",
+      "assertions": [
+        "Opens the plan's spec and reads ## Decisions",
+        "Returns NOT READY with the ADR path as the reason"
+      ]
+    },
+    {
+      "name": "runs_real_commands_and_reports_output",
+      "input": "/verify docs/physarum/plans/2026-11-12-billing.md",
+      "assertions": [
+        "Invokes superpowers:verification-before-completion",
+        "Runs every test/verify command in the plan plus the project's test suite",
+        "Reports real command output, NOT a claim of passing"
+      ]
+    },
+    {
+      "name": "test_failure_not_ready_systematic_debugging",
+      "input": "/verify (một test fail)",
+      "assertions": [
+        "Stops with NOT READY",
+        "Suggests fixing via systematic-debugging"
+      ]
+    },
+    {
+      "name": "hotfix_runs_verify_commands_and_regression",
+      "input": "/verify docs/physarum/hotfixes/2026-11-12-checkout-500.md",
+      "assertions": [
+        "Runs the record's Verify commands and its regression test",
+        "Skips the ADR check and design evidence step because a hotfix has no plan or spec"
+      ]
+    },
+    {
+      "name": "design_evidence_required",
+      "input": "/verify plan có spec ## Design, một Acceptance check chỉ ghi `done`",
+      "assertions": [
+        "Checks every Acceptance checks item has an Evidence: entry in at least one UI task",
+        "Treats a bare `done` as missing and returns NOT READY listing the items"
+      ]
+    },
+    {
+      "name": "code_review_then_recheck",
+      "input": "/verify (tests pass, review có finding Important)",
+      "assertions": [
+        "Invokes superpowers:requesting-code-review on the branch diff vs base",
+        "Fixes Critical and Important findings, then re-runs the test and design evidence steps"
+      ]
+    },
+    {
+      "name": "verdict_and_no_merge",
+      "input": "/verify (mọi bước pass)",
+      "assertions": [
+        "Ends with READY TO SHIP or NOT READY plus reasons",
+        "Does NOT merge or push",
+        "Suggests /ship on READY TO SHIP"
+      ]
+    }
+  ]
+}

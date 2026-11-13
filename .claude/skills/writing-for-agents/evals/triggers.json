@@ -1,0 +1,15 @@
+{
+  "skill": "writing-for-agents",
+  "test_cases": [
+    {"input": "viết skill mới cho agent", "should_trigger": true},
+    {"input": "sửa AGENTS.md cho gọn và rõ hơn", "should_trigger": true},
+    {"input": "edit CLAUDE.md so the agent follows it reliably", "should_trigger": true},
+    {"input": "improve this SKILL.md description so it triggers correctly", "should_trigger": true},
+    {"input": "viết tài liệu mà agent sẽ đọc", "should_trigger": true},
+    {"input": "fix the SQL query", "should_trigger": false},
+    {"input": "viết ADR cho quyết định này", "should_trigger": false},
+    {"input": "build a landing page", "should_trigger": false},
+    {"input": "humanize this blog post", "should_trigger": false},
+    {"input": "commit these code changes", "should_trigger": false}
+  ]
+}
