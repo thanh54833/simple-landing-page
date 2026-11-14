@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "task_set": "{{NN_name}}",
+    "name": "{{name}}",
+    "goal": "{{one sentence: the outcome when every task is done}}",
+    "generated_at": "{{YYYY-MM-DD from `date +%F`}}",
+    "note": "Structure: tasks -> subtasks. Status values: pending / in_progress / done / failed / skipped. On finishing an item, set its status and write the result into its note."
+  },
+  "tasks": {
+    "T001": "{{paste a block from templates/tasks/*.json, renumbered}}"
+  }
+}

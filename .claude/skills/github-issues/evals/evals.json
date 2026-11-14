@@ -1,0 +1,49 @@
+{
+  "skill": "github-issues",
+  "test_cases": [
+    {
+      "name": "bug_uses_issue_type_via_gh_api",
+      "input": "Create a bug issue in acme/web - the login page crashes when using SSO",
+      "assertions": [
+        "Runs gh api repos/acme/web/issues -X POST with -f type=\"Bug\"",
+        "Body follows the Bug Report template from references/templates.md (Description, Steps to Reproduce, Expected, Actual)",
+        "Does NOT use gh issue create, which has no --type flag",
+        "Does NOT add a [Bug] prefix to the title or a redundant bug label when the type is set"
+      ]
+    },
+    {
+      "name": "quotes_array_params_for_zsh",
+      "input": "File a feature request for dark mode with the high-priority label and assign alice",
+      "assertions": [
+        "Quotes the whole pair as 'labels[]=high-priority' and 'assignees[]=alice' in the gh api call",
+        "Does NOT write unquoted labels[]=high-priority"
+      ]
+    },
+    {
+      "name": "asks_for_repo_when_missing",
+      "input": "Create an issue: export to CSV is broken",
+      "assertions": [
+        "Confirms the target owner/repo before creating when the repo is not given and cannot be read from the current git remote",
+        "Does NOT run a create call against a guessed repository"
+      ]
+    },
+    {
+      "name": "update_fetches_current_issue_first",
+      "input": "Close issue 42 and change its title to 'Login fails with SSO' in acme/web",
+      "assertions": [
+        "Reads issue 42 first (mcp__github__issue_read or gh api GET) before the PATCH",
+        "Sends gh api repos/acme/web/issues/42 -X PATCH with only state and title",
+        "Reports the issue URL after the update"
+      ]
+    },
+    {
+      "name": "dependencies_load_reference",
+      "input": "Mark issue 10 as blocked by issue 11 in acme/web",
+      "assertions": [
+        "Reads references/dependencies.md before making the call",
+        "Uses the dependencies API from that reference, not a body edit or a label",
+        "Does NOT invent an endpoint that is not in the reference"
+      ]
+    }
+  ]
+}

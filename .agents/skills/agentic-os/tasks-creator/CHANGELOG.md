@@ -2,11 +2,13 @@
 
 Một file duy nhất cho `skills/agentic-os/tasks-creator/`, newest first. Heading đầu giữ cùng version với `../agentic-os-lock.json`. Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 
+## local-2026-11-14
+
+- Viết lại cho repo này: task set `.tasks/NN_<name>/` gồm `00_tasks.json` (tasks → subtasks) và `AGENTS.md` derived. Bỏ waves, folder api/web/qa, `.meta/00_projects.json`, template migration và `01_status.json`.
+- Thêm field `note` (mặc định rỗng) cho task và subtask; agent ghi kết quả vào đó khi done/failed/skipped.
+- Thêm `templates/` (task-set, feature/bugfix/chore/verify, AGENTS.md; placeholder `{{...}}`) và `scripts/check_task_set.py` (validate + `--fix` sinh `AGENTS.md`) để mọi task set cùng chất lượng; quy trình thêm bước đọc code trước, verify task cuối bắt buộc, task có subtasks xor prompt/expect, bảng xếp theo task rồi subtasks của nó.
+- Thay `reference/generation-rules.md` và `reference/agents-md-templates.md` bằng `reference/task-format.md`; viết lại `evals/`; `_template.json` chuyển thành `templates/task-set.json`.
+
 ## local-2026-10-12
 
-- Thêm `evals/evals.json` (8 test case) và `evals/triggers.json` (10 trigger, 5 negative).
-- Initial self-built release: tạo/cập nhật tay `.tasks/01_migration/` của một group (`00_tasks.json`, `AGENTS.md`, `01_status.json`), ngoài chuỗi gate SDLC.
-- Rule chính: classify BE/FE từ `.meta/00_projects.json`, numbering contiguous `api → web → qa`, wave key `SUFFIX(name)`; wording chỉ lấy từ 3 template (`reference/generation-rules.md`).
-- Incremental: thêm app vào group có progress chỉ thêm wave mới, không rewrite `00_tasks.json`/`01_status.json`; `AGENTS.md` task folder luôn derived (`reference/agents-md-templates.md`).
-- DỪNG sau khi ghi 3 file của group; không chạy `generate_task.py`, không sửa template.
-- Thêm `AGENTS.md` rule guide + `CHANGELOG.md` theo mẫu `blader/humanizer`.
+- Initial self-built release (repo migration: waves, `01_status.json`); đã thay thế bởi bản local-2026-11-14.

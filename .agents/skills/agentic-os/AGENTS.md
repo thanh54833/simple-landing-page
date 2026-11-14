@@ -22,6 +22,8 @@ Pack skill 2 tầng (`agentic-os/<skill>/`); factory này consume tại chỗ, k
 | `impeccable/` | `pbakaus/impeccable@4.5.2` | Full vendored project (`reference/` `scripts/` `agents/`) |
 | `hallmark/` | `Nutlope/hallmark@2.0.0` | Full vendored project (`references/` `scripts/` `agents/`, `LICENSE`); design skill for new pages |
 | `ai-image-generation/` | `inference-sh/skills@0cbf91c` | Single `SKILL.md` + `Local Overrides`: sinh ảnh qua `belt app run` (inference.sh CLI) |
+| `gh-issue-sync/` | `mitsuhiko/gh-issue-sync@955fe4c` | Single `SKILL.md`: đồng bộ GitHub issues về `.issues/` Markdown (pull/push) |
+| `github-issues/` | `github/awesome-copilot@8ecd5b1` | `SKILL.md` + `references/`: tạo/sửa issues, labels, types, dependencies, Projects qua `gh api` |
 
 Chỉ sửa 7 skill self-built tại chỗ. Vendored giữ nguyên layout upstream.
 
@@ -44,11 +46,20 @@ Chỉ sửa 7 skill self-built tại chỗ. Vendored giữ nguyên layout upstre
 - **Required files:** mỗi skill trong pack (self-built hoặc vendored) **phải** có đủ `SKILL.md`, `AGENTS.md`, `CHANGELOG.md`, `evals/evals.json`, `evals/triggers.json`. Thiếu một file = skill chưa xong: không thêm vào lock, không báo hoàn thành.
 - **Evals:** `evals.json` ≥3 test case, assertion cụ thể và kiểm tra được, có cả "phải làm" lẫn "không được làm"; `triggers.json` ≥3 trigger, ≥1 negative. Skill mới: viết evals cùng lúc với `SKILL.md`. Đổi `SKILL.md` (TUNE) → thêm 1 regression test vào `evals.json` cùng commit; phát hiện trigger phrase mới → thêm vào `triggers.json`.
 - **Verify bắt buộc:** `python3 .agents/playbooks/002_skills/01_evals/check-evals.py .agents/skills/agentic-os/<skill>` phải in `0 error` trước khi commit; kiểm cả 5 file bằng `ls <skill>`.
+- **Fetch checklist (bắt buộc mỗi lần fetch hoặc sync skill từ ngoài):** làm đủ cả 7 bước trong cùng commit, rồi mới báo xong.
+  1. Chép skill vào `agentic-os/<skill>/` giữ nguyên layout upstream; bỏ file không phải skill (code build, `embed.go`, `.git`).
+  2. Thêm entry vào `agentic-os-lock.json` (`source`, `sourceType: github`, `version: main@<sha7>` hoặc tag, `repository`).
+  3. Viết `AGENTS.md` theo mẫu `ai-image-generation/AGENTS.md`: What this skill contains, Key files, Rules for changes, Writing style.
+  4. Viết `CHANGELOG.md`: heading đầu = version trong lock, ghi nguồn và commit.
+  5. Viết `evals/evals.json` (≥3 case, có "phải làm" và "KHÔNG ĐƯỢC làm") và `evals/triggers.json` (≥3 trigger, ≥1 negative), gồm negative so với skill lân cận.
+  6. Thêm skill vào bảng "What this pack contains" ở file này, cùng dòng nguồn và hình thái.
+  7. Chạy `check-evals.py` ra `0 error`, `make agents_sync`, `make agents_sync-check`; `ls <skill>` thấy đủ 5 file bắt buộc.
+  Sync lại skill đã có: thay phần upstream, giữ `Local Overrides`, `AGENTS.md`, `CHANGELOG.md`, `evals/`; bump lock và heading `CHANGELOG.md` cùng version; thêm 1 note vào `CHANGELOG.md`.
 - **Vendored:** evals do repo viết, nằm trong `evals/`; sync upstream phải giữ lại `evals/`, `AGENTS.md`, `CHANGELOG.md` và khối `Local Overrides`.
 - Giữ `SKILL.md` và command route nó (`intent.md`/`adr.md`) in sync. Command chỉ route + gate, không chép procedure. `tasks-creator` và `init-deep` chưa có command.
 - `SKILL.md` local thắng mọi ref trong `00_sdlc_docs/` khi lệch. Local rule nằm ở `Local Overrides` đầu file.
 - Single-file skill: mọi local rule vào `Local Overrides`, không tách file mới trừ khi >100 dòng reference (`tasks-creator/reference/` là trường hợp đã tách).
-- Vendored (`impeccable/`, `doc-coauthoring/`, `writing-for-agents/`, `ai-image-generation/`): không sửa nội dung upstream, chỉ thêm `Local Overrides` remap path lồng.
+- Vendored (`impeccable/`, `doc-coauthoring/`, `writing-for-agents/`, `ai-image-generation/`, `gh-issue-sync/`, `github-issues/`): không sửa nội dung upstream, chỉ thêm `Local Overrides` remap path lồng.
 - **Version:** `agentic-os-lock.json` + heading đầu `CHANGELOG.md` giữ cùng một version. Self-built dùng `local-YYYY-MM-DD`; đổi skill → bump lock cùng commit.
 - **Compatibility:** install và use instructions trung lập runtime (Orca, OpenCode, Claude Code là ví dụ, không phải giới hạn).
 - **Description:** frontmatter `description` chỉ nêu trigger (`Use when...`), không tóm tắt workflow — agent phải đọc thân skill.

@@ -5,18 +5,17 @@ Mẫu theo `blader/humanizer` `AGENTS.md`.
 
 ## What this skill contains
 
-Skill `SKILL.md` + 2 file `reference/`, không build step. Không thuộc chuỗi gate `intent → ship`;
-chạy tay khi cần tạo/cập nhật `02_target/<group>/.tasks/01_migration/{00_tasks.json, AGENTS.md, 01_status.json}`.
-Điểm mạnh của skill: thêm app vào group đang có progress mà không đụng task đã `done`/`in_progress`.
-
-Skill chạy trên repo migration (có `.meta/00_projects.json`, `00_migration/02_template/01_tasks/`),
-không phải repo factory này. Path trong skill là path của repo đích — không remap, không chạy thử tại đây.
+Skill `SKILL.md` + `reference/task-format.md` + `templates/` + `scripts/check_task_set.py`. Không thuộc chuỗi gate
+`intent → ship`; chạy tay khi cần tạo/cập nhật một task set `.tasks/NN_<name>/{00_tasks.json, AGENTS.md}`
+của repo này. Cấu trúc: tasks → subtasks, không waves, không status file; kết quả ghi vào `note`.
 
 ## Key files
 
-- `SKILL.md` — source of truth: Core Procedure, "Adding an App Without Losing Progress", Quick Reference, Common Mistakes.
-- `reference/generation-rules.md` — công thức cơ học: classify BE/FE, numbering folder, wave key, `source_dir`/`target_dir`, wave-table.
-- `reference/agents-md-templates.md` — template literal cho `AGENTS.md` của task folder (central vs stub).
+- `SKILL.md` — source of truth cho quy trình: Core Procedure, Running and Updating Tasks, Quick Reference, Common Mistakes.
+- `reference/task-format.md` — source of truth cho schema, status, granularity, format bảng.
+- `templates/` — khung cố định để mọi task set cùng chất lượng: `task-set.json`, `tasks/{feature,bugfix,chore,verify}.json`, `AGENTS.md`. Placeholder là `{{...}}` và `T0NN`.
+- `scripts/check_task_set.py` — validator + `--fix` sinh `AGENTS.md`; mọi rule máy kiểm được nằm ở đây, không lặp lại thành văn bản dài.
+- `evals/` — test case và trigger.
 - `AGENTS.md` (file này) — rule guide cho agent sửa skill; không chứa procedure.
 - `CHANGELOG.md` — release notes, newest first.
 - `../agentic-os-lock.json` — pin `tasks-creator` (`sourceType: local`, `version: local-YYYY-MM-DD`).
@@ -24,18 +23,16 @@ không phải repo factory này. Path trong skill là path của repo đích —
 
 ## Rules for changes
 
-- **Một nguồn wording:** `skills`/`prompt`/`expect` chỉ đến từ 3 template của repo đích. Không chép wording vào skill này.
-- **Giữ nguyên tắc incremental:** `00_tasks.json` và `01_status.json` không bao giờ rewrite cả file khi đã có progress; `AGENTS.md` task folder luôn derived, an toàn overwrite. Sửa rule nào chạm 2 điều này phải nêu rõ trong `CHANGELOG.md`.
-- **SKILL ↔ reference in sync:** đổi công thức ở `generation-rules.md` → cập nhật điểm trỏ §-number trong `SKILL.md` (Core Procedure, Adding an App) và Common Mistakes nếu bị ảnh hưởng.
-- **Script song song:** `.tmp/scripts/generate_task.py` (repo đích) sinh cùng output cho case from-scratch. Đổi rule ở đây → kiểm tra script có lệch không, ghi chú vào `CHANGELOG.md`.
-- **Scope:** `02_target/.tasks/00_migration/*` (orchestration cấp root) nằm ngoài skill. Không mở rộng scope sang đó.
+- **Một nguồn cho mỗi thứ:** schema/status/granularity → `reference/task-format.md`; wording task → `templates/tasks/*.json`; khung `AGENTS.md` → `templates/AGENTS.md`; rule máy kiểm được → `scripts/check_task_set.py`. `SKILL.md` chỉ trỏ tới, không chép lại.
+- **Giữ nguyên tắc incremental:** `00_tasks.json` không bao giờ rewrite cả file khi đã có progress; `AGENTS.md` task folder luôn derived (qua script), an toàn overwrite. Sửa rule nào chạm 2 điều này phải nêu rõ trong `CHANGELOG.md`.
+- **Đổi schema/template/script:** cập nhật đồng thời `reference/task-format.md`, `templates/`, `scripts/check_task_set.py`, `evals/`; rồi chạy validator trên mọi `.tasks/*/` hiện có và sửa cho `OK`.
 - **Reference files:** thêm file `reference/` mới chỉ khi nội dung >100 dòng hoặc dùng lại ở nhiều chỗ; link từ `SKILL.md`.
 - **Version:** giữ cùng version ở `../agentic-os-lock.json` và heading đầu `CHANGELOG.md`. Đổi skill → bump lock cùng commit.
 - **Compatibility:** instructions trung lập runtime (Claude Code, OpenCode, Orca là ví dụ).
 - **Description:** frontmatter chỉ nêu `Use when...`, không tóm tắt workflow.
-- **Length:** mỗi từ trong `SKILL.md` bị đọc mỗi lần fire. Thêm chữ phải đáng giá; công thức dài để ở `reference/`.
+- **Length:** mỗi từ trong `SKILL.md` bị đọc mỗi lần fire. Thêm chữ phải đáng giá; chi tiết dài để ở `reference/`.
 - **History:** thêm note ngắn vào `CHANGELOG.md` cho mọi behavior change.
-- **Checks:** đọc lại `SKILL.md` + reference; verify frontmatter `name: tasks-creator`; kiểm link §-number còn đúng; dry-run tay trên 1 group mẫu (case group mới + case thêm app vào group có progress).
+- **Checks:** `python3 scripts/check_task_set.py` trên mọi set hiện có in `OK`; grep không còn tên file đã xoá; dry-run bằng subagent: tạo task set mới từ một goal mẫu rồi validate.
 
 ## Writing style
 

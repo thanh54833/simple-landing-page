@@ -29,7 +29,7 @@
     "tasks-creator": {
       "source": "local",
       "sourceType": "local",
-      "version": "local-2026-10-12",
+      "version": "local-2026-11-14",
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": ""
@@ -97,6 +97,22 @@
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": "https://github.com/inference-sh/skills/tree/main/tools/image/ai-image-generation"
+    },
+    "gh-issue-sync": {
+      "source": "mitsuhiko/gh-issue-sync",
+      "sourceType": "github",
+      "version": "main@955fe4c",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/mitsuhiko/gh-issue-sync/tree/main/skill"
+    },
+    "github-issues": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "version": "main@8ecd5b1",
+      "skillPath": "SKILL.md",
+      "computedHash": "",
+      "repository": "https://github.com/github/awesome-copilot/tree/main/skills/github-issues"
     }
   },
   "retired": []

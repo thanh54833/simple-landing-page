@@ -1,0 +1,24 @@
+{
+  "T0NN": {
+    "title": "Fix {{bug in one line}}",
+    "skills": "superpowers:systematic-debugging",
+    "status": "pending",
+    "note": "",
+    "subtasks": {
+      "T0NN.1": {
+        "title": "Reproduce and find the root cause",
+        "prompt": "Reproduce with `{{command}}`. Trace the cause in {{file or area}}. Change no code in this subtask.",
+        "expect": "note holds the exact failing output and a one-sentence root cause that names a file and line.",
+        "status": "pending",
+        "note": ""
+      },
+      "T0NN.2": {
+        "title": "Add a regression test and fix",
+        "prompt": "Add a test in {{test file path}} that fails on the bug, then fix {{file}} at the root cause.",
+        "expect": "The new test failed before the fix and passes after; `{{full test command}}` passes.",
+        "status": "pending",
+        "note": ""
+      }
+    }
+  }
+}

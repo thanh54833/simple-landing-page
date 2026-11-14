@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "task_set": "01_init_project",
+    "name": "init_project",
+    "goal": "Initialize agentic-os-core on a fresh machine: toolchain, generated agent/MCP config, dependencies, green tests, and a running dev stack.",
+    "generated_at": "2026-11-14",
+    "note": "Structure: tasks -> subtasks. Status values: pending / in_progress / done / failed / skipped. On finishing a subtask, set its status and write the result into its note; a task is done when all its subtasks are done (write a short summary in the task note)."
+  },
+  "tasks": {
+    "T001": {
+      "title": "Environment and generated config",
+      "skills": "superpowers:verification-before-completion",
+      "status": "pending",
+      "note": "",
+      "subtasks": {
+        "T001.1": {
+          "title": "Read project docs and check toolchain",
+          "prompt": "Read AGENTS.md and CLAUDE.md at the repo root. Verify uv, node, npm and make are installed.",
+          "expect": "Versions of uv, node, npm and make are recorded in note.",
+          "status": "pending",
+          "note": ""
+        },
+        "T001.2": {
+          "title": "Create .env",
+          "prompt": "Copy .env.example to .env if it is missing. Never commit it.",
+          "expect": ".env exists and is gitignored (`git check-ignore .env` prints it).",
+          "status": "pending",
+          "note": ""
+        },
+        "T001.3": {
+          "title": "Generate agent and MCP config",
+          "prompt": "Run `make agents_sync` and `make mcp`. Edit only under .agents/ and .mcp/servers.json, never the generated files.",
+          "expect": "`make agents_sync-check` and `make mcp-check` report no drift, and `git status` shows no unintended changes.",
+          "status": "pending",
+          "note": ""
+        }
+      }
+    },
+    "T002": {
+      "title": "Dependencies, tests and build",
+      "skills": "superpowers:verification-before-completion",
+      "status": "pending",
+      "note": "",
+      "subtasks": {
+        "T002.1": {
+          "title": "Install api and web dependencies",
+          "prompt": "Run `uv sync` in apps/api and `npm install` in apps/web.",
+          "expect": "Both installs finish without errors.",
+          "status": "pending",
+          "note": ""
+        },
+        "T002.2": {
+          "title": "Run tests",
+          "prompt": "Run `make test` from the repo root.",
+          "expect": "api and web tests pass; pass counts are recorded in note.",
+          "status": "pending",
+          "note": ""
+        },
+        "T002.3": {
+          "title": "Lint and build",
+          "prompt": "Run `cd apps/api && uv run ruff check .` and `cd apps/web && npm run build` (tsc -b && vite build).",
+          "expect": "ruff is clean and the web build succeeds.",
+          "status": "pending",
+          "note": ""
+        }
+      }
+    },
+    "T003": {
+      "title": "Verify the dev stack",
+      "skills": "run",
+      "status": "pending",
+      "note": "",
+      "subtasks": {
+        "T003.1": {
+          "title": "Start the stack",
+          "prompt": "Run `make dev` (api :8000 + web :3000). On macOS, if :3000 is busy, kill the listener by hand first (scripts/free-port.mjs frees nothing on macOS).",
+          "expect": "GET http://localhost:8000/api/health returns OK and http://localhost:3000 responds.",
+          "status": "pending",
+          "note": ""
+        },
+        "T003.2": {
+          "title": "Check the web app",
+          "prompt": "Open http://localhost:3000 (not 127.0.0.1; OAuth cookies are host-scoped). Check the landing page health readout, /skills and /commands.",
+          "expect": "Landing page shows a live health readout; /skills and /commands list content from .agents/.",
+          "status": "pending",
+          "note": ""
+        },
+        "T003.3": {
+          "title": "Stop the stack",
+          "prompt": "Stop the dev processes started in T003.1.",
+          "expect": "Nothing is left listening on :8000 and :3000.",
+          "status": "pending",
+          "note": ""
+        }
+      }
+    }
+  }
+}

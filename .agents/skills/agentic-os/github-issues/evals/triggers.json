@@ -1,0 +1,15 @@
+{
+  "skill": "github-issues",
+  "test_cases": [
+    {"input": "create an issue for the broken SSO login", "should_trigger": true},
+    {"input": "file a bug: checkout total is wrong", "should_trigger": true},
+    {"input": "set the priority and start date on issue 42", "should_trigger": true},
+    {"input": "rename the label 'bug' to 'defect' in this repo", "should_trigger": true},
+    {"input": "issue 10 is blocked by issue 11, link them", "should_trigger": true},
+    {"input": "tạo issue feature request cho dark mode", "should_trigger": true},
+    {"input": "add issue 7 as a sub-issue of issue 3", "should_trigger": true},
+    {"input": "pull open issues into local markdown files and push edits back", "should_trigger": false},
+    {"input": "review pull request 51 and leave inline comments", "should_trigger": false},
+    {"input": "commit these changes and open a PR", "should_trigger": false}
+  ]
+}

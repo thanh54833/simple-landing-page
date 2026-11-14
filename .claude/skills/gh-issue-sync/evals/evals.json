@@ -1,0 +1,40 @@
+{
+  "skill": "gh-issue-sync",
+  "test_cases": [
+    {
+      "name": "dry_run_before_push",
+      "input": "Tôi đã sửa vài file trong .issues/open/, đẩy lên GitHub giúp tôi",
+      "assertions": [
+        "Runs gh-issue-sync status or gh-issue-sync push --dry-run to preview local changes before pushing",
+        "Shows the user which issues will change and waits for confirmation before running gh-issue-sync push",
+        "Does NOT run gh-issue-sync push without a preview"
+      ]
+    },
+    {
+      "name": "new_issue_uses_temporary_id_filename",
+      "input": "Tạo issue mới 'Fix login timeout' bằng file local, label bug",
+      "assertions": [
+        "Runs gh-issue-sync new \"Fix login timeout\" --label bug, or creates a file named .issues/open/T<id>-fix-login-timeout.md",
+        "Filename starts with the T prefix and the frontmatter has no hand-written issue number",
+        "Does NOT invent a numeric issue ID in the filename"
+      ]
+    },
+    {
+      "name": "comment_via_comment_file",
+      "input": "Comment vào issue 42 là 'Đã fix ở PR #51' khi push",
+      "assertions": [
+        "Creates .issues/open/42.comment.md or .issues/open/42-<slug>.comment.md containing the comment text",
+        "Does NOT edit the body of the issue file to add the comment"
+      ]
+    },
+    {
+      "name": "pull_does_not_overwrite_without_force",
+      "input": "Pull issues mới về, nhưng giữ nguyên các thay đổi local chưa push",
+      "assertions": [
+        "Runs gh-issue-sync pull without --force",
+        "Explains that pull skips conflicting files and keeps local edits",
+        "Does NOT use --force unless the user agrees to overwrite local files"
+      ]
+    }
+  ]
+}

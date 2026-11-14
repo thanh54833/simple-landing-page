@@ -1,0 +1,24 @@
+{
+  "T0NN": {
+    "title": "{{Feature name}}",
+    "skills": "superpowers:test-driven-development",
+    "status": "pending",
+    "note": "",
+    "subtasks": {
+      "T0NN.1": {
+        "title": "Write the failing test",
+        "prompt": "In {{test file path}}, add a test for {{behavior}} that asserts {{exact result}}. Run: {{test command}}.",
+        "expect": "The test exists and fails because {{feature}} is missing (record the failure message in note).",
+        "status": "pending",
+        "note": ""
+      },
+      "T0NN.2": {
+        "title": "Implement {{feature}}",
+        "prompt": "In {{source file path}}, implement {{behavior}}, following {{existing file that shows the pattern}}.",
+        "expect": "`{{test command}}` passes, and `{{lint or build command}}` is clean.",
+        "status": "pending",
+        "note": ""
+      }
+    }
+  }
+}

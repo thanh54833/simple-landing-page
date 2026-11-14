@@ -1,0 +1,14 @@
+{
+  "skill": "gh-issue-sync",
+  "test_cases": [
+    {"input": "sync GitHub issues to local markdown files", "should_trigger": true},
+    {"input": "pull open issues into .issues/ so I can triage them in my editor", "should_trigger": true},
+    {"input": "đồng bộ issues về file Markdown rồi push thay đổi lên GitHub", "should_trigger": true},
+    {"input": "close issue 42 as not planned using the local issue files", "should_trigger": true},
+    {"input": "search my local issues for 'timeout'", "should_trigger": true},
+    {"input": "gh-issue-sync diff 42 --remote", "should_trigger": true},
+    {"input": "set the priority field and start date on issue 42", "should_trigger": false},
+    {"input": "add a blocked-by dependency between issue 10 and 11 via the API", "should_trigger": false},
+    {"input": "review the open pull request and leave comments", "should_trigger": false}
+  ]
+}

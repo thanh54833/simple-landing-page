@@ -1,0 +1,10 @@
+{
+  "T0NN": {
+    "title": "Verify the whole set",
+    "skills": "superpowers:verification-before-completion",
+    "status": "pending",
+    "note": "",
+    "prompt": "From the repo root run `make test`, `cd apps/api && uv run ruff check .` and `cd apps/web && npm run build`, plus any check named in the earlier tasks. Run `make agents_sync-check` if anything under .agents/ changed.",
+    "expect": "Every command exits 0. note holds each command with its pass counts or exit status."
+  }
+}

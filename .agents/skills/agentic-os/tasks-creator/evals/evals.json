@@ -2,76 +2,72 @@
   "skill": "tasks-creator",
   "test_cases": [
     {
-      "name": "creates_new_group_from_templates",
-      "input": "Tạo .tasks/01_migration cho group billing mới có apps/billing-api và apps/billing-web",
+      "name": "creates_new_task_set",
+      "input": "Tạo task set mới trong .tasks để setup CI",
       "assertions": [
-        "Reads the group entry in .meta/00_projects.json and all 3 templates under 00_migration/02_template/01_tasks/ (00_tasks_api.json, 00_tasks_web.json, 00_tasks_qa.json)",
-        "Classifies apps into BE and FE and numbers the folders contiguously",
-        "Creates 01_status.json as a literal empty file, NOT '{}'",
-        "Starts every new task with \"status\": \"pending\"",
-        "Does NOT copy another group's 00_tasks.json as a starting point"
+        "Runs ls .tasks and uses the next free NN; gets the date from `date +%F`",
+        "Builds 00_tasks.json from templates/task-set.json and blocks in templates/tasks/, keeping each block's skills value",
+        "Verifies every path named in a prompt exists before writing it",
+        "Ends the set with the verify block as the last task",
+        "Leaves no {{placeholder}} or T0NN in the file",
+        "Writes AGENTS.md via scripts/check_task_set.py --fix and the validator then prints OK",
+        "Does NOT create a 01_status.json file"
       ]
     },
     {
-      "name": "add_app_to_existing_group",
-      "input": "Add a new web app to group that already has done and in_progress tasks",
+      "name": "add_subtask_with_progress",
+      "input": "Thêm subtask T002.4 vào task set đã có T001 done và T002 in_progress",
       "assertions": [
         "Does NOT rewrite the whole 00_tasks.json",
-        "Adds only one new wave key to the web folder and one to NN_tasks_qa/00_tasks.json",
-        "Leaves every other wave untouched byte-for-byte and preserves existing task statuses",
-        "Adds the app to .meta/00_projects.json projects[]",
-        "Refreshes AGENTS.md for all folders in the group"
+        "Adds only T002.4 and leaves every other task, status and note untouched",
+        "Refreshes the AGENTS.md table"
       ]
     },
     {
-      "name": "does_not_run_generate_script_with_progress",
-      "input": "Dùng make target_generate_task --force để thêm app mới cho group đã có task done",
+      "name": "records_result_in_note",
+      "input": "Xong subtask T001.2, cập nhật task",
       "assertions": [
-        "Refuses to run generate_task.py or make target_generate_task on a folder with real progress",
-        "Explains that --force resets every task to pending",
-        "Uses the hand Core Procedure instead"
+        "Sets status to done only after checking expect",
+        "Writes the result (what was done, evidence) into that subtask's note",
+        "Edits only that subtask"
       ]
     },
     {
-      "name": "templates_are_the_wording_source",
-      "input": "Đổi prompt của task web cho mọi group từ giờ",
+      "name": "failed_needs_reason",
+      "input": "Subtask T003.1 không đạt expect",
       "assertions": [
-        "Edits 00_migration/02_template/01_tasks/*.json, NOT a per-group 00_tasks.json",
-        "States that a per-group edit does not propagate back"
+        "Sets status to failed, never leaves in_progress and never sets done",
+        "Writes the reason into note and asks the user before continuing"
       ]
     },
     {
-      "name": "renders_placeholders_and_unknown_platform",
-      "input": "Thêm app legacy-sync có platform Unknown vào group ops",
+      "name": "task_done_needs_all_subtasks",
+      "input": "Đánh dấu T002 done khi T002.3 còn pending",
       "assertions": [
-        "Substitutes {app} and {group} placeholders; no raw placeholder remains in the file",
-        "Adds the Unknown-platform note on T001",
-        "Copies skills verbatim from the matching template"
+        "Refuses to set the task done while a subtask is not done or skipped"
       ]
     },
     {
-      "name": "qa_dirs_are_group_level",
-      "input": "Tạo wave QA cho app mới trong group billing",
+      "name": "no_waves",
+      "input": "Thêm wave WAVE_02 vào task set",
       "assertions": [
-        "Sets only T001 source_dir per-app",
-        "Uses the same group-level tests/plan and tests dirs for T001 target_dir and T002 source_dir/target_dir",
-        "Does NOT create a per-app subfolder for QA target dirs"
+        "States waves are not used and models the work as a task with subtasks instead"
       ]
     },
     {
-      "name": "orphan_folder_not_deleted",
-      "input": "Folder 03_tasks_web trên đĩa không còn khớp .meta/00_projects.json, dọn đi",
+      "name": "validator_catches_drift",
+      "input": "Sửa tay bảng Current State trong AGENTS.md của một task set",
       "assertions": [
-        "Does NOT delete the folder",
-        "Still refreshes its AGENTS.md"
+        "Refuses to hand-edit the table and runs scripts/check_task_set.py --fix instead",
+        "Rows are ordered task row followed by its subtask rows"
       ]
     },
     {
-      "name": "out_of_scope_root_orchestration",
-      "input": "Sửa 02_target/.tasks/00_migration/04_tasks_run_group_waves",
+      "name": "task_has_subtasks_or_own_prompt",
+      "input": "Thêm prompt và expect trực tiếp vào task T002 đang có subtasks",
       "assertions": [
-        "States this folder is out of scope for tasks-creator",
-        "Does NOT apply the group generation rules to it"
+        "Does NOT give a task both subtasks and its own prompt/expect",
+        "Puts the new step in a subtask instead"
       ]
     }
   ]

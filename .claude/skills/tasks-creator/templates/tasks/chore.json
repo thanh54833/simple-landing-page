@@ -1,0 +1,17 @@
+{
+  "T0NN": {
+    "title": "{{Setup, config, refactor or docs change}}",
+    "skills": "superpowers:verification-before-completion",
+    "status": "pending",
+    "note": "",
+    "subtasks": {
+      "T0NN.1": {
+        "title": "{{Do the change}}",
+        "prompt": "{{Exact files and commands. Edit canonical sources only (.agents/, .mcp/servers.json), then regenerate.}}",
+        "expect": "{{Command whose output proves it, or a file state that can be checked.}}",
+        "status": "pending",
+        "note": ""
+      }
+    }
+  }
+}
