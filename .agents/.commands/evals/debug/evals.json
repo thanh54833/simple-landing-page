@@ -30,7 +30,7 @@
       "name": "hotfix_writes_record",
       "input": "/debug production checkout 500 từ alert, đã tìm ra lỗi null",
       "assertions": [
-        "Writes docs/physarum/hotfixes/YYYY-MM-DD-<slug>.md",
+        "Writes .physarum/docs/hotfixes/YYYY-MM-DD-<slug>.md",
         "Record contains Symptom, Root cause, Regression test with red then green output, Fix, and Verify",
         "Suggests /verify <hotfix record>"
       ]

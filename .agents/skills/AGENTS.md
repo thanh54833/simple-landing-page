@@ -9,7 +9,7 @@ Three packs, different domains. Pack-level rules live in each pack; this file ro
 | Task | Location | Notes |
 |------|----------|-------|
 | Pack policy (version, vendored, style) | `agentic-os/AGENTS.md` | applies to agentic-os pack |
-| SDLC gates (intent/adr/update-spec/tasks/init-deep) | `agentic-os/<skill>/` | self-built, single SKILL.md |
+| SDLC gates + writing skills (intent/adr/command, update-spec, tasks, init-deep, business-memory, humanizer, ai-image-generation) | `agentic-os/<skill>/` | self-built, single SKILL.md |
 | Frontend design system | `agentic-os/impeccable/` | vendored, don't touch upstream |
 | New-page design skill | `agentic-os/hallmark/` | vendored, don't touch upstream; use for new builds, not existing designs |
 | Co-authoring docs | `agentic-os/doc-coauthoring/` | minimal copy + Local Overrides |

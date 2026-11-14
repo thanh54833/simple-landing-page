@@ -4,7 +4,7 @@ Mục tiêu: ghi lại **vì sao** để quyết định tương lai không ph�
 
 ## Điều kiện
 
-- Chưa có `docs/physarum/business-memory/index.json` → DỪNG, báo owner memory chưa khởi tạo và hỏi có chạy `reference/init.md` không. Không tự khởi tạo.
+- Chưa có `.physarum/agents/product_owner/index.json` → DỪNG, báo owner memory chưa khởi tạo và hỏi có chạy `reference/init.md` không. Không tự khởi tạo.
 
 ## Chọn loại
 

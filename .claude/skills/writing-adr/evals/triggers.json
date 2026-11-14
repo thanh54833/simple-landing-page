@@ -1,9 +1,9 @@
 {
   "skill": "writing-adr",
   "test_cases": [
-    {"input": "viết ADR cho spec docs/physarum/specs/2026-11-12-billing-sync.md", "should_trigger": true},
+    {"input": "viết ADR cho spec .physarum/docs/specs/2026-11-12-billing-sync.md", "should_trigger": true},
     {"input": "record this architecture decision: we chose Postgres over DynamoDB", "should_trigger": true},
-    {"input": "/adr docs/physarum/specs/2026-11-10-auth.md", "should_trigger": true},
+    {"input": "/adr .physarum/docs/specs/2026-11-10-auth.md", "should_trigger": true},
     {"input": "spec này có cần ADR không?", "should_trigger": true},
     {"input": "run the G2+ gate on the approved spec", "should_trigger": true},
     {"input": "viết spec cho tính năng export CSV", "should_trigger": false},

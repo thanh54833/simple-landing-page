@@ -7,7 +7,7 @@
       "assertions": [
         "Reads reference/init.md and does NOT read reference/save.md",
         "Takes every item from repo files, ADRs, PRODUCT.md, or the owner's words in this session",
-        "Creates files under docs/physarum/business-memory/, NOT .physarum/memory/",
+        "Creates files under .physarum/agents/product_owner/, NOT .physarum/memory/",
         "Creates index.json and checks every JSON file parses with python3 -c \"import json;json.load(open(...))\""
       ]
     },

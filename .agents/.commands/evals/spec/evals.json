@@ -3,7 +3,7 @@
   "test_cases": [
     {
       "name": "resolves_session_intent_without_asking",
-      "input": "/spec (session vừa accept docs/physarum/intents/2026-11-12-order-history-intent.md)",
+      "input": "/spec (session vừa accept .physarum/docs/intents/2026-11-12-order-history-intent.md)",
       "assertions": [
         "Uses the intent accepted in this session without asking and states its path in one line",
         "Does NOT list intent files when the session already produced one"
@@ -13,13 +13,13 @@
       "name": "lists_intents_when_nothing_resolves",
       "input": "/spec (session mới, không có path)",
       "assertions": [
-        "Lists docs/physarum/intents/*-intent.md and asks which one",
+        "Lists .physarum/docs/intents/*-intent.md and asks which one",
         "Does NOT guess an intent"
       ]
     },
     {
       "name": "stops_when_intent_not_accepted",
-      "input": "/spec docs/physarum/intents/2026-11-12-order-history-intent.md (Status: draft)",
+      "input": "/spec .physarum/docs/intents/2026-11-12-order-history-intent.md (Status: draft)",
       "assertions": [
         "Reads the intent from disk instead of relying on memory of its Status",
         "Stops and says the PO must accept it first, suggesting /intent to revise the draft",
@@ -36,11 +36,11 @@
     },
     {
       "name": "brainstorming_architectural_path_no_reask",
-      "input": "/spec docs/physarum/intents/2026-11-12-order-history-intent.md (accepted)",
+      "input": "/spec .physarum/docs/intents/2026-11-12-order-history-intent.md (accepted)",
       "assertions": [
         "Invokes superpowers:brainstorming with the intent as the brief on the architectural path",
         "Does NOT re-ask Problem, Proposed outcome, Constraints, or Out of scope",
-        "Writes docs/physarum/specs/YYYY-MM-DD-<topic>-design.md reusing the intent's date+topic stem",
+        "Writes .physarum/docs/specs/YYYY-MM-DD-<topic>-design.md reusing the intent's date+topic stem",
         "Does NOT reclassify to bounded or spike"
       ]
     },
@@ -48,8 +48,8 @@
       "name": "ui_spec_gets_design_section_before_review",
       "input": "/spec intent mô tả một trang và một sheet mới trong web app",
       "assertions": [
-        "Treats the spec as a UI spec and reads .agents/.commands/impeccable.md",
-        "Follows its Design contract and Spec stage so ## Design is in the spec before the user is asked to review",
+        "Treats the spec as a UI spec and follows the Design contract at the end of .agents/.commands/spec.md",
+        "Follows its Design contract and Spec stage so ## Design is in the spec before the step 5 report",
         "Asks only what ## Design still needs"
       ]
     },
@@ -62,28 +62,85 @@
       ]
     },
     {
-      "name": "offers_two_options_recommended_first",
-      "input": "/spec (spec vừa được user approve, intent Class T3 đổi schema)",
+      "name": "report_uses_fixed_template",
+      "input": "/spec (spec vừa viết xong)",
       "assertions": [
-        "Asks once which command runs next and offers exactly /adr <spec path> and /plan <spec path>",
-        "Labels /adr as (Recommended) and lists it first with a one-line reason",
-        "Does NOT pick the next command silently"
+        "Reports with the fixed lines in order: Spec written, Intent, Approach, Design, Decisions, ADR check, Agent calls, Open questions",
+        "Does NOT ask 'approved?' separately before the three options",
+        "Does NOT commit"
       ]
     },
     {
-      "name": "plan_recommended_when_user_skips_adr",
-      "input": "/spec (user đã nói trong session: bỏ qua ADR)",
+      "name": "ends_with_three_options_in_fixed_order",
+      "input": "/spec (spec vừa viết xong, intent Class T3 đổi schema)",
       "assertions": [
-        "Recommends /plan first, labeled (Recommended)",
-        "When Class is T3 and ## Decisions has no outcome, writes the line `ADR skipped by user` to ## Decisions after the user picks /plan"
+        "Ends the reply with exactly three options in order: option 1 is the command named by ADR check, option 2 is the other of /adr and /plan, option 3 is Tiny/Quick: accept and /implement",
+        "Marks option 1 (Recommended) with a one-line reason, here /adr",
+        "Option 3's description says it skips /adr and /plan",
+        "Does NOT pick an option silently"
       ]
     },
     {
-      "name": "stops_after_approval_no_planning",
-      "input": "/spec (user approve spec xong)",
+      "name": "adr_check_recommends_plan_when_no_adr_worthy_decision",
+      "input": "/spec (spec ghi 'No ADR needed' trong ## Decisions, Class T1)",
       "assertions": [
-        "Stops after naming the chosen command",
-        "Does NOT invoke writing-plans or the chosen command's skill"
+        "ADR check line says plan with a reason",
+        "Option 1 is Accept and /plan (Recommended) and option 2 is Accept and /adr"
+      ]
+    },
+    {
+      "name": "adr_check_recommends_adr_for_hard_to_reverse_tradeoff",
+      "input": "/spec (Class T1 nhưng approach chọn một quyết định khó đảo ngược, gây bất ngờ khi thiếu context, có đánh đổi thật)",
+      "assertions": [
+        "ADR check line says adr citing the three writing-adr tests",
+        "Option 1 is Accept and /adr (Recommended) and option 2 is Accept and /plan"
+      ]
+    },
+    {
+      "name": "option_accept_sets_status_and_runs_command",
+      "input": "/spec (user picks option 1: Accept and /plan)",
+      "assertions": [
+        "Sets the spec Status to approved with a name and today's date",
+        "Runs /plan with the spec path",
+        "Does NOT invoke writing-plans directly",
+        "When Class is T3, the spec records an architecture change, or ADR check found a decision passing the writing-adr filter, and ## Decisions has no outcome, and the user picks /plan, writes the line `ADR skipped by user`"
+      ]
+    },
+    {
+      "name": "option_tiny_quick_accept_and_implement",
+      "input": "/spec (user picks option 3: Tiny/Quick accept and /implement)",
+      "assertions": [
+        "Sets the spec Status to approved",
+        "Sets the intent to Class: T0 with Lane /implement → /verify → /ship and adds 'Class set by originator' to Signals",
+        "Runs /implement with the intent path",
+        "Does NOT run /adr or /plan"
+      ]
+    },
+    {
+      "name": "free_text_answer_is_change_request",
+      "input": "/spec (user answers Other: 'đổi tên nút thành Create repo')",
+      "assertions": [
+        "Edits the spec and repeats the report and the three options",
+        "Does NOT approve the spec",
+        "Does NOT run any next command"
+      ]
+    },
+    {
+      "name": "ui_design_records_thesis_and_sketch",
+      "input": "/spec intent mô tả một form mới trong web app",
+      "assertions": [
+        "## Design has a Thesis slot (reading path, what leads and supports, what groups and separates) and a Sketch slot (desktop and 390px) written before Structure",
+        "Structure agrees with the Sketch",
+        "Acceptance checks include at least one hierarchy check (squint test) taken from Thesis"
+      ]
+    },
+    {
+      "name": "mirrors_screenshot_not_taken_is_stated",
+      "input": "/spec (UI spec, browser busy so the Mirrors screen cannot be screenshotted)",
+      "assertions": [
+        "The Mirrors slot says `not taken — <reason>` instead of staying silent",
+        "The step 5 report line `Design:` says the Mirrors screenshot was not taken",
+        "Does NOT claim a screenshot that was not taken"
       ]
     }
   ]

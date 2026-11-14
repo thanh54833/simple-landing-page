@@ -20,7 +20,7 @@
     },
     {
       "name": "accepted_t0_intent_valid_input",
-      "input": "/implement docs/physarum/intents/2026-11-12-rename-intent.md (accepted, Class: T0)",
+      "input": "/implement .physarum/docs/intents/2026-11-12-rename-intent.md (accepted, Class: T0)",
       "assertions": [
         "Accepts the T0 intent as input in place of a plan",
         "Implements it as a single task"
@@ -37,7 +37,7 @@
     },
     {
       "name": "asks_method_and_workspace_with_recommended_first",
-      "input": "/implement docs/physarum/plans/2026-11-12-billing.md (chưa chọn method, workspace)",
+      "input": "/implement .physarum/docs/plans/2026-11-12-billing.md (chưa chọn method, workspace)",
       "assertions": [
         "Asks method and workspace in one question round",
         "Lists `subagent-driven (Recommended)` before `inline`, and `current branch (Recommended)` before `new worktree`",
@@ -71,9 +71,9 @@
       "name": "ui_task_follows_build_stage",
       "input": "/implement plan có task UI và spec có ## Design",
       "assertions": [
-        "Follows the Build stage of .agents/.commands/impeccable.md for every UI task before its task review",
+        "Follows the Build stage of .agents/.commands/spec.md for every UI task before its task review",
         "Records the Evidence: list under the task in the plan file",
-        "Stops a deviation from ## Design and routes it through /update-spec instead of changing code silently"
+        "Stops a deviation from ## Design and routes it through /backsync instead of changing code silently"
       ]
     },
     {
@@ -83,6 +83,15 @@
         "Stops where the skill would invoke finishing-a-development-branch",
         "Does NOT merge, push, open a PR, or discard",
         "Reports branch/worktree, tasks completed, and anything left open, and suggests /verify <plan path>"
+      ]
+    },
+    {
+      "name": "ui_dispatch_reads_craft_floor_and_controller_records_detect",
+      "input": "/implement <plan with a UI task, spec carries ## Design>",
+      "assertions": [
+        "The dispatch of the UI task tells the implementer to read craft-floor.md before editing",
+        "The controller runs impeccable detect on the changed UI files and records a `detect:` entry in the task's Evidence list",
+        "The hierarchy check is recorded with a screenshot path and the element that leads"
       ]
     }
   ]

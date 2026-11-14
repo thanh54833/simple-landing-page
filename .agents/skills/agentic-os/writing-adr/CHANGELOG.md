@@ -9,7 +9,7 @@ Một file duy nhất cho `skills/agentic-os/writing-adr/`, newest first. Headin
 
 ## local-2026-10-14
 
-- ADR dir chuyển từ `docs/adr/` sang `docs/physarum/adr/` theo owner override (gom vào gate working area); command `/adr` và spec `## Decisions` đồng bộ theo.
+- ADR dir chuyển từ `docs/adr/` sang `.physarum/docs/adr/` theo owner override (gom vào gate working area); command `/adr` và spec `## Decisions` đồng bộ theo.
 
 ## local-2026-10-09
 

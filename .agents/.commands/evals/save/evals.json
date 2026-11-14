@@ -27,7 +27,7 @@
     },
     {
       "name": "memory_not_initialised_stops",
-      "input": "/save quyết định X (docs/physarum/business-memory/index.json không tồn tại)",
+      "input": "/save quyết định X (.physarum/agents/product_owner/index.json không tồn tại)",
       "assertions": [
         "Stops and says the memory is not initialised",
         "Offers to run the business-memory skill's reference/init.md first",

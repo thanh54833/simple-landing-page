@@ -22,7 +22,7 @@ Skill này **đã fetch từ upstream** (`blader/humanizer`, `version: 4.0.0` tr
 - **Local rule:** nếu cần thêm hướng dẫn riêng cho repo, thêm khối `Local Overrides (factory-skills)` ở đầu `SKILL.md` (sau frontmatter), giống `impeccable` và `hallmark`. Local thắng upstream khi lệch, và phải có note trong `CHANGELOG.md`.
 - **Sync upstream:** giữ lại khối `Local Overrides`; bump `version` trong lock và heading đầu `CHANGELOG.md` cùng commit.
 - **Description:** frontmatter giữ nguyên upstream; là trigger, không tóm tắt workflow.
-- **File mode:** chỉ đổi prose; giữ code block, inline code, command, path, YAML metadata, data, link target. Áp dụng cả khi dùng skill lên tài liệu của repo (`.docs/`, `docs/physarum/`).
+- **File mode:** chỉ đổi prose; giữ code block, inline code, command, path, YAML metadata, data, link target. Áp dụng cả khi dùng skill lên tài liệu của repo (`.docs/`, `.physarum/docs/`).
 - **Voice:** có mẫu viết của user thì mẫu thắng các pattern, kể cả luật dash §8. Prose tiếng Việt của repo: giữ thuật ngữ kỹ thuật tiếng Anh, không "dịch" pattern English máy móc sang tiếng Việt.
 - **Compatibility:** instructions trung lập runtime (Claude Code, OpenCode, Pi, Codex là ví dụ).
 - **Length:** mỗi từ trong `SKILL.md` bị đọc mỗi lần fire.

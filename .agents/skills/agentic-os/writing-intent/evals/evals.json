@@ -6,7 +6,7 @@
       "input": "Viết intent.md cho ý tưởng: khách hàng muốn xem lịch sử đơn hàng theo tháng",
       "assertions": [
         "Asks analyst questions one at a time (what cannot be done today, who is affected, what better looks like, what is out of scope) before writing the file",
-        "Creates docs/physarum/intents/YYYY-MM-DD-<slug>-intent.md with Status: draft",
+        "Creates .physarum/docs/intents/YYYY-MM-DD-<slug>-intent.md with Status: draft",
         "File contains the sections Problem, Proposed outcome, Affected users and systems, Constraints, Out of scope, Open questions, Classification",
         "Does NOT put endpoints, file paths, estimates, or implementation options in any field",
         "Stops after writing and does NOT invoke brainstorming or writing-plans"

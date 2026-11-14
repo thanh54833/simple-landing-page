@@ -3,8 +3,8 @@
   "test_cases": [
     {"input": "thực thi plan đã duyệt từng task", "should_trigger": true},
     {"input": "implement the approved plan with subagents", "should_trigger": true},
-    {"input": "triển khai theo plan docs/physarum/plans/x.md", "should_trigger": true},
-    {"input": "/implement docs/physarum/plans/x.md inline", "should_trigger": true},
+    {"input": "triển khai theo plan .physarum/docs/plans/x.md", "should_trigger": true},
+    {"input": "/implement .physarum/docs/plans/x.md inline", "should_trigger": true},
     {"input": "viết spec", "should_trigger": false},
     {"input": "verify the branch before shipping", "should_trigger": false},
     {"input": "debug the crash", "should_trigger": false},

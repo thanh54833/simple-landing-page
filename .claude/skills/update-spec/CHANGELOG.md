@@ -2,6 +2,10 @@
 
 Một file duy nhất cho `skills/agentic-os/update-spec/`, newest first. Heading đầu giữ cùng version với `../agentic-os-lock.json`. Prose tiếng Việt, thuật ngữ kỹ thuật giữ tiếng Anh.
 
+## local-2026-11-14
+
+- Local Overrides: patch `## Design` tuân Design contract cuối `spec.md`; spec cũ chưa có `Thesis`/`Sketch` thì patch thêm hai slot (khớp thay đổi Design contract ở `.commands/CHANGELOG.md`, 2026-11-14).
+
 ## local-2026-11-10
 
 - Thêm `evals/evals.json` (8 test case) và `evals/triggers.json` (10 trigger, 5 negative).
@@ -9,6 +13,6 @@ Một file duy nhất cho `skills/agentic-os/update-spec/`, newest first. Headin
 
 ## local-2026-10-26
 
-- Initial self-built release: unified back-sync drift + record delta, thay raw copy `openspec-update-change` (ý tưởng hunk MODIFIED/ADDED/REMOVED port từ `.templates/spec/OpenSpec`, adapt hub: patch tại chỗ `docs/physarum/specs/`, không openspec CLI).
+- Initial self-built release: unified back-sync drift + record delta, thay raw copy `openspec-update-change` (ý tưởng hunk MODIFIED/ADDED/REMOVED port từ `.templates/spec/OpenSpec`, adapt hub: patch tại chỗ `.physarum/docs/specs/`, không openspec CLI).
 - TDD theo `writing-skills`: RED lộ silent load-bearing decision + scope creep vào code/tests/`DESIGN.md` + rewrite pinned test (đã revert sạch); GREEN đúc guardrails + rationalization table + red flags vào skill.
 - Confirm-then-write, một spec một lần; DỪNG sau patch, suggest `/verify` (T4 → `/adr` số mới).

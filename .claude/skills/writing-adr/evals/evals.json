@@ -3,11 +3,11 @@
   "test_cases": [
     {
       "name": "stops_when_spec_not_approved",
-      "input": "Viết ADR cho docs/physarum/specs/2026-11-12-billing-sync.md",
+      "input": "Viết ADR cho .physarum/docs/specs/2026-11-12-billing-sync.md",
       "assertions": [
         "Reads the spec and checks its approval status before listing any candidate decision",
         "Stops and points the user to /spec when the spec is missing or not approved",
-        "Does NOT create any file under docs/physarum/adr/",
+        "Does NOT create any file under .physarum/docs/adr/",
         "Does NOT invoke writing-plans"
       ]
     },
@@ -23,10 +23,10 @@
     },
     {
       "name": "writes_adr_with_template_and_next_number",
-      "input": "Spec đã approve chọn Postgres JSONB thay vì bảng riêng cho audit log, khó đổi sau. docs/physarum/adr/ đã có 0001-use-fastapi.md và 0003-oauth-cookie-host-scoped.md. Viết ADR.",
+      "input": "Spec đã approve chọn Postgres JSONB thay vì bảng riêng cho audit log, khó đổi sau. .physarum/docs/adr/ đã có 0001-use-fastapi.md và 0003-oauth-cookie-host-scoped.md. Viết ADR.",
       "assertions": [
-        "Inspects docs/physarum/adr/ for the existing numbering scheme before writing",
-        "Creates docs/physarum/adr/0004-<kebab-case-slug>.md (highest existing number + 1, same extension and filename pattern)",
+        "Inspects .physarum/docs/adr/ for the existing numbering scheme before writing",
+        "Creates .physarum/docs/adr/0004-<kebab-case-slug>.md (highest existing number + 1, same extension and filename pattern)",
         "ADR contains the headings Context, Decision, Alternatives considered, Consequences and the fields Status, Date, Spec, Binds, Prevents",
         "Alternatives considered lists at least one rejected option with a `Rejected:` reason",
         "Sets `Status: proposed` on creation, not `accepted`",
@@ -68,16 +68,16 @@
       "input": "Tôi accept ADR 0004. Tiếp tục luôn.",
       "assertions": [
         "Sets `Status: accepted` in each ADR the user accepted",
-        "Ensures the spec's `## Decisions` section contains `- ADR: docs/physarum/adr/0004-<slug>.md (accepted)`",
+        "Ensures the spec's `## Decisions` section contains `- ADR: .physarum/docs/adr/0004-<slug>.md (accepted)`",
         "Stops after recording acceptance",
         "Does NOT invoke writing-plans and does NOT edit code; tells the user to run /plan <spec> as the next step"
       ]
     },
     {
       "name": "creates_adr_dir_lazily",
-      "input": "Spec approve có quyết định chọn message broker (khó đổi). Repo chưa có docs/physarum/adr/. Viết ADR.",
+      "input": "Spec approve có quyết định chọn message broker (khó đổi). Repo chưa có .physarum/docs/adr/. Viết ADR.",
       "assertions": [
-        "Creates docs/physarum/adr/ lazily",
+        "Creates .physarum/docs/adr/ lazily",
         "Names the first file 0001-<slug>.md",
         "Does NOT write to docs/adr/ or a per-feature folder"
       ]

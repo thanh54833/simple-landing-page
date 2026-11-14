@@ -77,7 +77,7 @@
       "input": "/enhance element có spec ## Design, hướng mới khác spec",
       "assertions": [
         "Treats the spec's ## Design as the brief",
-        "Routes a departure from it through /update-spec first"
+        "Routes a departure from it through /backsync first"
       ]
     }
   ]

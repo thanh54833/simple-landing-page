@@ -31,6 +31,13 @@ When NOT to use: viết hay sửa `SKILL.md` → `writing-for-agents`; command k
 6. **Register.** `.agents/.commands/AGENTS.md`: dòng trong `WHERE TO LOOK` + danh sách chain/standalone; thêm convention chỉ khi có luật chéo router mới. `.agents/.commands/CHANGELOG.md`: một bullet tiếng Việt dưới heading ngày hôm nay.
 7. **Sync and check.** `make agents_sync`, rồi `make agents_sync-check`, rồi `diff .agents/.commands/<name>.md .claude/commands/<name>.md`. File mirror lạ do sync sinh ra thì báo user, không tự thêm.
 8. **Dry-run.** Đọc router như agent: với input rỗng, input là path, input ngoài phạm vi, mỗi nhánh phải kết thúc bằng một hành động hoặc STOP. Báo kết quả từng nhánh.
+9. **Converge.** Mỗi lần thêm hoặc đổi hành vi router (kể cả khi chỉ nâng cấp), kiểm lại cả router với các nguồn sau; một lỗi là một cặp câu không thể cùng đúng (mâu thuẫn) hoặc một chỗ hai agent đọc ra hai việc khác nhau (mơ hồ):
+   - **Convention:** `.commands/AGENTS.md` (STOP, ladder, frontmatter). Router vi phạm luật chung → sửa router, hoặc ghi ngoại lệ đúng một chỗ ở `AGENTS.md` và trỏ tới.
+   - **Backing skill:** `Local Overrides` + `Handoff` của skill phía sau (ai accept, điểm dừng, thứ được phép gọi). Lệch → sửa phần skill sở hữu luật đó.
+   - **Neighbor routers:** router trước và sau trong chain còn nhận đúng đầu ra của router này (trạng thái file, tên bước đang được trỏ tới).
+   - **Within the router:** mọi nhánh sớm (Tiny/Quick, hotfix, input rỗng) khớp với các bước sau; mỗi lựa chọn đưa ra có một hành động riêng, trạng thái nó ghi vào file (Class, Lane, Status) không mâu thuẫn nhau; mỗi từ chỉ mức độ ("khuyến nghị", "một lần", "luôn") có tiêu chí kiểm được.
+   - **Evals + registry:** mỗi bước hoặc điểm STOP đổi đều có eval khớp; dòng `AGENTS.md` và `CHANGELOG.md` mô tả đúng hành vi mới.
+   Xong khi một lượt đọc đủ năm nhóm không tìm ra lỗi nào. Mỗi lỗi: sửa, rồi đọc lại cả năm nhóm từ đầu (một sửa có thể sinh lỗi mới). Sau lượt thứ 3 vẫn còn lỗi, hoặc một lỗi cần quyết định chính sách của user (ai được accept, bỏ gate nào) → STOP và hỏi user, không tự chọn. Báo cáo: số lượt, từng lỗi + cách sửa, và "0 lỗi còn lại" ở lượt cuối.
 
 ## Template
 
@@ -56,4 +63,5 @@ argument-hint: <path or free text>   # quote it when it starts with `[`
 - Nhét procedure hoặc rule "cách làm" vào router; đáng ra vào skill.
 - Đổi số bước mà quên các chỗ khác đang trỏ "step N".
 - Sửa `.claude/commands/` hay `.pi/prompts/` trực tiếp, hoặc quên `agents_sync-check`.
+- Nâng cấp router xong mà không đọc lại với convention, backing skill, neighbor routers, evals: lỗi chỉ lộ ra ở lần chạy sau.
 - Frontmatter có field thứ ba, hoặc `argument-hint` bắt đầu bằng `[` mà không quote.

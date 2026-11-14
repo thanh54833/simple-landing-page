@@ -11,7 +11,7 @@ evals/
     ├── evals.json         # behavior: input + assertions
     └── triggers.json      # activation: phrase + should_trigger
 ```
-One folder per router today: `intent`, `spec`, `adr`, `plan`, `implement`, `verify`, `ship`, `debug`, `update-spec`, `save`, `retro`, `impeccable`, `redesign`, `enhance`, `img`.
+One folder per router today: `intent`, `spec`, `adr`, `plan`, `implement`, `verify`, `ship`, `debug`, `backsync`, `save`, `retro`, `impeccable`, `redesign`, `enhance`, `img`.
 
 ## WHERE TO LOOK
 | Task | Location | Notes |

@@ -5,7 +5,7 @@ File này giải thích cách sửa `business-memory` mà không gãy schema c�
 ## What this skill contains
 
 Skill self-built (`local`): `SKILL.md` (route + hard rules) và `reference/` (`init.md`, `save.md`). Không build step.
-Ghi vào `docs/physarum/business-memory/` của project đích. Command `/save` (`.agents/.commands/save.md`) route vào `reference/save.md`; chưa có command cho `init`.
+Ghi vào `.physarum/agents/product_owner/` của project đích. Command `/save` (`.agents/.commands/save.md`) route vào `reference/save.md`; chưa có command cho `init`.
 
 ## Key files
 
@@ -17,8 +17,8 @@ Ghi vào `docs/physarum/business-memory/` của project đích. Command `/save` 
 
 ## Rules for changes
 
-- Đổi schema ở `reference/` phải kèm: (1) ghi chú migration trong `CHANGELOG.md`, (2) cập nhật file mẫu trong `docs/physarum/business-memory/` của repo này nếu có.
-- `docs/physarum/business-memory/AGENTS.md` (persona recall) và skill này phải khớp: verbs, trường decision bắt buộc, quy tắc append-only.
+- Đổi schema ở `reference/` phải kèm: (1) ghi chú migration trong `CHANGELOG.md`, (2) cập nhật file mẫu trong `.physarum/agents/product_owner/` của repo này nếu có.
+- `.physarum/agents/product_owner/AGENTS.md` (persona recall) và skill này phải khớp: verbs, trường decision bắt buộc, quy tắc append-only.
 - Không thêm quy tắc xoá hoặc sửa decision `accepted`.
 - Version: lock và heading đầu `CHANGELOG.md` cùng `local-YYYY-MM-DD`; đổi skill thì bump cùng commit.
 - Sau khi sửa: chạy `make agents_sync` (sinh `.claude/skills/`), không sửa bản sinh tay.

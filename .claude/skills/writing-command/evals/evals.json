@@ -69,6 +69,18 @@
         "Dry-runs the router with empty input, a path input, and an out-of-scope input",
         "Reports the result of each branch, each ending in an action or STOP"
       ]
+    },
+    {
+      "name": "converge_after_upgrade",
+      "input": "nâng cấp /intent để cuối reply có ba lựa chọn (accept + /spec, tiếp tục, Tiny/Quick + /implement)",
+      "assertions": [
+        "After editing, re-reads the router against .commands/AGENTS.md, the backing skill's Local Overrides and Handoff, neighbor routers, its own early branches, and evals + registry",
+        "Finds that running /spec or /implement conflicts with the 'router STOPS and names the next command' convention and records one exception in .commands/AGENTS.md",
+        "Finds that the backing skill says the PO accepts and aligns the skill",
+        "Fixes each finding and re-reads all five groups from the top",
+        "Ends with a report: rounds, each finding with its fix, and 0 findings in the last round",
+        "STOPs and asks the user when a finding needs a policy decision or findings remain after 3 rounds"
+      ]
     }
   ]
 }

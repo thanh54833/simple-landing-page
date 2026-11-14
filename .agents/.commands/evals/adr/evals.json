@@ -3,7 +3,7 @@
   "test_cases": [
     {
       "name": "resolves_session_spec_and_states_it",
-      "input": "/adr (session vừa approve docs/physarum/specs/2026-11-12-billing-design.md)",
+      "input": "/adr (session vừa approve .physarum/docs/specs/2026-11-12-billing-design.md)",
       "assertions": [
         "Uses the spec this session approved without asking and states its path in one line",
         "Does NOT ask the approval question again for a spec approved in this session"
@@ -19,7 +19,7 @@
     },
     {
       "name": "asks_approval_once_when_unknown",
-      "input": "/adr docs/physarum/specs/2026-11-12-billing-design.md (chưa rõ đã approve chưa)",
+      "input": "/adr .physarum/docs/specs/2026-11-12-billing-design.md (chưa rõ đã approve chưa)",
       "assertions": [
         "Asks once: Has this spec been reviewed and approved?",
         "Stops when the answer is not approved"
@@ -27,7 +27,7 @@
     },
     {
       "name": "invokes_writing_adr_skill",
-      "input": "/adr docs/physarum/specs/2026-11-12-billing-design.md (approved)",
+      "input": "/adr .physarum/docs/specs/2026-11-12-billing-design.md (approved)",
       "assertions": [
         "Invokes the writing-adr skill, or reads .agents/skills/agentic-os/writing-adr/SKILL.md when the runtime cannot find it",
         "Passes the spec as input and lets the skill decide whether any ADR is needed",
@@ -38,7 +38,7 @@
       "name": "outputs_go_to_adr_dir_and_decisions",
       "input": "/adr (spec có một quyết định khó đảo ngược)",
       "assertions": [
-        "Writes ADRs to docs/physarum/adr/NNNN-<slug>.md",
+        "Writes ADRs to .physarum/docs/adr/NNNN-<slug>.md",
         "Adds a ## Decisions section to the spec listing each outcome"
       ]
     },

@@ -13,7 +13,25 @@ Invoke the `writing-intent` skill. If the runtime cannot find it, read `.agents/
 
 1. Treat the User Input as source material. If it is empty, ask for the idea, ticket, or alert.
 2. Classify the source (`idea` | `ticket` | `alert`); ask once if unclear. Ticket → keep its ID in `Source ref`.
-3. If the request is a Tiny/Quick change (a small change on an existing flow: typo, rename, comment, format, constant, flag, a tweak to an existing endpoint that keeps its contract, one-file fix; 1–2 files, no new acceptance criteria) → an intent is optional: write a short one only if the user wants it recorded, otherwise say it is not needed, name `[/intent →] /implement` → `/verify` → `/ship`, and stop. If it is a hotfix (production is broken, the goal restores existing behavior) → say intent.md is not needed, name `/debug` → `/verify` → `/ship`, and stop.
+3. If the request is a Tiny/Quick change (a small change on an existing flow: typo, rename, comment, format, constant, flag, a tweak to an existing endpoint that keeps its contract, one-file fix; 1–2 files, no new acceptance criteria) → an intent is optional: write a short one only if the user wants it recorded (it then goes through steps 6–7 like any intent, `Class: T0`), otherwise say it is not needed, name `[/intent →] /implement` → `/verify` → `/ship`, and stop. If it is a hotfix (production is broken, the goal restores existing behavior) → say intent.md is not needed, name `/debug` → `/verify` → `/ship`, and stop.
 4. Ask analyst questions one at a time, per the skill, until every Classification predicate is answered or parked in Open questions.
-5. Write `docs/physarum/intents/YYYY-MM-DD-<outcome-slug>-intent.md` from the skill's template (including `## Classification`), `Status: draft`.
-6. STOP. Hand the file path to the originator for correction and state the proposed `Class` + `Lane` plus the next command (the first step of the Lane) for them to confirm or change. Do not commit, do not invoke `brainstorming` or `writing-plans`, do not design.
+5. Write `.physarum/docs/intents/YYYY-MM-DD-<outcome-slug>-intent.md` from the skill's template (including `## Classification`), `Status: draft`.
+6. Report the written file in this fixed shape, same lines in the same order every time (a line with nothing to say gets `—`), then go to step 7. Class and Lane are suggestions for the originator to confirm or change, never decisions:
+
+   ```text
+   Intent written: <path>
+   Source: <idea | ticket | alert> (<Source ref or —>)
+   Problem: <one line>
+   Proposed outcome: <one line>
+   Open questions: <N> — <the most important one, or —>
+   Suggested Class: <T0 | T1 | T3> (<proposed | provisional>)
+   Suggested Lane: <gates in order, from the Class>
+   Signals: <the predicates that matched>
+   ```
+
+7. Ask once which way to go, never picking silently, always as the last thing in the reply. Offer exactly these three options in this fixed order, with `(Recommended)` on option 3 when the suggested `Class` is T0 and on option 1 otherwise, plus a one-line reason from the intent:
+   1. `Accept and /spec` — set `Status: accepted` and `Accepted by` (the originator's name from the session, else `git config user.name`, plus today's date) in the file; when the suggested `Class` was T0, set `Class: T1` and `Lane: /spec → /plan → /implement → /verify → /ship` and add `Class set by originator (was T0)` to `Signals`. Then run `/spec <path>`.
+   2. `Keep refining` — ask what to add or change, update the same draft file (`Status` stays `draft`), repeat step 6, and ask this step again.
+   3. `Tiny/Quick: accept and /implement` — set `Class: T0`, `Lane: /implement → /verify → /ship`, `Status: accepted` and `Accepted by` in the file, and when the suggested `Class` was not T0 add `Class set by originator (was <old Class>)` to `Signals`; then run `/implement <path>`. The user's choice overrides the suggested Class; if `/implement` finds more than 1–2 files or new acceptance criteria it reclassifies to T1 per `writing-intent` and stops.
+
+   Picking option 1 or 3 is the acceptance: the originator acts as PO for this intent. This is the one place a router runs the next command instead of stopping to name it, and only for the command the picked option names. The fixed order is deliberate (same layout every run), so `(Recommended)` may sit on option 3 instead of first. Until the user picks, do not commit, do not invoke `brainstorming` or `writing-plans`, do not design. After the pick, run only that command; never `/plan` or anything later.

@@ -5,11 +5,11 @@ Mẫu theo `update-spec/AGENTS.md`.
 
 ## What this skill contains
 
-Skill single `SKILL.md`, không build step. Chạy khi tạo hoặc sửa command trong `.agents/.commands/`: phân loại gate/standalone, đặt rule đúng chỗ (router vs skill), tái dùng bước đã có, kiểm cross-reference số bước, đăng ký `AGENTS.md` + `CHANGELOG.md`, sync, dry-run. Chưa có command riêng (như `tasks-creator`, `init-deep`).
+Skill single `SKILL.md`, không build step. Chạy khi tạo hoặc sửa command trong `.agents/.commands/`: phân loại gate/standalone, đặt rule đúng chỗ (router vs skill), tái dùng bước đã có, kiểm cross-reference số bước, đăng ký `AGENTS.md` + `CHANGELOG.md`, sync, dry-run, converge (kiểm mâu thuẫn/mơ hồ đến khi 0 lỗi). Chưa có command riêng (như `tasks-creator`, `init-deep`).
 
 ## Key files
 
-- `SKILL.md` — source of truth duy nhất: 8 bước Workflow + template router.
+- `SKILL.md` — source of truth duy nhất: 9 bước Workflow + template router.
 - `AGENTS.md` (file này) — rule guide cho agent sửa skill; không chứa procedure.
 - `CHANGELOG.md` — release notes, newest first.
 - `../agentic-os-lock.json` — pin `writing-command` (`sourceType: local`, `version: local-YYYY-MM-DD`).

@@ -13,16 +13,57 @@ $ARGUMENTS
 1. Resolve the intent file, first match wins:
    - the User Input path;
    - the intent this session accepted, else created or revised, else the user named as the subject of work (latest wins) — use it without asking, and state its path in one line so the user can correct it;
-   - otherwise list `docs/physarum/intents/*-intent.md` and ask which one.
+   - otherwise list `.physarum/docs/intents/*-intent.md` and ask which one.
 2. Read it from disk (an accept in this session edits the file; never rely on memory of its `Status`). If `Status` is not `accepted` → STOP: say the PO must accept it first (run `/intent` to revise a draft). No intent file → STOP, suggest `/intent`.
 3. Invoke the Superpowers `brainstorming` skill (Claude Code: `superpowers:brainstorming`) with the intent as the brief:
    - Take the architectural path; do not reclassify to bounded or spike.
    - Problem, Proposed outcome, Constraints, Out of scope come from the intent — do not re-ask them; only ask what is still in Open questions or needed for design.
-   - Write the spec to `docs/physarum/specs/YYYY-MM-DD-<topic>-design.md`, reusing the intent's date+topic stem, and hold the skill's review and hand-over-for-approval steps until step 4 is done.
-4. UI check. When the intent's Proposed outcome or Affected users and systems names something a person sees or operates in the web app (page, route, component, sheet, nav item), the spec is a UI spec: read `.agents/.commands/impeccable.md` and follow its Design contract and Spec stage on the saved spec file, so `## Design` is in it before the user is asked to review. Ask only what `## Design` still needs; do not re-ask intent items. No UI named → skip this step. Then let the held review step run.
-5. STOP after the user approves the written spec; for a UI spec the approval covers `## Design`. Then ask once which command runs next, never picking silently. Offer exactly two options, `/adr <spec path>` (G2+; may conclude "No ADR needed") and `/plan <spec path>`, the recommended one first and labeled `(Recommended)`, with a one-line reason citing what the user decided. Pick the recommended one by the first rule that matches:
-   1. The user said in this session to skip the ADR → `/plan`.
-   2. The spec's `## Decisions` already holds an outcome that lets `/plan` continue (an accepted ADR, "No ADR needed", "Deferred", or an `ADR skipped by user` line) and no linked ADR is still not accepted → `/plan`.
-   3. The intent's `Class` is T3, or the spec records an architecture change (new subsystem, schema, auth, contract), or a linked ADR is not yet accepted → `/adr`.
-   4. Otherwise → `/plan`.
-   Whenever the user picks `/plan` while the intent's `Class` is T3 or the spec records an architecture change, and `## Decisions` has no outcome line yet, add the line `ADR skipped by user` to the spec's `## Decisions` (a waiver by the user, not an ADR outcome); `/plan` accepts exactly that line at its ADR gate. Then STOP and name the chosen command. Do not invoke the chosen skill, and do not invoke `writing-plans` — planning is a separate gate.
+   - Write the spec to `.physarum/docs/specs/YYYY-MM-DD-<topic>-design.md`, reusing the intent's date+topic stem, and hold the skill's review and hand-over-for-approval steps until step 4 is done; step 5 replaces the hand-over.
+4. UI check. When the intent's Proposed outcome or Affected users and systems names something a person sees or operates in the web app (page, route, component, sheet, nav item), the spec is a UI spec: follow the Design contract and Spec stage at the end of this file on the saved spec file, so `## Design` is in the spec before the report in step 5. Ask only what `## Design` still needs; do not re-ask intent items. No UI named → skip this step. Then go to step 5, which replaces the skill's hand-over-for-approval.
+5. Report the written spec in this fixed shape, same lines in the same order every time (a line with nothing to say gets `—`). This report is the skill's hand-over for approval; do not ask "approved?" separately. `ADR check` is a suggestion by the first rule that matches:
+
+   ```text
+   Spec written: <path>
+   Intent: <path> (Class <T0 | T1 | T3>)
+   Approach: <the chosen approach, one line>
+   Design: <`## Design` present (UI spec; Mirrors screenshot taken | not taken) | no UI>
+   Decisions: <the `## Decisions` lines, or —>
+   ADR check: <adr | plan> — <one-line reason from the matching rule>
+   Agent calls: <N> — <the ones worth checking, or —>
+   Open questions: <N> — <the most important one, or —>
+   ```
+
+   ADR check rules:
+   1. The user said in this session to skip the ADR → `plan`.
+   2. The spec's `## Decisions` already holds an outcome that lets `/plan` continue (an accepted ADR, "No ADR needed", "Deferred", or an `ADR skipped by user` line) and no linked ADR is still not accepted → `plan`.
+   3. The intent's `Class` is T3, or the spec records an architecture change (new subsystem, schema, auth, contract), or a linked ADR is not yet accepted, or the chosen approach holds a decision that passes all three tests of the `writing-adr` filter (hard to reverse, surprising without context, a real trade-off) → `adr`.
+   4. Otherwise → `plan`.
+6. Ask once which way to go, never picking silently, as the last thing in the reply. Offer exactly these three options in this fixed order, with `(Recommended)` always on option 1 and a one-line reason from the `ADR check` line. Picking any option approves the spec: set its `Status` to `approved (<originator name from the session, else git config user.name> — <today>)`. A free-text answer (Other) is a change request: edit the spec, repeat steps 5–6, and do not approve.
+   1. `Accept and /adr` or `Accept and /plan` — the command named by `ADR check`.
+   2. The other command of that pair (`/plan` when option 1 is `/adr`, `/adr` when option 1 is `/plan`).
+   3. `Tiny/Quick: accept and /implement` — set the intent's `Class: T0` and `Lane: /implement → /verify → /ship`, when its `Class` changes add `Class set by originator (was <old Class>)` to its `Signals`, then run `/implement <intent path>`. This skips `/adr` and `/plan`: say so in the option's one-line description, and when the spec has `## Design` add that its `## Design` and `Acceptance checks` are no longer enforced by `/implement` and `/verify`.
+
+   When the user picks `/plan` (option 1 or 2) while the intent's `Class` is T3, the spec records an architecture change, or the chosen approach holds a decision passing the `writing-adr` filter, and `## Decisions` has no outcome line yet, add the line `ADR skipped by user` to the spec's `## Decisions` (a waiver by the user, not an ADR outcome); `/plan` accepts exactly that line at its ADR gate.
+   After the pick, run only the command that option names (`/adr <spec path>`, `/plan <spec path>` or `/implement <intent path>`); never `/plan` after `/adr`, and never `writing-plans` from here.
+
+## Design contract
+
+UI specs only. The skill is `.agents/skills/agentic-os/impeccable/SKILL.md`: read it in full and follow its `Local Overrides` (every `.agents/skills/impeccable/...` path reads as `.agents/skills/agentic-os/impeccable/...`; `<skill-base-dir>` is that folder). Backend-only input is out of scope: say so and STOP. Do not edit anything under `impeccable/` (vendored). On Windows run the launcher as `scripts/impeccable.cmd`.
+
+**Contract** — the one definition `/spec`, `/plan`, `/implement` and `/verify` share; they point here by name and do not restate it. A UI spec carries a `## Design` section with exactly these slots, each holding a concrete value:
+   - **Mode:** `Persuade`, `Operate`, `Read` or `Experience`, plus one line on why.
+   - **Thesis:** the result of the spatial-thesis step, three lines: the primary reading or task path; what leads and what supports; what groups together and what separates.
+   - **Mirrors:** the shipped screen or `DESIGN.md` component this surface is built from, as a route or component name; or `none` with the reason no existing pattern fits. Also the path of the screenshot taken of it at this stage, or `not taken — <reason>` (no shipped screen, or the app or browser could not be used).
+   - **Sketch:** a text sketch of the main state at desktop and at 390px, drawn from the `Thesis` before `Structure` is written; `Structure` agrees with it.
+   - **Structure:** the regions in reading order, each naming the `DESIGN.md` component it reuses. A component that does not exist yet is marked `new`, and `/impeccable extract` is suggested afterward.
+   - **Tokens:** the roles used, by `DESIGN.md` token name (color, type step, radius, spacing), ending with the line "no new hue, token or shadow".
+   - **States:** for every region, the empty, loading, error, long-content and edge-content appearance, one line each (edge content = the longest, shortest and odd-character values the data can hold).
+   - **Responsive:** what changes at 1024px and up, 1023px and down, 767px and down, and 390px.
+   - **Copy:** every user-visible string, verbatim.
+   - **Interaction and a11y:** keyboard path, focus target, touch size, reduced-motion behavior.
+   - **Acceptance checks:** observable assertions, each checkable in a screenshot, in computed style or in a test (for example "list row height 32px", "current row = wash + line + 2px gold rail"); at least one is a hierarchy check taken from `Thesis` (squint test, for example "in the 1440px screenshot blurred, the name field is still the first region the eye lands on").
+A spec approved before the `Thesis` and `Sketch` slots existed keeps working: `/plan` copies the slots it has, and the next patch to its `## Design` also adds `Thesis` and `Sketch`.
+**Spec stage** (input is an accepted intent or a spec path with no `## Design`): load PRODUCT.md and DESIGN.md through the skill's context step, screenshot the `Mirrors` screen in the running app when one exists, set the spatial thesis with `layout` and the mode reference (`mode-operate`, `mode-read` or `mode-persuade`; `Experience` has none, so use `layout` alone), write that step down as the `Thesis` slot, draw the `Sketch` from it, then fill the remaining slots (`Structure` follows the `Sketch`). Read `craft-floor.md` here even though no code is edited (this stage overrides the skill's planning-only exemption) and redraw any region whose slot needs a pattern on its Refuse list. Write the result into the saved spec file as `## Design`. Do not edit product code at this stage.
+**Build stage** (input is a spec or task that carries `## Design`): the dispatch of a UI task tells the implementer to read `craft-floor.md` (its Refuse list) before editing. Build exactly what it says — strings verbatim, components and tokens as named. Then verify once, batched: run `impeccable detect` on the changed UI files, run the project build and the target's tests, take desktop (1440px) and mobile (390px) screenshots of every state listed under `States`, and record each acceptance check with its evidence (a computed value, a test name, or a screenshot path) as an `Evidence:` list under the task in the plan file. That list also carries a `detect:` entry holding the result of the final `impeccable detect` run, which must be `[]` (a finding the controller judges wrong goes to the user, never into the entry), and the hierarchy check is recorded like the other checks (a screenshot path plus the element that leads). A deviation is not made in code: STOP and run `/backsync`, which patches `## Design`, then resume the build.
+
+**Missing reference.** If a `reference/<name>.md` that the skill names is missing from the vendored `impeccable/` folder, say so in one line and continue from `SKILL.md` plus the references that exist. Do not reconstruct its content from memory.

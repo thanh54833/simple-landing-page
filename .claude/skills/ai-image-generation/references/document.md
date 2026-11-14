@@ -2,7 +2,7 @@
 
 Write or refresh `AI-IMAGE-GENERATION.md` and its sidecar `style-lock.json` in a repo's Cobra agent, the way impeccable's `document` writes `DESIGN.md` and `design.json`. Run it in two cases: **scan** (the document is missing or the design system changed) and **improve** (the ledger holds new notes).
 
-Locations (relative to the repo root): `.physarum/ai-image-generate/cobra-agent/` holds `AI-IMAGE-GENERATION.md`, `style-lock.json`, `ledger/index.json`, `series/`, `scripts/check.mjs`. The design system source is `DESIGN.md`; product truth is `PRODUCT.md`.
+Locations (relative to the repo root): `.physarum/agents/ai-image-generate/cobra-agent/` holds `AI-IMAGE-GENERATION.md`, `style-lock.json`, `ledger/index.json`, `series/`, `scripts/check.mjs`. The design system source is `DESIGN.md`; product truth is `PRODUCT.md`.
 
 ## Roles
 
@@ -20,7 +20,7 @@ Hex values live in `style-lock.json` only; the document never repeats them.
 2. **Diff the sidecar.** For each palette token in `style-lock.json`, find its value in `DESIGN.md`. Done when every token is classed `same`, `changed` (new value), `new` or `removed`.
 3. **Show the owner the diff** (palette changes, new or removed rules) and ask: refresh, overwrite or merge. An existing `AI-IMAGE-GENERATION.md` is never overwritten silently.
 4. **Write** both files after the owner agrees. Keep the document's eight sections in this order: Overview, Palette, Type in images, Composition, Depth & Atmosphere, Shapes & Marks, Series & Consistency, Do's and Don'ts; then Known failures and Improvement loop. Omit a section only when `DESIGN.md` has nothing for it. Frontmatter `palette` equals the sidecar's palette keys.
-5. **Verify** with `node .physarum/ai-image-generate/cobra-agent/scripts/check.mjs` until `✓ OK`. A palette change makes existing superprompts fail the hex check; list those superprompts for the owner instead of editing them silently.
+5. **Verify** with `node .physarum/agents/ai-image-generate/cobra-agent/scripts/check.mjs` until `✓ OK`. A palette change makes existing superprompts fail the hex check; list those superprompts for the owner instead of editing them silently.
 
 Carry into the document only what constrains images: an Overview voice taken from `DESIGN.md`, the rules that bind marks, depth and evidence. Page layout and UI components do not belong.
 

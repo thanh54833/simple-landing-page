@@ -1,6 +1,6 @@
 # Init — khởi tạo business memory cho project
 
-Mục tiêu: dựng `docs/physarum/business-memory/` từ evidence có sẵn, để agent hiểu nghiệp vụ trước khi ra quyết định.
+Mục tiêu: dựng `.physarum/agents/product_owner/` từ evidence có sẵn, để agent hiểu nghiệp vụ trước khi ra quyết định.
 
 ## Điều kiện
 
@@ -8,7 +8,7 @@ Mục tiêu: dựng `docs/physarum/business-memory/` từ evidence có sẵn, đ
 
 ## Bước
 
-1. **Đọc nguồn** (chỉ những gì tồn tại): `PRODUCT.md`, `README*`, `AGENTS.md` gốc, `docs/physarum/{intents,specs,adr}/`, `package.json`/`pyproject.toml` để biết stack, cấu trúc `apps/`/`src/`.
+1. **Đọc nguồn** (chỉ những gì tồn tại): `PRODUCT.md`, `README*`, `AGENTS.md` gốc, `.physarum/docs/{intents,specs,adr}/`, `package.json`/`pyproject.toml` để biết stack, cấu trúc `apps/`/`src/`.
 2. **Lập bản nháp `domain.json`** theo schema dưới. Mỗi mục có nguồn; mục không có nguồn bỏ vào `open_questions`.
 3. **Lập decision nháp từ ADR** đã `accepted`: mỗi ADR → một `dec-XXX` (`source` trỏ ADR, `alternatives_rejected` lấy từ phần "Alternatives considered"). Quyết định ghi ở `PRODUCT.md` hoặc owner nói trong phiên cũng được, nêu rõ `source`. ADR còn `proposed` thì decision là `proposed`.
 4. **Hỏi owner tối đa 3 câu** cho chỗ evidence không trả lời được (users chính, non-goals, rule quan trọng nhất). Câu nào chưa trả lời → `open_questions`.
@@ -20,7 +20,7 @@ Mục tiêu: dựng `docs/physarum/business-memory/` từ evidence có sẵn, đ
 ## Layout tạo ra
 
 ```
-docs/physarum/business-memory/
+.physarum/agents/product_owner/
 ├── AGENTS.md        # persona + quy trình recall/save
 ├── index.json
 ├── domain.json
@@ -71,4 +71,4 @@ Xem `reference/save.md` mục Decision.
 
 ## Template `AGENTS.md`
 
-`reference/memory-agents-template.md` là persona + quy trình recall/save. Sao chép nguyên văn vào `docs/physarum/business-memory/AGENTS.md`; chỉ đổi tên product/đường dẫn nếu project khác repo này.
+`reference/memory-agents-template.md` là persona + quy trình recall/save. Sao chép nguyên văn vào `.physarum/agents/product_owner/AGENTS.md`; chỉ đổi tên product/đường dẫn nếu project khác repo này.

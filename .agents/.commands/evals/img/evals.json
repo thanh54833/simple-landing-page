@@ -13,7 +13,7 @@
       "name": "brief_maps_to_generate_for_fitting_slot",
       "input": "/img banner 16:9 Physarum hấp thụ skill cho README",
       "assertions": [
-        "Reads .physarum/ai-image-generate/cobra-agent/index.json and maps the brief to the physarum-cover series and its hero-16x9 slot",
+        "Reads .physarum/agents/ai-image-generate/cobra-agent/index.json and maps the brief to the physarum-cover series and its hero-16x9 slot",
         "States the resolved series and slot in one line before invoking the skill"
       ]
     },
@@ -43,7 +43,7 @@
     },
     {
       "name": "cobra_missing_stops",
-      "input": "/img tạo cover hero 16:9 (không có .physarum/ai-image-generate/cobra-agent/AGENTS.md)",
+      "input": "/img tạo cover hero 16:9 (không có .physarum/agents/ai-image-generate/cobra-agent/AGENTS.md)",
       "assertions": [
         "Stops and says Cobra is not set up in this repo",
         "Points to the ai-image-generation skill for a one-off image outside Cobra",
@@ -65,7 +65,7 @@
       "assertions": [
         "Stops after reporting the draft path and its ledger entry",
         "Suggests /img approve gen-005-physarum-cover-hero-16x9 or /img improve as the next command",
-        "Does NOT approve the image, and does NOT copy it outside .physarum/ai-image-generate/"
+        "Does NOT approve the image, and does NOT copy it outside .physarum/agents/ai-image-generate/"
       ]
     },
     {

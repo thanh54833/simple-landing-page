@@ -11,10 +11,10 @@ Pack skill 2 tầng (`agentic-os/<skill>/`); factory này consume tại chỗ, k
 | Skill | Nguồn | Hình thái |
 |---|---|---|
 | `writing-intent/` | self-built (`local`) | Single `SKILL.md`: capture `intent.md` proto-spec trước design |
-| `writing-adr/` | self-built (`local`) | Single `SKILL.md`: gate G2+, lọc ADR, ghi `docs/physarum/adr/` |
+| `writing-adr/` | self-built (`local`) | Single `SKILL.md`: gate G2+, lọc ADR, ghi `.physarum/docs/adr/` |
 | `update-spec/` | self-built (`local`) | Single `SKILL.md`: back-sync spec đã approve với code drift, hunk dán nhãn |
 | `writing-command/` | self-built (`local`) | Single `SKILL.md`: tạo hoặc sửa command trong `.agents/.commands/` (router mỏng), đăng ký + sync + dry-run; command `/save` |
-| `business-memory/` | self-built (`local`) | `SKILL.md` + `reference/` (`init`, `save`): khởi tạo và lưu business memory vào `docs/physarum/business-memory/`, command `/save` |
+| `business-memory/` | self-built (`local`) | `SKILL.md` + `reference/` (`init`, `save`): khởi tạo và lưu business memory vào `.physarum/agents/product_owner/`, command `/save` |
 | `tasks-creator/` | self-built (`local`) | `SKILL.md` + `reference/`: tạo tay `.tasks/01_migration/` của group, ngoài chuỗi gate, command `/save` |
 | `init-deep/` | self-built (`local`) | Single `SKILL.md`: sinh hierarchy `AGENTS.md` (Root + subdirs theo complexity score), standalone, command `/save` |
 | `doc-coauthoring/` | copy tay từ upstream | Single `SKILL.md` minimal + `Local Overrides` |
@@ -36,8 +36,8 @@ Chỉ sửa 7 skill self-built tại chỗ. Vendored giữ nguyên layout upstre
 - `<skill>/CHANGELOG.md` — release notes từng skill, newest first. Mọi skill đều có.
 - `<skill>/evals/{evals,triggers}.json` — evals bắt buộc của từng skill (hành vi + kích hoạt); method ở `.agents/playbooks/002_skills/01_evals/evals.md`.
 - `agentic-os-lock.json` — pin version pack (`local-YYYY-MM-DD` cho skill tự build, tag upstream cho vendored).
-- `.agents/.commands/{intent,spec,adr,plan,implement,verify,ship,update-spec}.md` — router `$ARGUMENTS` vào skill (canonical); `.opencode/command/`, `.pi/prompts/`, `.claude/commands/` do `make agents_sync` sinh ra, không sửa tay; procedure nằm trong skill.
-- `install.sh` (repo root) — copy pack + skeleton `docs/physarum/` vào target, idempotent. Vắng tại factory này; setup theo runtime nằm trong `.pi/INSTALL.md`, `.opencode/INSTALL.md`, `.claude/INSTALL.md`.
+- `.agents/.commands/{intent,spec,adr,plan,implement,verify,ship,backsync}.md` — router `$ARGUMENTS` vào skill (canonical); `.opencode/command/`, `.pi/prompts/`, `.claude/commands/` do `make agents_sync` sinh ra, không sửa tay; procedure nằm trong skill.
+- `install.sh` (repo root) — copy pack + skeleton `.physarum/docs/` vào target, idempotent. Vắng tại factory này; setup theo runtime nằm trong `.pi/INSTALL.md`, `.opencode/INSTALL.md`, `.claude/INSTALL.md`.
 
 ## Rules for changes
 

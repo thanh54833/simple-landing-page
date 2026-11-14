@@ -3,7 +3,7 @@
   "test_cases": [
     {"input": "verify nhánh này trước khi ship", "should_trigger": true},
     {"input": "check the implementation with evidence and code review", "should_trigger": true},
-    {"input": "/verify docs/physarum/plans/x.md", "should_trigger": true},
+    {"input": "/verify .physarum/docs/plans/x.md", "should_trigger": true},
     {"input": "đã xong chưa, chạy verify giúp", "should_trigger": true},
     {"input": "viết plan", "should_trigger": false},
     {"input": "merge the branch and open a PR", "should_trigger": false},

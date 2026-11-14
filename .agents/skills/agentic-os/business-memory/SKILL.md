@@ -5,7 +5,7 @@ description: Use when a project needs its business memory created (domain map, d
 
 ## Local Overrides
 
-- Memory nằm ở `docs/physarum/business-memory/` (owner chọn; không dùng `.physarum/memory/`). Policy kỹ thuật vẫn ở `AGENTS.md` gốc, không chép vào memory.
+- Memory nằm ở `.physarum/agents/product_owner/` (owner chọn; không dùng `.physarum/memory/`). Policy kỹ thuật vẫn ở `AGENTS.md` gốc, không chép vào memory.
 - Skill chỉ ghi memory. Không sửa code, không sinh spec/ADR/plan. ADR kỹ thuật vẫn đi qua `writing-adr`; decision ở đây tóm tắt và trỏ `source` về ADR.
 
 # Business Memory
@@ -16,7 +16,7 @@ Memory nghiệp vụ trong repo gồm: **domain map** (hiểu hệ thống), **d
 
 ## When to Use
 
-- Project chưa có `docs/physarum/business-memory/` → **init**
+- Project chưa có `.physarum/agents/product_owner/` → **init**
 - Owner vừa chốt một quyết định, đổi business rule, hoặc rút ra bài học nghiệp vụ → **save**
 
 NOT for: design token UI, lỗi CI thuần kỹ thuật, preference máy local, ghi log chat, đọc/recall (đọc theo `AGENTS.md` trong thư mục memory).

@@ -6,7 +6,7 @@ description: Use when capturing a raw idea, ticket, or incident alert as an inte
 ## Local Overrides (Notion hub ai-engineer)
 
 - Agent đọc skill này khi user muốn ghi `intent.md` proto-spec trước design (source: idea, ticket, alert). Không dùng để viết spec, plan, code.
-- Viết xong `intent.md` thì DỪNG. Không endpoint, file path, estimate, không gọi `writing-plans`. Accept là việc của product owner (merge hoặc đóng review).
+- Viết xong `intent.md` thì DỪNG. Không endpoint, file path, estimate, không gọi `writing-plans`. Accept là việc của product owner (merge hoặc đóng review), hoặc của originator khi chọn `Accept and /spec` / `Tiny/Quick: accept and /implement` ở bước 7 của `/intent`.
 - Skill này fire TRƯỚC `brainstorming`, không nhét vào plugin Superpowers, không copy vào thư mục Superpowers.
 - Tiny/Quick (việc nhỏ trên flow có sẵn: typo, rename, comment, format, hằng số, flag, chỉnh một endpoint có sẵn mà giữ nguyên contract, sửa một file; 1–2 file, không cần tiêu chí chấp nhận mới) thì `intent.md` là tuỳ chọn: ngắn, mỗi mục một dòng, chỉ viết khi user muốn ghi lại. Lane `[/intent →] /implement` → `/verify` → `/ship`, không spec, không plan.
 - Hotfix (production hỏng, mục tiêu khôi phục hành vi cũ) cũng khỏi `intent.md`: lane là `/debug` → `/verify` → `/ship`, bắt đầu thẳng từ `/debug`.
@@ -38,7 +38,7 @@ Before any design or implementation action — including invoking `brainstorming
 2. **Ask analyst questions one at a time** — what cannot be done today, who is affected, what better looks like, what is out of scope. Multiple choice when real options exist.
 3. **Keep the originator's words** in Problem and Proposed outcome. Unconfirmed assumptions go to Open questions, never Constraints.
 4. **Classify** — fill `## Classification` from the Classification table below. Every row's predicate must be answered (yes / no / unknown) from the answers so far; ask the missing ones, one at a time. Unknown after asking → list it in Open questions and mark `Class` as `provisional`.
-5. **Write from the template below.** Status stays `draft` unless the user explicitly accepts. Default path `docs/physarum/intents/YYYY-MM-DD-<slug>-intent.md` — same root and date-stem naming as Superpowers specs/plans; `<slug>` is kebab-case from the outcome (not the task name), date is creation date. Reuse the same date+topic stem for the later spec and plan so the chain sorts together.
+5. **Write from the template below.** Status stays `draft` unless the user explicitly accepts. Default path `.physarum/docs/intents/YYYY-MM-DD-<slug>-intent.md` — same root and date-stem naming as Superpowers specs/plans; `<slug>` is kebab-case from the outcome (not the task name), date is creation date. Reuse the same date+topic stem for the later spec and plan so the chain sorts together.
 6. **Hand the file to the originator for correction**, with the proposed Class and Lane stated in one line for them to confirm or change. Do not commit unless asked.
 7. **On accept:** set `Status: accepted` plus `Accepted by` (name + date). Do not start design.
 
@@ -94,8 +94,8 @@ Source: the stage-gate reference §6 (the file was removed from the working tree
 
 ## Handoff
 
-1. This skill writes `intent.md` and stops. PO accepts by merge.
-2. Only then run the first command of the intent's `Lane`. For `/spec`: invoke Superpowers, point it at the intent file, run `brainstorming` architectural path. Spec and plan use Superpowers defaults — `docs/physarum/specs/YYYY-MM-DD-<topic>-design.md`, then `writing-plans` writes `docs/physarum/plans/YYYY-MM-DD-<feature-name>.md`. Keep the same date+topic stem across all three.
+1. This skill writes `intent.md` and stops. PO accepts by merge, or the originator accepts by picking an accept option in `/intent` step 7.
+2. Only then run the first command of the intent's `Lane`. For `/spec`: invoke Superpowers, point it at the intent file, run `brainstorming` architectural path. Spec and plan use Superpowers defaults — `.physarum/docs/specs/YYYY-MM-DD-<topic>-design.md`, then `writing-plans` writes `.physarum/docs/plans/YYYY-MM-DD-<feature-name>.md`. Keep the same date+topic stem across all three.
 3. After spec approval, `writing-plans` writes the plan. Three gates, three folders (`intents/`, `specs/`, `plans/`), one stem. A hotfix has no intent, spec or plan: `/debug` writes one record in `hotfixes/` instead. A Tiny/Quick change has at most a short intent (or none): `/implement` takes the intent, or the request in chat, directly.
 
 ## Common Mistakes

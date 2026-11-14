@@ -1,18 +1,18 @@
 # Guide for agents — canonical skills + gate routers
 
 ## OVERVIEW
-`agentic-os-core` ships skill packs here, not app code: `skills/agentic-os/` (SDLC gates, self-built + 3 vendored), `skills/rea/` (REA investigation), and `skills/react-best-practices/` (vendored Vercel rules). `.commands/` holds the gate routers. Both trees are canonical — every runtime copy is generated from here by `make agents_sync`.
+`agentic-os-core` ships skill packs here, not app code: `skills/agentic-os/` (SDLC gates, writing-* skills, design + image skills; self-built + vendored), `skills/rea/` (REA investigation), and `skills/react-best-practices/` (vendored Vercel rules). `.commands/` holds the gate routers. Both trees are canonical — every runtime copy is generated from here by `make agents_sync`.
 
 ## STRUCTURE
 ```
 .agents/
-├── .commands/                 # gate routers: 11 + CHANGELOG.md (thin: route + gate, no procedure)
+├── .commands/                 # gate routers: 14 + CHANGELOG.md + evals/ (thin: route + gate, no procedure)
 ├── settings/
 │   ├── models.json            # single source of truth for model (synced down by `make agents_sync`)
 │   └── mcp.json               # single source of truth for MCP servers (synced down by `make agents_sync`)
 ├── skills/
 │   ├── AGENTS.md              # pack router
-│   ├── agentic-os/            # intent, adr, update-spec, tasks-creator, init-deep, doc-coauthoring, impeccable, writing-for-agents
+│   ├── agentic-os/            # 13: writing-intent/adr/command, update-spec, tasks-creator, init-deep, business-memory, doc-coauthoring, humanizer, impeccable, hallmark, ai-image-generation, writing-for-agents
 │   ├── rea/                   # 4 artifact/CI investigation skills
 │   └── react-best-practices/  # vendored; AGENTS.md is generated
 └── AGENTS.md                  # this file
@@ -36,7 +36,7 @@ Fan-out written by `scripts/sync-agents.mjs` (`make agents_sync`, short `make as
 | Sync the runtime copies | `scripts/sync-agents.mjs` | `--check` writes nothing, exits 1 on drift |
 | Pack rules | `skills/AGENTS.md` | start here, then the pack's own `AGENTS.md` |
 | Write/revise an intent | `skills/agentic-os/writing-intent/SKILL.md` | source of truth for `/intent` |
-| Record an ADR | `skills/agentic-os/writing-adr/SKILL.md` | gate G2+; writes `docs/physarum/adr/` |
+| Record an ADR | `skills/agentic-os/writing-adr/SKILL.md` | gate G2+; writes `.physarum/docs/adr/` |
 | Back-sync a drifted spec | `skills/agentic-os/update-spec/SKILL.md` | hunk-labeled patch, confirm-then-write |
 | Gate task sets | `skills/agentic-os/tasks-creator/` | outside the gate chain, no command |
 | Hierarchy `AGENTS.md` | `skills/agentic-os/init-deep/SKILL.md` | generator for this file |

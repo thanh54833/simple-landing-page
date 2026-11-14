@@ -19,7 +19,7 @@
     },
     {
       "name": "approval_asked_once",
-      "input": "/plan docs/physarum/specs/2026-11-12-billing-design.md (chưa rõ approve)",
+      "input": "/plan .physarum/docs/specs/2026-11-12-billing-design.md (chưa rõ approve)",
       "assertions": [
         "Asks once: Has this spec been reviewed and approved?",
         "Stops when it is not approved",
@@ -52,17 +52,17 @@
     },
     {
       "name": "invokes_writing_plans_and_saves_with_stem",
-      "input": "/plan docs/physarum/specs/2026-11-12-billing-design.md (approved, ADR ok)",
+      "input": "/plan .physarum/docs/specs/2026-11-12-billing-design.md (approved, ADR ok)",
       "assertions": [
         "Invokes superpowers:writing-plans with the spec as input and holds its Execution Handoff",
-        "Saves docs/physarum/plans/YYYY-MM-DD-<topic>.md reusing the spec's date+topic stem"
+        "Saves .physarum/docs/plans/YYYY-MM-DD-<topic>.md reusing the spec's date+topic stem"
       ]
     },
     {
       "name": "ui_spec_design_copied_into_plan",
       "input": "/plan spec có ## Design",
       "assertions": [
-        "Copies the spec's Copy and Acceptance checks into the plan's Global Constraints",
+        "Copies the spec's Copy, Thesis (when the spec has one) and Acceptance checks into the plan's Global Constraints",
         "Gives every UI task a `Design:` line naming the spec section"
       ]
     },

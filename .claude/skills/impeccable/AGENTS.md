@@ -16,7 +16,7 @@ Skill thiết kế/review frontend (design, critique, audit, polish, harden, ani
 - `AGENTS.md` (file này) — rule guide cho agent sửa skill; không chứa rule design.
 - `CHANGELOG.md` — release notes, newest first.
 - `../agentic-os-lock.json` — pin `impeccable` (`sourceType: github`, `source: pbakaus/impeccable`, `version: X.Y.Z`, `skillPath: impeccable/SKILL.md`).
-- `.agents/.commands/impeccable.md`, `redesign.md`, `enhance.md` — router; glue repo (contract `## Design`, resolve target) nằm ở đây vì skill vendored không sửa được.
+- `.agents/.commands/spec.md` (cuối file: contract `## Design`), `redesign.md`, `enhance.md` — router; glue repo (contract `## Design`, resolve target) nằm ở đây vì skill vendored không sửa được.
 
 ## Rules for changes
 

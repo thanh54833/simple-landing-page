@@ -3,7 +3,7 @@
   "test_cases": [
     {
       "name": "resolves_plan_hotfix_or_tiny",
-      "input": "/verify (session vừa implement plan docs/physarum/plans/2026-11-12-billing.md)",
+      "input": "/verify (session vừa implement plan .physarum/docs/plans/2026-11-12-billing.md)",
       "assertions": [
         "Uses the plan this session implemented without asking and states its path in one line",
         "Lists plans, hotfix records, and accepted T0 intents and asks only when nothing resolves"
@@ -28,7 +28,7 @@
     },
     {
       "name": "runs_real_commands_and_reports_output",
-      "input": "/verify docs/physarum/plans/2026-11-12-billing.md",
+      "input": "/verify .physarum/docs/plans/2026-11-12-billing.md",
       "assertions": [
         "Invokes superpowers:verification-before-completion",
         "Runs every test/verify command in the plan plus the project's test suite",
@@ -45,7 +45,7 @@
     },
     {
       "name": "hotfix_runs_verify_commands_and_regression",
-      "input": "/verify docs/physarum/hotfixes/2026-11-12-checkout-500.md",
+      "input": "/verify .physarum/docs/hotfixes/2026-11-12-checkout-500.md",
       "assertions": [
         "Runs the record's Verify commands and its regression test",
         "Skips the ADR check and design evidence step because a hotfix has no plan or spec"
@@ -74,6 +74,15 @@
         "Ends with READY TO SHIP or NOT READY plus reasons",
         "Does NOT merge or push",
         "Suggests /ship on READY TO SHIP"
+      ]
+    },
+    {
+      "name": "ui_task_without_detect_entry_not_ready",
+      "input": "/verify <plan whose UI task Evidence has every acceptance check but no `detect:` entry>",
+      "assertions": [
+        "Verdict is NOT READY",
+        "The reason names the missing `detect:` entry",
+        "A `detect:` entry that holds findings instead of `[]` also counts as missing"
       ]
     }
   ]

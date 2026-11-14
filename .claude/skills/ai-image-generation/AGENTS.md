@@ -5,7 +5,7 @@ Mẫu theo `hallmark` `AGENTS.md`.
 
 ## What this skill contains
 
-Sinh ảnh AI (text-to-image, image-to-image, inpainting, upscaling) qua `belt app run <app-id>` của inference.sh CLI, với bảng model (GPT-Image-2.5, FLUX, Gemini, Grok, Seedream, Reve…). `SKILL.md` vendored từ `inference-sh/skills` kèm khối `Local Overrides`; thêm local: tạo **superprompt JSON** (schema, validator, flatten), **reference image**, và **Cobra first** (trong repo có `.physarum/ai-image-generate/cobra-agent/`, mọi ảnh đi qua Cobra và lưu ở `drafts/`). `allowed-tools: Bash(belt *)`.
+Sinh ảnh AI (text-to-image, image-to-image, inpainting, upscaling) qua `belt app run <app-id>` của inference.sh CLI, với bảng model (GPT-Image-2.5, FLUX, Gemini, Grok, Seedream, Reve…). `SKILL.md` vendored từ `inference-sh/skills` kèm khối `Local Overrides`; thêm local: tạo **superprompt JSON** (schema, validator, flatten), **reference image**, và **Cobra first** (trong repo có `.physarum/agents/ai-image-generate/cobra-agent/`, mọi ảnh đi qua Cobra và lưu ở `drafts/`). `allowed-tools: Bash(belt *)`.
 
 ## Key files
 
@@ -22,7 +22,7 @@ Sinh ảnh AI (text-to-image, image-to-image, inpainting, upscaling) qua `belt a
 ## Rules for changes
 
 - **Vendored + local:** phần upstream của `SKILL.md` giữ nguyên. Chỉ `Local Overrides` và 3 trigger local (`superprompt`, `json prompt`, `reference image`) được sửa tay; local thắng upstream khi lệch, và mỗi lần đổi phải có note trong `CHANGELOG.md`. Rule hành vi (confirm, login, overwrite) vẫn ở `Local rules`, không nhét vào `SKILL.md`.
-- **Cobra first:** điều kiện là file `.physarum/ai-image-generate/cobra-agent/AGENTS.md` tồn tại trong repo đang làm việc (skill được phân phối sang repo khác, nên không hardcode làm mặc định). Nội dung Cobra (style, ledger, thư mục ảnh) nằm ở `.physarum/`, không chép vào skill; skill chỉ trỏ tới và giữ quy trình trong `references/`.
+- **Cobra first:** điều kiện là file `.physarum/agents/ai-image-generate/cobra-agent/AGENTS.md` tồn tại trong repo đang làm việc (skill được phân phối sang repo khác, nên không hardcode làm mặc định). Nội dung Cobra (style, ledger, thư mục ảnh) nằm ở `.physarum/`, không chép vào skill; skill chỉ trỏ tới và giữ quy trình trong `references/`.
 - **Superprompt:** schema và danh sách enum trong `references/superprompt.md` và `scripts/validate-superprompt.mjs` phải khớp nhau; đổi một bên thì đổi bên kia và chạy lại ví dụ trong `references/examples/`.
 - **Model table:** bảng App ID đổi theo upstream (thêm/bớt model). Cập nhật bằng sync, không sửa tay; `belt app list --category image` là nguồn thật.
 - **Cost + data:** mọi lần `belt app run` tốn credit và gửi nội dung lên dịch vụ ngoài.

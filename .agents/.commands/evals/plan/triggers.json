@@ -4,7 +4,7 @@
     {"input": "lập plan triển khai từ spec đã duyệt", "should_trigger": true},
     {"input": "write the implementation plan for this spec", "should_trigger": true},
     {"input": "tạo kế hoạch từng task cho spec này", "should_trigger": true},
-    {"input": "/plan docs/physarum/specs/x-design.md", "should_trigger": true},
+    {"input": "/plan .physarum/docs/specs/x-design.md", "should_trigger": true},
     {"input": "viết spec thiết kế", "should_trigger": false},
     {"input": "implement the plan task by task", "should_trigger": false},
     {"input": "debug why the build fails", "should_trigger": false},

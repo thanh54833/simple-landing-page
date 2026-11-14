@@ -118,18 +118,18 @@
     },
     {
       "name": "cobra_first_in_repo_with_cobra",
-      "input": "Tạo cho tôi ảnh banner 16:9 cho README của repo, về chủ đề Physarum hấp thụ các skill. (repo có .physarum/ai-image-generate/cobra-agent/)",
+      "input": "Tạo cho tôi ảnh banner 16:9 cho README của repo, về chủ đề Physarum hấp thụ các skill. (repo có .physarum/agents/ai-image-generate/cobra-agent/)",
       "assertions": [
-        "Reads .physarum/ai-image-generate/cobra-agent/AGENTS.md before building any prompt",
+        "Reads .physarum/agents/ai-image-generate/cobra-agent/AGENTS.md before building any prompt",
         "Reads AI-IMAGE-GENERATION.md and style-lock.json and takes colors from style-lock, not from a fresh read of DESIGN.md alone",
         "Proposes a series and slot (new series when none fits) and waits for the owner to agree before belt app run",
         "Superprompt is saved under cobra-agent/superprompts/ and check.mjs prints OK before any run",
-        "Plans to save the result under .physarum/ai-image-generate/drafts/<series>/ and to add a ledger entry; does NOT plan to save to a scratch directory"
+        "Plans to save the result under .physarum/agents/ai-image-generate/drafts/<series>/ and to add a ledger entry; does NOT plan to save to a scratch directory"
       ]
     },
     {
       "name": "simple_request_without_cobra_uses_quickstart",
-      "input": "Generate an image of a cat astronaut in space (repo has no .physarum/ai-image-generate/cobra-agent/)",
+      "input": "Generate an image of a cat astronaut in space (repo has no .physarum/agents/ai-image-generate/cobra-agent/)",
       "assertions": [
         "Does NOT read references/superprompt.md and does NOT build a superprompt JSON",
         "Proposes a model and a one-line prompt, then waits for the user to agree before belt app run"

@@ -16,14 +16,14 @@ Viết xong thì DỪNG ở `Status: accepted` — không gọi `writing-plans`,
 - `CHANGELOG.md` — release notes, newest first. Behavior change hoặc non-obvious fix phải có 1 note.
 - `../agentic-os-lock.json` — pin `writing-adr` (`sourceType: local`, `version: local-YYYY-MM-DD`).
 - `.agents/.commands/adr.md` — router `$ARGUMENTS` (spec path) vào skill; giữ in sync với skill, không chép procedure.
-- Target runtime: `docs/physarum/adr/NNNN-<slug>.md` + mục `## Decisions` trong spec (tạo lazy khi chạy `/adr` lần đầu).
+- Target runtime: `.physarum/docs/adr/NNNN-<slug>.md` + mục `## Decisions` trong spec (tạo lazy khi chạy `/adr` lần đầu).
 
 ## Rules for changes
 
 - Giữ `SKILL.md` và `.agents/.commands/adr.md` in sync. Command chỉ resolve spec + check approve + khai báo điểm DỪNG.
 - **Filter:** candidate thành ADR chỉ khi cả 3 đúng: hard to reverse + surprising without context + real trade-off. Đổi filter → cập nhật Workflow §2 + `Common Mistakes` + ví dụ.
 - **Template:** một ADR = một decision. `Status: proposed | accepted | superseded by NNNN | deprecated`. Đổi quyết định thì viết ADR mới + đánh `Supersedes`; ADR cũ chỉ đổi Status, không rewrite. Đổi template → cập nhật Self-check §6 (Binds/Prevents, rejected alternative).
-- **Numbering:** tôn trọng scheme sẵn có trong `docs/physarum/adr/` (location, extension, numbering, headings). Không có folder thì tạo lazy, bắt đầu `0001`, next = max + 1. Không introduce scheme thứ hai.
+- **Numbering:** tôn trọng scheme sẵn có trong `.physarum/docs/adr/` (location, extension, numbering, headings). Không có folder thì tạo lazy, bắt đầu `0001`, next = max + 1. Không introduce scheme thứ hai.
 - **Load-bearing:** quyết định paradigm/stack/ranh giới lớn do user chọn (Coaching default, Fast với `[ASSUMPTION]`). Không bao giờ để agent tự quyết silently.
 - **Version:** giữ cùng version ở `../agentic-os-lock.json` và heading đầu `CHANGELOG.md`. Đổi skill → bump lock cùng commit.
 - **Compatibility:** instructions trung lập runtime (Claude Code, OpenCode, Orca là ví dụ).

@@ -6,7 +6,7 @@
       "input": "/intent",
       "assertions": [
         "Asks the user for the idea, ticket, or alert because the User Input is empty",
-        "Does NOT create any file under docs/physarum/intents/",
+        "Does NOT create any file under .physarum/docs/intents/",
         "Does NOT invent an idea to write about"
       ]
     },
@@ -52,7 +52,8 @@
       "assertions": [
         "Writes a short intent with one line per section",
         "Names /implement as the next command",
-        "Does NOT route the change through /spec or /plan"
+        "Does NOT route the change through /spec or /plan",
+        "Goes through the fixed report with Suggested Class T0 and ends with the three options, option 3 marked (Recommended)"
       ]
     },
     {
@@ -85,20 +86,59 @@
       "name": "writes_file_with_template_and_draft_status",
       "input": "/intent cho phép khách tự đổi địa chỉ giao hàng (đã trả lời đủ câu hỏi)",
       "assertions": [
-        "Writes docs/physarum/intents/YYYY-MM-DD-<outcome-slug>-intent.md",
+        "Writes .physarum/docs/intents/YYYY-MM-DD-<outcome-slug>-intent.md",
         "File contains ## Classification and Status: draft",
         "Slug comes from the outcome, NOT from the task name"
       ]
     },
     {
-      "name": "stops_with_class_lane_next_command",
+      "name": "report_uses_fixed_template",
       "input": "/intent cho phép khách tự đổi địa chỉ giao hàng (file đã ghi xong)",
       "assertions": [
-        "Hands the file path to the originator for correction",
-        "States the proposed Class, the Lane, and the next command (first step of the Lane) in one line",
+        "Reports the file with the fixed lines in order: Intent written, Source, Problem, Proposed outcome, Open questions, Suggested Class, Suggested Lane, Signals",
+        "Presents Class and Lane as suggestions the originator can change",
         "Does NOT commit",
         "Does NOT invoke brainstorming or writing-plans",
         "Does NOT design"
+      ]
+    },
+    {
+      "name": "ends_with_three_options_in_fixed_order",
+      "input": "/intent cho phép khách tự đổi địa chỉ giao hàng (file đã ghi xong)",
+      "assertions": [
+        "Ends the reply with exactly three options in order: Accept and /spec, Keep refining, Tiny/Quick: accept and /implement",
+        "Marks option 1 (Recommended) when the suggested Class is not T0",
+        "Does NOT pick an option silently",
+        "Does NOT start /spec or /implement before the user picks"
+      ]
+    },
+    {
+      "name": "option_accept_and_spec",
+      "input": "/intent (user picks option 1: Accept and /spec)",
+      "assertions": [
+        "Sets Status: accepted and fills Accepted by with a name and today's date in the intent file",
+        "Runs /spec with the intent path",
+        "Does NOT invoke writing-plans",
+        "When the suggested Class was T0, sets Class: T1 with the spec lane and notes the change in Signals"
+      ]
+    },
+    {
+      "name": "option_keep_refining",
+      "input": "/intent (user picks option 2: Keep refining and adds a constraint)",
+      "assertions": [
+        "Updates the same intent file and keeps Status: draft",
+        "Repeats the fixed report and the three options",
+        "Does NOT accept the intent"
+      ]
+    },
+    {
+      "name": "option_tiny_quick_accept_and_implement",
+      "input": "/intent (user picks option 3: Tiny/Quick accept and /implement)",
+      "assertions": [
+        "Sets Class: T0, Lane: /implement → /verify → /ship, Status: accepted and Accepted by in the intent file",
+        "Runs /implement with the intent path",
+        "Does NOT route through /spec or /plan",
+        "When the suggested Class was not T0, notes Class set by originator in Signals"
       ]
     }
   ]

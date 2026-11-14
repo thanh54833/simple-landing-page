@@ -3,7 +3,7 @@
   "test_cases": [
     {
       "name": "stops_when_spec_not_approved",
-      "input": "Cập nhật spec docs/physarum/specs/2026-11-01-auth-design.md, code lệch rồi (spec chưa approve)",
+      "input": "Cập nhật spec .physarum/docs/specs/2026-11-01-auth-design.md, code lệch rồi (spec chưa approve)",
       "assertions": [
         "Checks the spec's approval before any patch",
         "Stops and points to /spec when the spec is not approved",
@@ -71,6 +71,16 @@
       "assertions": [
         "Points the next step as guidance only (architecture → /adr new number, otherwise /verify)",
         "Does NOT run the next gate itself"
+      ]
+    },
+    {
+      "name": "design_patch_on_old_spec_adds_thesis_and_sketch",
+      "input": "/backsync (UI spec approved before Thesis/Sketch existed; /implement blocked on a ## Design deviation)",
+      "assertions": [
+        "Patches ## Design as MODIFIED hunks after the user confirms",
+        "Also adds the Thesis and Sketch slots because the spec has none",
+        "Follows the Design contract at the end of .agents/.commands/spec.md",
+        "Points back to /implement, not /verify"
       ]
     }
   ]

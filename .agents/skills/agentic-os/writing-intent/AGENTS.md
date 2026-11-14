@@ -17,7 +17,7 @@ Viết xong thì DỪNG — không gọi `brainstorming`/`writing-plans`, không
 - `CHANGELOG.md` — release notes, newest first. Behavior change hoặc non-obvious fix phải có 1 note.
 - `../agentic-os-lock.json` — pin `writing-intent` (`sourceType: local`, `version: local-YYYY-MM-DD`).
 - `.agents/.commands/intent.md` — router `$ARGUMENTS` (idea/ticket/alert) vào skill; giữ in sync, không chép procedure.
-- Target runtime: `docs/physarum/intents/YYYY-MM-DD-<slug>-intent.md` (cùng stem date+topic với spec/plan sau này).
+- Target runtime: `.physarum/docs/intents/YYYY-MM-DD-<slug>-intent.md` (cùng stem date+topic với spec/plan sau này).
 
 ## Rules for changes
 

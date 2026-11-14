@@ -45,7 +45,7 @@
     "writing-command": {
       "source": "local",
       "sourceType": "local",
-      "version": "local-2026-11-10",
+      "version": "local-2026-11-14",
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": ""
@@ -53,7 +53,7 @@
     "update-spec": {
       "source": "local",
       "sourceType": "local",
-      "version": "local-2026-11-10",
+      "version": "local-2026-11-14",
       "skillPath": "SKILL.md",
       "computedHash": "",
       "repository": ""

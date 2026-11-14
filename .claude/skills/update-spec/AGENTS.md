@@ -5,7 +5,7 @@ Mẫu theo `blader/humanizer` `AGENTS.md`.
 
 ## What this skill contains
 
-Skill single `SKILL.md`, không build step. Chạy sau implement khi code drift khỏi spec đã approve (hotfix đổi logic, fix bug đổi behavior), hoặc khi change nhỏ đã chốt cần ghi vào spec. Patch spec tại chỗ trong `docs/physarum/specs/`, hunk dán nhãn, confirm-then-write. Viết xong thì DỪNG — không gọi `writing-plans`, không sửa code.
+Skill single `SKILL.md`, không build step. Chạy sau implement khi code drift khỏi spec đã approve (hotfix đổi logic, fix bug đổi behavior), hoặc khi change nhỏ đã chốt cần ghi vào spec. Patch spec tại chỗ trong `.physarum/docs/specs/`, hunk dán nhãn, confirm-then-write. Viết xong thì DỪNG — không gọi `writing-plans`, không sửa code.
 
 ## Key files
 
@@ -13,12 +13,12 @@ Skill single `SKILL.md`, không build step. Chạy sau implement khi code drift 
 - `AGENTS.md` (file này) — rule guide cho agent sửa skill; không chứa procedure chạy gate.
 - `CHANGELOG.md` — release notes, newest first. Behavior change hoặc non-obvious fix phải có 1 note.
 - `../agentic-os-lock.json` — pin `update-spec` (`sourceType: local`, `version: local-YYYY-MM-DD`).
-- `.agents/.commands/update-spec.md` — router `$ARGUMENTS` (spec path) vào skill; giữ in sync, không chép procedure.
-- Target runtime: mọi file trong `docs/physarum/specs/` (patch tại chỗ) + ghi chú artifact liên quan khi cần.
+- `.agents/.commands/backsync.md` — router `$ARGUMENTS` (spec path) vào skill; giữ in sync, không chép procedure.
+- Target runtime: mọi file trong `.physarum/docs/specs/` (patch tại chỗ) + ghi chú artifact liên quan khi cần.
 
 ## Rules for changes
 
-- Giữ `SKILL.md` và `.agents/.commands/update-spec.md` in sync. Command chỉ resolve input + check approve + khai báo điểm DỪNG.
+- Giữ `SKILL.md` và `.agents/.commands/backsync.md` in sync. Command chỉ resolve input + check approve + khai báo điểm DỪNG.
 - **Drift:** base = commit lúc spec approved (`git log -- <spec-path>`), diff `base..HEAD -- apps/`. Behavior vào spec; UI-only loại + ghi lý do.
 - **Reconcile:** draft trong conversation trước, check 2 chiều spec <-> intent/plan/ADR. `MODIFIED` giữ scenario cũ không bị đụng. Đọc lại file sau patch, quét note mới vs text cũ.
 - **Confirm:** một spec một lần, show hunk + why, confirm mới ghi. Reject thì bỏ. Load-bearing (delete vs implement vs defer) → present options, không tự quyết.
